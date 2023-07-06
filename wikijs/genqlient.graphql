@@ -1,0 +1,581 @@
+mutation Login($username: String!, $password: String!, $strategy: String!) {
+  authentication {
+    login(username: $username, password: $password, strategy: $strategy) {
+      responseResult {
+        succeeded
+        errorCode
+        slug
+        message
+      }
+      jwt
+      mustChangePwd
+      mustProvideTFA
+      mustSetupTFA
+      continuationToken
+      redirect
+      tfaQRImage
+    }
+  }
+}
+
+query GetSiteConfig {
+  site {
+    config {
+      host
+      title
+      description
+      robots
+      analyticsService
+      analyticsId
+      company
+      contentLicense
+      footerOverride
+      logoUrl
+      pageExtensions
+      authAutoLogin
+      authEnforce2FA
+      authHideLocal
+      authLoginBgUrl
+      authJwtAudience
+      authJwtExpiration
+      authJwtRenewablePeriod
+      editFab
+      editMenuBar
+      editMenuBtn
+      editMenuExternalBtn
+      editMenuExternalName
+      editMenuExternalIcon
+      editMenuExternalUrl
+      featurePageRatings
+      featurePageComments
+      featurePersonalWikis
+      securityOpenRedirect
+      securityIframe
+      securityReferrerPolicy
+      securityTrustProxy
+      securitySRI
+      securityHSTS
+      securityHSTSDuration
+      securityCSP
+      securityCSPDirectives
+      uploadMaxFileSize
+      uploadMaxFiles
+      uploadScanSVG
+      uploadForceDownload
+    }
+  }
+}
+
+mutation UpdateSiteConfig($host: String, $title: String, $description: String, $robots: [String], $analyticsService: String, $analyticsId: String, $company: String, $contentLicense: String, $footerOverride: String, $logoUrl: String, $pageExtensions: String, $authAutoLogin: Boolean, $authEnforce2FA: Boolean, $authHideLocal: Boolean, $authLoginBgUrl: String, $authJwtAudience: String, $authJwtExpiration: String, $authJwtRenewablePeriod: String, $editFab: Boolean, $editMenuBar: Boolean, $editMenuBtn: Boolean, $editMenuExternalBtn: Boolean, $editMenuExternalName: String, $editMenuExternalIcon: String, $editMenuExternalUrl: String, $featurePageRatings: Boolean, $featurePageComments: Boolean, $featurePersonalWikis: Boolean, $securityOpenRedirect: Boolean, $securityIframe: Boolean, $securityReferrerPolicy: Boolean, $securityTrustProxy: Boolean, $securitySRI: Boolean, $securityHSTS: Boolean, $securityHSTSDuration: Int, $securityCSP: Boolean, $securityCSPDirectives: String, $uploadMaxFileSize: Int, $uploadMaxFiles: Int, $uploadScanSVG: Boolean, $uploadForceDownload: Boolean) {
+  site {
+    updateConfig(host: $host, title: $title, description: $description, robots: $robots, analyticsService: $analyticsService, analyticsId: $analyticsId, company: $company, contentLicense: $contentLicense, footerOverride: $footerOverride, logoUrl: $logoUrl, pageExtensions: $pageExtensions, authAutoLogin: $authAutoLogin, authEnforce2FA: $authEnforce2FA, authHideLocal: $authHideLocal, authLoginBgUrl: $authLoginBgUrl, authJwtAudience: $authJwtAudience, authJwtExpiration: $authJwtExpiration, authJwtRenewablePeriod: $authJwtRenewablePeriod, editFab: $editFab, editMenuBar: $editMenuBar, editMenuBtn: $editMenuBtn, editMenuExternalBtn: $editMenuExternalBtn, editMenuExternalName: $editMenuExternalName, editMenuExternalIcon: $editMenuExternalIcon, editMenuExternalUrl: $editMenuExternalUrl, featurePageRatings: $featurePageRatings, featurePageComments: $featurePageComments, featurePersonalWikis: $featurePersonalWikis, securityOpenRedirect: $securityOpenRedirect, securityIframe: $securityIframe, securityReferrerPolicy: $securityReferrerPolicy, securityTrustProxy: $securityTrustProxy, securitySRI: $securitySRI, securityHSTS: $securityHSTS, securityHSTSDuration: $securityHSTSDuration, securityCSP: $securityCSP, securityCSPDirectives: $securityCSPDirectives, uploadMaxFileSize: $uploadMaxFileSize, uploadMaxFiles: $uploadMaxFiles, uploadScanSVG: $uploadScanSVG, uploadForceDownload: $uploadForceDownload) {
+      responseResult {
+        succeeded
+        errorCode
+        slug
+        message
+      }
+    }
+  }
+}
+
+query ListGroups($filter: String, $orderBy: String) {
+  groups {
+    list(filter: $filter, orderBy: $orderBy) {
+      id
+      name
+      isSystem
+      userCount
+      createdAt
+      updatedAt
+    }
+  }
+}
+
+query GetGroup($id: Int!) {
+  groups {
+    single(id: $id) {
+      id
+      name
+      isSystem
+      redirectOnLogin
+      permissions
+      pageRules {
+        id
+        deny
+        match
+        roles
+        path
+        locales
+      }
+      users {
+        id
+        name
+        email
+        providerKey
+        isSystem
+        isActive
+        createdAt
+        lastLoginAt
+      }
+      createdAt
+      updatedAt
+    }
+  }
+}
+
+query GetGroups($filter: String, $orderBy: String) {
+  groups {
+    list(filter: $filter, orderBy: $orderBy) {
+      id
+      name
+      isSystem
+      userCount
+      createdAt
+      updatedAt
+    }
+  }
+}
+
+mutation CreateGroup($name: String!) {
+  groups {
+    create(name: $name) {
+      responseResult {
+        succeeded
+        errorCode
+        slug
+        message
+      }
+      group {
+        id
+        name
+        isSystem
+        redirectOnLogin
+        permissions
+        pageRules {
+          id
+          deny
+          match
+          roles
+          path
+          locales
+        }
+        users {
+          id
+          name
+          email
+          providerKey
+          isSystem
+          isActive
+          createdAt
+          lastLoginAt
+        }
+        createdAt
+        updatedAt
+      }
+    }
+  }
+}
+
+mutation UpdateGroup($id: Int!, $name: String!, $redirectOnLogin: String!, $permissions: [String]!, $pageRules: [PageRuleInput]!) {
+  groups {
+    update(id: $id, name: $name, redirectOnLogin: $redirectOnLogin, permissions: $permissions, pageRules: $pageRules) {
+      responseResult {
+        succeeded
+        errorCode
+        slug
+        message
+      }
+    }
+  }
+}
+
+mutation DeleteGroup($id: Int!) {
+  groups {
+    delete(id: $id) {
+      responseResult {
+        succeeded
+        errorCode
+        slug
+        message
+      }
+    }
+  }
+}
+
+mutation GroupAssignUser($groupId: Int!, $userId: Int!) {
+  groups {
+    assignUser(groupId: $groupId, userId: $userId) {
+      responseResult {
+        succeeded
+        errorCode
+        slug
+        message
+      }
+    }
+  }
+}
+
+mutation GroupUnassignUser($groupId: Int!, $userId: Int!) {
+  groups {
+    assignUser(groupId: $groupId, userId: $userId) {
+      responseResult {
+        succeeded
+        errorCode
+        slug
+        message
+      }
+    }
+  }
+}
+
+query GetLocalization {
+  localization {
+    config {
+      locale
+      autoUpdate
+      namespacing
+      namespaces
+    }
+  }
+}
+
+mutation SetLocalization($locale: String!, $autoUpdate: Boolean!, $namespacing: Boolean!, $namespaces: [String]!) {
+  localization {
+    updateLocale(locale: $locale, autoUpdate: $autoUpdate, namespacing: $namespacing, namespaces: $namespaces) {
+      responseResult {
+        succeeded
+        errorCode
+        slug
+        message
+      }
+    }
+  }
+}
+
+query GetLocales {
+  localization {
+    locales {
+      availability
+      code
+      createdAt
+      installDate
+      isInstalled
+      isRTL
+      name
+      nativeName
+      updatedAt
+    }
+  }
+}
+
+mutation DownloadLocale($locale: String!) {
+  localization {
+    downloadLocale(locale: $locale) {
+      responseResult {
+        succeeded
+        errorCode
+        slug
+        message
+      }
+    }
+  }
+}
+
+
+mutation CreatePage($content: String!, $description: String!, $editor: String!, $isPublished: Boolean!, $isPrivate: Boolean!, $locale: String!, $path: String!, $publishEndDate: Date, $publishStartDate: Date, $scriptCss: String, $scriptJs: String, $tags: [String]!, $title: String!) {
+  pages {
+    create(content: $content, description: $description, editor: $editor, isPublished: $isPublished, isPrivate: $isPrivate, locale: $locale, path: $path, publishEndDate: $publishEndDate, publishStartDate: $publishStartDate, scriptCss: $scriptCss, scriptJs: $scriptJs, tags: $tags, title: $title) {
+      responseResult {
+        succeeded
+        errorCode
+        slug
+        message
+      }
+      page {
+        id
+        path
+        hash
+        title
+        description
+        isPrivate
+        isPublished
+        privateNS
+        publishStartDate
+        publishEndDate
+        tags {
+          id
+          tag
+          title
+          createdAt
+          updatedAt
+        }
+        content
+        render
+        contentType
+        createdAt
+        updatedAt
+        scriptCss
+        scriptJs
+        authorId
+        authorName
+        authorEmail
+        creatorId
+        creatorName
+        creatorEmail
+      }
+    }
+  }
+}
+
+mutation UpdatePage($id: Int!, $content: String!, $description: String!, $editor: String!, $isPublished: Boolean!, $isPrivate: Boolean!, $locale: String!, $path: String!, $publishEndDate: Date, $publishStartDate: Date, $scriptCss: String, $scriptJs: String, $tags: [String]!, $title: String!) {
+  pages {
+    update(id: $id, content: $content, description: $description, editor: $editor, isPublished: $isPublished, isPrivate: $isPrivate, locale: $locale, path: $path, publishEndDate: $publishEndDate, publishStartDate: $publishStartDate, scriptCss: $scriptCss, scriptJs: $scriptJs, tags: $tags, title: $title) {
+      responseResult {
+        succeeded
+        errorCode
+        slug
+        message
+      }
+      page {
+        id
+        path
+        hash
+        title
+        description
+        isPrivate
+        isPublished
+        privateNS
+        publishStartDate
+        publishEndDate
+        tags {
+          id
+          tag
+          title
+          createdAt
+          updatedAt
+        }
+        content
+        render
+        contentType
+        createdAt
+        updatedAt
+        scriptCss
+        scriptJs
+        authorId
+        authorName
+        authorEmail
+        creatorId
+        creatorName
+        creatorEmail
+      }
+    }
+  }
+}
+
+mutation DeletePage($id: Int!) {
+  pages {
+    delete(id: $id) {
+      responseResult {
+        succeeded
+        errorCode
+        slug
+        message
+      }
+    }
+  }
+}
+
+mutation FlushPageCache {
+  pages {
+    flushCache {
+      responseResult {
+        succeeded
+        errorCode
+        slug
+        message
+      }
+    }
+  }
+}
+
+query GetPage($id: Int!) {
+  pages {
+    single(id: $id) {
+      id
+      path
+      hash
+      title
+      description
+      isPrivate
+      isPublished
+      privateNS
+      publishStartDate
+      publishEndDate
+      tags {
+        id
+        tag
+        title
+        createdAt
+        updatedAt
+      }
+      content
+      render
+      contentType
+      createdAt
+      updatedAt
+      editor
+      locale
+      scriptCss
+      scriptJs
+      authorId
+      authorName
+      authorEmail
+      creatorId
+      creatorName
+      creatorEmail
+    }
+  }
+}
+
+query GetPageByPath($path: String!, $locale: String!) {
+  pages {
+    singleByPath(path: $path, locale: $locale) {
+      id
+      path
+      hash
+      title
+      description
+      isPrivate
+      isPublished
+      privateNS
+      publishStartDate
+      publishEndDate
+      tags {
+        id
+        tag
+        title
+        createdAt
+        updatedAt
+      }
+      content
+      render
+      contentType
+      createdAt
+      updatedAt
+      editor
+      locale
+      scriptCss
+      scriptJs
+      authorId
+      authorName
+      authorEmail
+      creatorId
+      creatorName
+      creatorEmail
+    }
+  }
+}
+
+query GetApiState {
+  authentication {
+    apiState
+  }
+}
+
+mutation SetApiState($enabled: Boolean!) {
+  authentication {
+    setApiState(enabled: $enabled) {
+      responseResult {
+        succeeded
+        errorCode
+        slug
+        message
+      }
+    }
+  }
+}
+
+query GetApiKeys {
+  authentication {
+    apiKeys {
+      id
+      name
+      keyShort
+      expiration
+      createdAt
+      updatedAt
+      isRevoked
+    }
+  }
+}
+
+mutation CreateApiKey($name: String!, $expiration: String!, $fullAccess: Boolean!, $group: Int) {
+  authentication {
+    createApiKey(name: $name, expiration: $expiration, fullAccess: $fullAccess, group: $group) {
+      responseResult {
+        succeeded
+        errorCode
+        slug
+        message
+      }
+      key
+    }
+  }
+}
+
+mutation RevokeApiKey($id: Int!) {
+  authentication {
+    revokeApiKey(id: $id) {
+      responseResult {
+        succeeded
+        errorCode
+        slug
+        message
+      }
+    }
+  }
+}
+
+query GetAuthStrategies($enabledOnly: Boolean) {
+  authentication {
+    activeStrategies(enabledOnly: $enabledOnly) {
+        key
+        strategy {
+          key
+          title
+          description
+          isAvailable
+          useForm
+          usernameType
+          logo
+          color
+          website
+          icon
+        }
+        displayName
+        order
+        isEnabled
+        config {
+          key
+          value
+        }
+        selfRegistration
+        domainWhitelist
+        autoEnrollGroups
+    }
+  }
+}
+
+mutation SetAuthStrategies($strategies: [AuthenticationStrategyInput]!) {
+  authentication {
+    updateStrategies(strategies: $strategies) {
+      responseResult {
+        succeeded
+        errorCode
+        slug
+        message
+      }
+    }
+  }
+}

@@ -16,7 +16,7 @@ builds:
   ldflags:
     - '-s -w -X main.version={{.Version}} -X main.commit={{.Commit}}'
   goos:
-    - freebsd
+    # - freebsd
     - windows
     - linux
     - darwin
@@ -27,8 +27,6 @@ builds:
     - arm64
   ignore:
     - goos: darwin
-      goarch: '386'
-    - goos: freebsd # mussing strings.CutPrefix
       goarch: '386'
   binary: '{{ .ProjectName }}_v{{ .Version }}'
 archives:

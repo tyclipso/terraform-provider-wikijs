@@ -18,20 +18,20 @@ description: |-
 ### Required
 
 - `expires_in` (String) When creating an API Key wiki.js expects an expiration timespan (e. g. '1d' '20h')
-- `name` (String)
+- `name` (String) Display name of the API Key (not unique)
 
 ### Optional
 
-- `full_access` (Boolean)
-- `group_id` (Number)
+- `full_access` (Boolean) Set to true to create an API Key with full access rights. Mutually exclusive with group_id.
+- `group_id` (Number) Mutually exclusive with full_access. List of group_ids the API Key should inherit it's permissions and page rules form.
 - `min_remaining_duration` (String) Set a minimum duration the api key needs to remain active. This field is changed when the expiration dates comes to close and triggers a replace
 
 ### Read-Only
 
-- `created_at` (String)
+- `created_at` (String) Creation time as returned by Wiki.JS (expect RFC3339 format)
 - `expiration` (String) The actual expiration date of this key
-- `id` (Number) The ID of this resource.
-- `key` (String, Sensitive)
-- `key_short` (String)
+- `id` (Number) Internal Id of the API Key
+- `key` (String, Sensitive) The actual API Key. Keep it secret!
+- `key_short` (String) Suffix of the actual API Key as shown in the Web UI (Hint: Wiki.JS always adds three dots before the actual suffix. You need to remove those if you need to match an actual key)
 
 

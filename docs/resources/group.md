@@ -17,32 +17,37 @@ description: |-
 
 ### Required
 
-- `name` (String)
-- `page_rules` (Attributes List) (see [below for nested schema](#nestedatt--page_rules))
-- `permissions` (List of String)
+- `name` (String) Name of the group
+- `page_rules` (Attributes List) Page rules for this group. See nested object (see [below for nested schema](#nestedatt--page_rules))
+- `permissions` (List of String) Global permissions for this group (see: https://github.com/requarks/wiki/blob/db8a09fe8c267a54fbbfabe0dc871a2108824968/client/components/admin/admin-groups-edit-permissions.vue#L43)
 
 ### Optional
 
-- `redirect_on_login` (String)
+- `redirect_on_login` (String) Path to redirect members to upon login
 
 ### Read-Only
 
-- `id` (Number) The ID of this resource.
-- `is_system` (Boolean)
+- `id` (Number) Internal id of the group.
+- `is_system` (Boolean) Whether this is a system group
 
 <a id="nestedatt--page_rules"></a>
 ### Nested Schema for `page_rules`
 
 Required:
 
-- `deny` (Boolean)
-- `locales` (List of String)
-- `match` (String)
-- `path` (String)
-- `roles` (List of String)
+- `deny` (Boolean) Defines whether this is a deny or allow rule
+- `locales` (List of String) Locale to match on. Empty list to match on any locale.
+- `match` (String) Match pattern for this rule. One of:
+  - START
+  - EXACT
+  - END
+  - REGEX
+  - TAG
+- `path` (String) Path to match on
+- `roles` (List of String) Permissions of this role (see: https://github.com/requarks/wiki/blob/db8a09fe8c267a54fbbfabe0dc871a2108824968/client/components/admin/admin-groups-edit-permissions.vue#L43)
 
 Read-Only:
 
-- `id` (String)
+- `id` (String) Internal ID for this rule
 
 

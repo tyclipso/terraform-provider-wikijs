@@ -17,31 +17,31 @@ description: |-
 
 ### Required
 
-- `content` (String)
-- `description` (String)
-- `locale` (String)
-- `path` (String)
-- `title` (String)
+- `content` (String) Content of the page (format is defined by editor)
+- `description` (String) Meta description of the page for search engines
+- `locale` (String) Language of this page
+- `path` (String) Path of the page (omit leading slash)
+- `title` (String) Page Title
 
 ### Optional
 
-- `editor` (String)
-- `is_private` (Boolean)
-- `is_published` (Boolean)
-- `publish_end_date` (String)
-- `publish_start_date` (String)
-- `script_css` (String)
-- `script_js` (String)
-- `tags` (Set of String)
+- `editor` (String) Editor type to use for this page
+- `is_private` (Boolean) Whether this is a private page
+- `is_published` (Boolean) Whether this page is published
+- `publish_end_date` (String) Set to an RFC 3399 timestamp to define an unpublish date.
+- `publish_start_date` (String) Set to an RFC 3399 timestamp to define a publish date.
+- `script_css` (String) Additional CSS to add to the rendered page
+- `script_js` (String) Additional JS to add to the rendered page
+- `tags` (Set of String) List of page tags
 
 ### Read-Only
 
-- `created_at` (String)
-- `creator_email` (String)
-- `creator_id` (Number)
-- `creator_name` (String)
-- `hash` (String)
-- `id` (Number) The ID of this resource.
+- `created_at` (String) Creation date of this page (expect RFC 3399 timestamp). Use data source to get updated_at
+- `creator_email` (String) Email of the page creator. Use data source to get authors
+- `creator_id` (Number) User id of the creator. Use data source to get authors
+- `creator_name` (String) Name of the page creator. Use data source to get authors
+- `hash` (String) Page hash computed by wiki.js (see: https://github.com/requarks/wiki/blob/db8a09fe8c267a54fbbfabe0dc871a2108824968/server/helpers/page.js#L71)
+- `id` (Number) Internal id
 - `private_ns` (String)
 
 

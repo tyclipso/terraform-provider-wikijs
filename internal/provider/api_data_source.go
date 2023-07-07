@@ -40,7 +40,8 @@ func (d *apiDataSource) Schema(_ context.Context, _ datasource.SchemaRequest, re
 	resp.Schema = schema.Schema{
 		Attributes: map[string]schema.Attribute{
 			"enabled": schema.BoolAttribute{
-				Computed: true,
+				Computed:    true,
+				Description: "States whether the Wiki.JS API is enabled",
 			},
 		},
 	}

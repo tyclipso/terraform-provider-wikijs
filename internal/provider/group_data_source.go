@@ -48,53 +48,68 @@ func (d *groupDataSource) Schema(_ context.Context, _ datasource.SchemaRequest, 
 	resp.Schema = schema.Schema{
 		Attributes: map[string]schema.Attribute{
 			"group_id": schema.Int64Attribute{
-				Required: true,
+				Required:    true,
+				Description: "Internal id of the group.",
 			},
 			"name": schema.StringAttribute{
-				Computed: true,
+				Computed:    true,
+				Description: "Name of the group",
 			},
 			"is_system": schema.BoolAttribute{
-				Computed: true,
+				Computed:    true,
+				Description: "Whether this is a system group",
 			},
 			"redirect_on_login": schema.StringAttribute{
-				Computed: true,
+				Computed:    true,
+				Description: "Path to redirect members to upon login",
 			},
 			"permissions": schema.ListAttribute{
 				Computed:    true,
 				ElementType: types.StringType,
+				Description: "Global permissions for this group (see: https://github.com/requarks/wiki/blob/db8a09fe8c267a54fbbfabe0dc871a2108824968/client/components/admin/admin-groups-edit-permissions.vue#L43)",
 			},
 			"page_rules": schema.ListNestedAttribute{
-				Computed: true,
+				Computed:    true,
+				Description: "Page rules for this group. See nested object",
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"id": schema.StringAttribute{
-							Computed: true,
+							Computed:    true,
+							Description: "Internal ID for this rule",
 						},
 						"deny": schema.BoolAttribute{
-							Computed: true,
+							Computed:    true,
+							Description: "Defines whether this is a deny or allow rule",
 						},
 						"match": schema.StringAttribute{
-							Computed: true,
+							Computed:            true,
+							Description:         "Match pattern for this rule.",
+							MarkdownDescription: "Match pattern for this rule. One of:\n  - START\n  - EXACT\n  - END\n  - REGEX\n  - TAG",
 						},
 						"roles": schema.ListAttribute{
 							Computed:    true,
 							ElementType: types.StringType,
+							Description: "Permissions of this role (see: https://github.com/requarks/wiki/blob/db8a09fe8c267a54fbbfabe0dc871a2108824968/client/components/admin/admin-groups-edit-permissions.vue#L43)",
 						},
 						"path": schema.StringAttribute{
-							Computed: true,
+							Computed:    true,
+							Description: "Path to match on",
 						},
 						"locales": schema.ListAttribute{
 							Computed:    true,
 							ElementType: types.StringType,
+							Description: "Locale to match on. Empty list to match on any locale.",
 						},
 					},
 				},
 			},
 			"created_at": schema.StringAttribute{
-				Computed: true,
+				Computed:    true,
+				Description: "Creation time of this group (expect RFC3399)",
 			},
 			"updated_at": schema.StringAttribute{
-				Computed: true,
+				Computed:    true,
+				Description: "Last update time of this group (expect RFC3399)",
 			},
 		},
 	}

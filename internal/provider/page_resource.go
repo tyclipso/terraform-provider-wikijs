@@ -65,109 +65,128 @@ func (r *pageResource) Schema(_ context.Context, _ resource.SchemaRequest, resp 
 	resp.Schema = schema.Schema{
 		Attributes: map[string]schema.Attribute{
 			"id": schema.Int64Attribute{
-				Computed: true,
+				Computed:    true,
+				Description: "Internal id",
 				PlanModifiers: []planmodifier.Int64{
 					int64planmodifier.UseStateForUnknown(),
 					int64planmodifier.RequiresReplace(),
 				},
 			},
 			"path": schema.StringAttribute{
-				Required: true,
+				Required:    true,
+				Description: "Path of the page (omit leading slash)",
 				PlanModifiers: []planmodifier.String{
 					// @Todo: Implement move
 					stringplanmodifier.RequiresReplace(),
 				},
 			},
 			"hash": schema.StringAttribute{
-				Computed: true,
+				Computed:    true,
+				Description: "Page hash computed by wiki.js (see: https://github.com/requarks/wiki/blob/db8a09fe8c267a54fbbfabe0dc871a2108824968/server/helpers/page.js#L71)",
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"title": schema.StringAttribute{
-				Required: true,
+				Required:    true,
+				Description: "Page Title",
 			},
 			"description": schema.StringAttribute{
-				Required: true,
+				Required:    true,
+				Description: "Meta description of the page for search engines",
 			},
 			"is_private": schema.BoolAttribute{
-				Optional: true,
-				Computed: true,
-				Default:  booldefault.StaticBool(false),
+				Optional:    true,
+				Computed:    true,
+				Description: "Whether this is a private page",
+				Default:     booldefault.StaticBool(false),
 			},
 			"is_published": schema.BoolAttribute{
-				Optional: true,
-				Computed: true,
-				Default:  booldefault.StaticBool(true),
+				Optional:    true,
+				Computed:    true,
+				Description: "Whether this page is published",
+				Default:     booldefault.StaticBool(true),
 			},
 			"private_ns": schema.StringAttribute{
 				Computed: true,
 				Default:  stringdefault.StaticString(""),
 			},
 			"publish_start_date": schema.StringAttribute{
-				Optional: true,
-				Computed: true,
-				Default:  stringdefault.StaticString(""),
+				Optional:    true,
+				Computed:    true,
+				Description: "Set to an RFC 3399 timestamp to define a publish date.",
+				Default:     stringdefault.StaticString(""),
 			},
 			"publish_end_date": schema.StringAttribute{
-				Optional: true,
-				Computed: true,
-				Default:  stringdefault.StaticString(""),
+				Optional:    true,
+				Computed:    true,
+				Description: "Set to an RFC 3399 timestamp to define an unpublish date.",
+				Default:     stringdefault.StaticString(""),
 			},
 			"tags": schema.SetAttribute{
 				Optional:    true,
 				Computed:    true,
 				ElementType: types.StringType,
+				Description: "List of page tags",
 			},
 			"content": schema.StringAttribute{
-				Required: true,
+				Required:    true,
+				Description: "Content of the page (format is defined by editor)",
 			},
 			"created_at": schema.StringAttribute{
 				Computed: true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
+				Description: "Creation date of this page (expect RFC 3399 timestamp). Use data source to get updated_at",
 			},
 			"editor": schema.StringAttribute{
-				Optional: true,
-				Computed: true,
-				Default:  stringdefault.StaticString("markdown"),
+				Optional:    true,
+				Computed:    true,
+				Default:     stringdefault.StaticString("markdown"),
+				Description: "Editor type to use for this page",
 			},
 			"locale": schema.StringAttribute{
-				Required: true,
+				Required:    true,
+				Description: "Language of this page",
 				PlanModifiers: []planmodifier.String{
 					// @Todo: Implement move
 					stringplanmodifier.RequiresReplace(),
 				},
 			},
 			"script_css": schema.StringAttribute{
-				Optional: true,
-				Computed: true,
+				Optional:    true,
+				Computed:    true,
+				Description: "Additional CSS to add to the rendered page",
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"script_js": schema.StringAttribute{
-				Optional: true,
-				Computed: true,
+				Optional:    true,
+				Computed:    true,
+				Description: "Additional JS to add to the rendered page",
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"creator_id": schema.Int64Attribute{
-				Computed: true,
+				Computed:    true,
+				Description: "User id of the creator. Use data source to get authors",
 				PlanModifiers: []planmodifier.Int64{
 					int64planmodifier.UseStateForUnknown(),
 				},
 			},
 			"creator_name": schema.StringAttribute{
-				Computed: true,
+				Computed:    true,
+				Description: "Name of the page creator. Use data source to get authors",
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"creator_email": schema.StringAttribute{
-				Computed: true,
+				Computed:    true,
+				Description: "Email of the page creator. Use data source to get authors",
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},

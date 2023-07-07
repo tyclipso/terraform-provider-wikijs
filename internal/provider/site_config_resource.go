@@ -288,8 +288,7 @@ func (r *siteConfigResource) Schema(_ context.Context, _ resource.SchemaRequest,
 			"security_csp": schema.BoolAttribute{
 				Optional: true,
 				Computed: true,
-
-				Default: booldefault.StaticBool(false),
+				Default:  booldefault.StaticBool(false),
 			},
 			"security_csp_directives": schema.StringAttribute{
 				Optional: true,

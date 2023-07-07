@@ -17,8 +17,8 @@ description: |-
 
 ### Optional
 
-- `filter` (String)
-- `order_by` (String)
+- `filter` (String) Seems like this is just part of the graphql schema but not implemented in the wiki.js server
+- `order_by` (String) Seems like this is just part of the graphql schema but not implemented in the wiki.js server
 
 ### Read-Only
 
@@ -29,11 +29,11 @@ description: |-
 
 Read-Only:
 
-- `created_at` (String)
-- `id` (Number)
-- `is_system` (Boolean)
-- `name` (String)
-- `updated_at` (String)
-- `user_count` (Number)
+- `created_at` (String) Creation time of this group (expect RFC3399)
+- `id` (Number) Internal id of the group.
+- `is_system` (Boolean) Whether this is a system group
+- `name` (String) Name of the group
+- `updated_at` (String) Last update time of this group (expect RFC3399)
+- `user_count` (Number) Number of users in this group
 
 

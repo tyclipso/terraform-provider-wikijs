@@ -17,19 +17,19 @@ description: |-
 
 ### Read-Only
 
-- `api_keys` (Attributes List) (see [below for nested schema](#nestedatt--api_keys))
+- `api_keys` (Attributes List) List of all API Keys known to wiki.js, see the nested object for details. (see [below for nested schema](#nestedatt--api_keys))
 
 <a id="nestedatt--api_keys"></a>
 ### Nested Schema for `api_keys`
 
 Read-Only:
 
-- `created_at` (String)
-- `expiration` (String)
-- `id` (Number)
-- `is_revoked` (Boolean)
-- `key_short` (String)
-- `name` (String)
-- `updated_at` (String)
+- `created_at` (String) Creation time as returned by Wiki.JS (expect RFC3339 format)
+- `expiration` (String) Expiration time as returned by Wiki.JS (expect RFC3339 format)
+- `id` (Number) Internal Id of the API Key
+- `is_revoked` (Boolean) Whether the API Key is revoked
+- `key_short` (String) Suffix of the actual API Key as shown in the Web UI (Hint: Wiki.JS always adds three dots before the actual suffix. You need to remove those if you need to match an actual key)
+- `name` (String) Display name of the API Key (not unique)
+- `updated_at` (String) Time of last updated of the key as returned by Wiki.JS (expect RFC3339 format)
 
 

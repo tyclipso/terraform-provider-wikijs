@@ -17,45 +17,45 @@ description: |-
 
 ### Optional
 
-- `locale` (String)
-- `page_id` (Number)
-- `path` (String)
+- `locale` (String) Language of this page
+- `page_id` (Number) Internal ID of this page
+- `path` (String) Path of the page (omit leading slash)
 
 ### Read-Only
 
-- `author_email` (String)
-- `author_id` (Number)
-- `author_name` (String)
-- `content` (String)
+- `author_email` (String) Email of the page last author.
+- `author_id` (Number) User id of the last author.
+- `author_name` (String) Name of the page last author.
+- `content` (String) Content of the page (format is defined by editor)
 - `content_type` (String)
-- `created_at` (String)
-- `creator_email` (String)
-- `creator_id` (Number)
-- `creator_name` (String)
-- `description` (String)
-- `editor` (String)
-- `hash` (String)
-- `is_private` (Boolean)
-- `is_published` (Boolean)
+- `created_at` (String) Creation date of this page (expect RFC 3399 timestamp)
+- `creator_email` (String) Email of the page creator.
+- `creator_id` (Number) User id of the creator.
+- `creator_name` (String) Name of the page creator.
+- `description` (String) Meta description of the page for search engines
+- `editor` (String) Editor type of this page
+- `hash` (String) Page hash computed by wiki.js (see: https://github.com/requarks/wiki/blob/db8a09fe8c267a54fbbfabe0dc871a2108824968/server/helpers/page.js#L71)
+- `is_private` (Boolean) Whether this is a private page
+- `is_published` (Boolean) Whether this page is published
 - `private_ns` (String)
-- `publish_end_date` (String)
-- `publish_start_date` (String)
-- `render` (String)
-- `script_css` (String)
-- `script_js` (String)
-- `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
-- `title` (String)
-- `updated_at` (String)
+- `publish_end_date` (String) RFC 3399 timestamp, when an unpublish date is defined.
+- `publish_start_date` (String) RFC 3399 timestamp, when a publish date is defined.
+- `render` (String) Rendered HTML of the content
+- `script_css` (String) Additional CSS to add to the rendered page
+- `script_js` (String) Additional JS to add to the rendered page
+- `tags` (Attributes Set) List of page tags (see [below for nested schema](#nestedatt--tags))
+- `title` (String) Page Title
+- `updated_at` (String) Update date of this page (expect RFC 3399 timestamp)
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
 Read-Only:
 
-- `created_at` (String)
-- `id` (Number)
-- `tag` (String)
-- `title` (String)
-- `updated_at` (String)
+- `created_at` (String) Creation date of this tag (expect RFC 3399 timestamp)
+- `id` (Number) Internal id of this tag
+- `tag` (String) The actual tag name. Use this string, when referencing a tag
+- `title` (String) Display name of this tag
+- `updated_at` (String) Update date of this tag (expect RFC 3399 timestamp)
 
 

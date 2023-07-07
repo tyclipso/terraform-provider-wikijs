@@ -54,11 +54,11 @@ func (p *WikiJSProvider) Schema(ctx context.Context, req provider.SchemaRequest,
 				Required:            true,
 			},
 			"email": schema.StringAttribute{
-				MarkdownDescription: "Email to login with (also used as admin email during finalize install)",
+				MarkdownDescription: "Email to login with",
 				Optional:            true,
 			},
 			"password": schema.StringAttribute{
-				MarkdownDescription: "Password to login with (also used as admin password during finalize install)",
+				MarkdownDescription: "Password to login with",
 				Optional:            true,
 			},
 		},
@@ -143,6 +143,7 @@ func (p *WikiJSProvider) DataSources(ctx context.Context) []func() datasource.Da
 		NewGroupsDataSource,
 		NewApiDataSource,
 		NewApiKeysDataSource,
+		NewAuthStrategiesDataSource,
 	}
 }
 

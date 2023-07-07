@@ -61,43 +61,53 @@ func (r *groupResource) Schema(_ context.Context, _ resource.SchemaRequest, resp
 	resp.Schema = schema.Schema{
 		Attributes: map[string]schema.Attribute{
 			"id": schema.Int64Attribute{
-				Computed: true,
+				Computed:    true,
+				Description: "Internal id of the group.",
 				PlanModifiers: []planmodifier.Int64{
 					int64planmodifier.UseStateForUnknown(),
 					int64planmodifier.RequiresReplace(),
 				},
 			},
 			"name": schema.StringAttribute{
-				Required: true,
+				Required:    true,
+				Description: "Name of the group",
 			},
 			"is_system": schema.BoolAttribute{
-				Computed: true,
-				Default:  booldefault.StaticBool(false),
+				Computed:    true,
+				Description: "Whether this is a system group",
+				Default:     booldefault.StaticBool(false),
 			},
 			"redirect_on_login": schema.StringAttribute{
-				Computed: true,
-				Optional: true,
-				Default:  stringdefault.StaticString("/"),
+				Computed:    true,
+				Optional:    true,
+				Description: "Path to redirect members to upon login",
+				Default:     stringdefault.StaticString("/"),
 			},
 			"permissions": schema.ListAttribute{
 				Required:    true,
 				ElementType: types.StringType,
+				Description: "Global permissions for this group (see: https://github.com/requarks/wiki/blob/db8a09fe8c267a54fbbfabe0dc871a2108824968/client/components/admin/admin-groups-edit-permissions.vue#L43)",
 			},
 			"page_rules": schema.ListNestedAttribute{
-				Required: true,
+				Required:    true,
+				Description: "Page rules for this group. See nested object",
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"id": schema.StringAttribute{
-							Computed: true,
+							Computed:    true,
+							Description: "Internal ID for this rule",
 							PlanModifiers: []planmodifier.String{
 								stringplanmodifier.UseStateForUnknown(),
 							},
 						},
 						"deny": schema.BoolAttribute{
-							Required: true,
+							Required:    true,
+							Description: "Defines whether this is a deny or allow rule",
 						},
 						"match": schema.StringAttribute{
-							Required: true,
+							Required:            true,
+							Description:         "Match pattern for this rule.",
+							MarkdownDescription: "Match pattern for this rule. One of:\n  - START\n  - EXACT\n  - END\n  - REGEX\n  - TAG",
 							Validators: []validator.String{
 								stringvalidator.OneOf(
 									string(wikijs.PageRuleMatchStart),
@@ -110,13 +120,16 @@ func (r *groupResource) Schema(_ context.Context, _ resource.SchemaRequest, resp
 						},
 						"roles": schema.ListAttribute{
 							Required:    true,
+							Description: "Permissions of this role (see: https://github.com/requarks/wiki/blob/db8a09fe8c267a54fbbfabe0dc871a2108824968/client/components/admin/admin-groups-edit-permissions.vue#L43)",
 							ElementType: types.StringType,
 						},
 						"path": schema.StringAttribute{
-							Required: true,
+							Required:    true,
+							Description: "Path to match on",
 						},
 						"locales": schema.ListAttribute{
 							Required:    true,
+							Description: "Locale to match on. Empty list to match on any locale.",
 							ElementType: types.StringType,
 						},
 					},

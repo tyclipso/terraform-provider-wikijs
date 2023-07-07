@@ -81,16 +81,20 @@ func (d *siteConfigDataSource) Schema(_ context.Context, _ datasource.SchemaRequ
 	resp.Schema = schema.Schema{
 		Attributes: map[string]schema.Attribute{
 			"host": schema.StringAttribute{
-				Computed: true,
+				Computed:    true,
+				Description: "Full URL to your wiki, without the trailing slash. (e.g. https://wiki.example.com)",
 			},
 			"title": schema.StringAttribute{
-				Computed: true,
+				Computed:    true,
+				Description: "Displayed in the top bar and appended to all pages meta title.",
 			},
 			"description": schema.StringAttribute{
-				Computed: true,
+				Computed:    true,
+				Description: "Default description when none is provided for a page.",
 			},
 			"robots": schema.ListAttribute{
 				Computed:    true,
+				Description: "Default: Index, Follow. Can also be set on a per-page basis.",
 				ElementType: types.StringType,
 			},
 			"analytics_service": schema.StringAttribute{
@@ -100,46 +104,60 @@ func (d *siteConfigDataSource) Schema(_ context.Context, _ datasource.SchemaRequ
 				Computed: true,
 			},
 			"company": schema.StringAttribute{
-				Computed: true,
+				Computed:    true,
+				Description: "Name to use when displaying copyright notice in the footer. Leave empty to hide.",
 			},
 			"content_license": schema.StringAttribute{
-				Computed: true,
+				Computed:    true,
+				Description: "License shown in the footer of all content pages.",
 			},
 			"footer_override": schema.StringAttribute{
-				Computed: true,
+				Computed:    true,
+				Description: "Optionally override the footer text with a custom message. Useful if none of the above licenses are appropriate.",
 			},
 			"logo_url": schema.StringAttribute{
-				Computed: true,
+				Computed:    true,
+				Description: "Specify an image to use as the logo. SVG, PNG, JPG are supported, in a square ratio, 34x34 pixels or larger. Click the button on the right to upload a new image.",
 			},
 			"page_extensions": schema.StringAttribute{
-				Computed: true,
+				Computed:    true,
+				Description: "A comma-separated list of URL extensions that will be treated as pages. For example, adding md will treat /foobar.md the same as /foobar.",
 			},
 			"auth_auto_login": schema.BoolAttribute{
-				Computed: true,
+				Computed:    true,
+				Description: "Should the user be redirected automatically to the first authentication provider.",
 			},
 			"auth_enforce_2fa": schema.BoolAttribute{
-				Computed: true,
+				Computed:    true,
+				Description: "Force all users to use Two-Factor Authentication when using an authentication provider with a user / password form.",
 			},
 			"auth_hide_local": schema.BoolAttribute{
-				Computed: true,
+				Computed:    true,
+				Description: "Don't show the local authentication provider on the login screen. Add ?all to the URL to temporarily use it.",
 			},
 			"auth_login_bg_url": schema.StringAttribute{
-				Computed: true,
+				Computed:    true,
+				Description: "Specify an image to use as the login background. PNG and JPG are supported, 1920x1080 recommended. Leave empty for default. Click the button on the right to upload a new image. Note that the Guests group must have read-access to the selected image!",
 			},
 			"auth_jwt_audience": schema.StringAttribute{
-				Computed: true,
+				Computed:    true,
+				Description: "Audience URN used in JWT issued upon login. Usually your domain name. (e.g. urn:your.domain.com)",
 			},
 			"auth_jwt_expiration": schema.StringAttribute{
-				Computed: true,
+				Computed:    true,
+				Description: "The expiration period of a token until it must be renewed. (default: 30m)",
 			},
 			"auth_jwt_renewable_period": schema.StringAttribute{
-				Computed: true,
+				Computed:    true,
+				Description: "The maximum period a token can be renewed when expired. (default: 14d)",
 			},
 			"edit_fab": schema.BoolAttribute{
-				Computed: true,
+				Computed:    true,
+				Description: "Display the edit floating action button (FAB) with a speed-dial menu in the bottom right corner of the screen.",
 			},
 			"edit_menu_bar": schema.BoolAttribute{
-				Computed: true,
+				Computed:    true,
+				Description: "Display the edit menu bar in the page header.",
 			},
 			"edit_menu_btn": schema.BoolAttribute{
 				Computed: true,
@@ -160,31 +178,38 @@ func (d *siteConfigDataSource) Schema(_ context.Context, _ datasource.SchemaRequ
 				Computed: true,
 			},
 			"feature_page_comments": schema.BoolAttribute{
-				Computed: true,
+				Computed:    true,
+				Description: "Allow users to leave comments on pages.",
 			},
 			"feature_personal_wikis": schema.BoolAttribute{
 				Computed: true,
 			},
 			"security_open_redirect": schema.BoolAttribute{
-				Computed: true,
+				Computed:    true,
+				Description: "Prevents user controlled URLs from directing to websites outside of your wiki. This provides Open Redirect protection.",
 			},
 			"security_iframe": schema.BoolAttribute{
-				Computed: true,
+				Computed:    true,
+				Description: "Prevents other websites from embedding your wiki in an iframe. This provides clickjacking protection.",
 			},
 			"security_referrer_policy": schema.BoolAttribute{
-				Computed: true,
+				Computed:    true,
+				Description: "Limits the referrer header to same origin.",
 			},
 			"security_trust_proxy": schema.BoolAttribute{
-				Computed: true,
+				Computed:    true,
+				Description: "Should be enabled when using a reverse-proxy like nginx, apache, CloudFlare, etc in front of Wiki.js. Turn off otherwise.",
 			},
 			"security_sri": schema.BoolAttribute{
 				Computed: true,
 			},
 			"security_hsts": schema.BoolAttribute{
-				Computed: true,
+				Computed:    true,
+				Description: "This ensures the connection cannot be established through an insecure HTTP connection.",
 			},
 			"security_hsts_duration": schema.Int64Attribute{
-				Computed: true,
+				Computed:    true,
+				Description: "Defines the duration for which the server should only deliver content through HTTPS. It's a good idea to start with small values and make sure that nothing breaks on your wiki before moving to longer values.",
 			},
 			"security_csp": schema.BoolAttribute{
 				Computed: true,
@@ -193,16 +218,20 @@ func (d *siteConfigDataSource) Schema(_ context.Context, _ datasource.SchemaRequ
 				Computed: true,
 			},
 			"upload_max_file_size": schema.Int64Attribute{
-				Computed: true,
+				Computed:    true,
+				Description: "The maximum size for a single file.",
 			},
 			"upload_max_files": schema.Int64Attribute{
-				Computed: true,
+				Computed:    true,
+				Description: "How many files can be uploaded in a single batch?",
 			},
 			"upload_scan_svg": schema.BoolAttribute{
-				Computed: true,
+				Computed:    true,
+				Description: "Should SVG uploads be scanned for vulnerabilities and stripped of any potentially unsafe content.",
 			},
 			"upload_force_download": schema.BoolAttribute{
-				Computed: true,
+				Computed:    true,
+				Description: "Should non-image files be forced as downloads when accessed directly. This prevents potential XSS attacks via unsafe file extensions uploads.",
 			},
 		},
 	}

@@ -52,32 +52,40 @@ func (d *groupsDataSource) Schema(_ context.Context, _ datasource.SchemaRequest,
 	resp.Schema = schema.Schema{
 		Attributes: map[string]schema.Attribute{
 			"filter": schema.StringAttribute{
-				Optional: true,
+				Optional:    true,
+				Description: "Seems like this is just part of the graphql schema but not implemented in the wiki.js server",
 			},
 			"order_by": schema.StringAttribute{
-				Optional: true,
+				Optional:    true,
+				Description: "Seems like this is just part of the graphql schema but not implemented in the wiki.js server",
 			},
 			"groups": schema.ListNestedAttribute{
 				Computed: true,
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"id": schema.Int64Attribute{
-							Computed: true,
+							Computed:    true,
+							Description: "Internal id of the group.",
 						},
 						"name": schema.StringAttribute{
-							Computed: true,
+							Computed:    true,
+							Description: "Name of the group",
 						},
 						"is_system": schema.BoolAttribute{
-							Computed: true,
+							Computed:    true,
+							Description: "Whether this is a system group",
 						},
 						"user_count": schema.Int64Attribute{
-							Computed: true,
+							Computed:    true,
+							Description: "Number of users in this group",
 						},
 						"created_at": schema.StringAttribute{
-							Computed: true,
+							Computed:    true,
+							Description: "Creation time of this group (expect RFC3399)",
 						},
 						"updated_at": schema.StringAttribute{
-							Computed: true,
+							Computed:    true,
+							Description: "Last update time of this group (expect RFC3399)",
 						},
 					},
 				},

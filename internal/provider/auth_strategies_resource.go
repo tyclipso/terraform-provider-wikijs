@@ -65,31 +65,45 @@ func (r *authStrategiesResource) Schema(_ context.Context, _ resource.SchemaRequ
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"key": schema.StringAttribute{
-							Computed: true,
+							Computed:    true,
+							Description: "Unique Key for this instance of the auth strategie",
 							PlanModifiers: []planmodifier.String{
 								stringplanmodifier.UseStateForUnknown(),
 							},
 						},
 						"strategy_key": schema.StringAttribute{
-							Required: true,
+							Required:    true,
+							Description: "Unique Identifier of the auth strategie to use (e.g. local, oauth2, oidc, keycloak, ldap)",
+							MarkdownDescription: "Unique Identifier of the auth strategie to use (e.g. local, oauth2, oidc, keycloak, ldap)\n\n" +
+								"```graphql\n" +
+								"query GetAuthStrategies {\n  authentication {\n    strategies {\n      title\n      key\n      description\n    }\n  }\n}\n" +
+								"```",
 						},
 						"config": schema.MapAttribute{
 							Required:    true,
 							ElementType: types.StringType,
 							Sensitive:   true,
+							Description: "Map with config options for this specifc auth strategie",
+							MarkdownDescription: "Map with config options for this specifc auth strategie\n\n" +
+								"```graphql\n" +
+								"query GetAuthStrategies {\n  authentication {\n    strategies {\n      title\n      key\n      props {\n        key\n        value\n      }\n    }\n  }\n}\n" +
+								"```",
 						},
 						"display_name": schema.StringAttribute{
-							Required: true,
+							Required:    true,
+							Description: "Name for this instance to be shown in the interface and at the login screen",
 						},
 						"enabled": schema.BoolAttribute{
-							Optional: true,
-							Computed: true,
-							Default:  booldefault.StaticBool(true),
+							Optional:    true,
+							Computed:    true,
+							Description: "Whether to enable this auth strategy instance",
+							Default:     booldefault.StaticBool(true),
 						},
 						"self_registration": schema.BoolAttribute{
-							Optional: true,
-							Computed: true,
-							Default:  booldefault.StaticBool(false),
+							Optional:    true,
+							Computed:    true,
+							Description: "Automatically create user accounts for people who successfully login via this auth strategie",
+							Default:     booldefault.StaticBool(false),
 							Validators: []validator.Bool{
 								boolvalidator.AlsoRequires(path.MatchRelative().AtParent().AtName("domain_whitelist"), path.MatchRelative().AtParent().AtName("auto_enroll_groups")),
 							},
@@ -97,6 +111,7 @@ func (r *authStrategiesResource) Schema(_ context.Context, _ resource.SchemaRequ
 						"domain_whitelist": schema.ListAttribute{
 							Optional:    true,
 							ElementType: types.StringType,
+							Description: "When self_registration is set to true, this list must contain the allowed domains",
 							Validators: []validator.List{
 								listvalidator.AlsoRequires(path.MatchRelative().AtParent().AtName("self_registration"), path.MatchRelative().AtParent().AtName("auto_enroll_groups")),
 							},
@@ -104,6 +119,7 @@ func (r *authStrategiesResource) Schema(_ context.Context, _ resource.SchemaRequ
 						"auto_enroll_groups": schema.ListAttribute{
 							Optional:    true,
 							ElementType: types.Int64Type,
+							Description: "When self_registration is set to true, this list must contain the group ids the newly created account is added to.",
 							Validators: []validator.List{
 								listvalidator.AlsoRequires(path.MatchRelative().AtParent().AtName("self_registration"), path.MatchRelative().AtParent().AtName("domain_whitelist")),
 							},
@@ -292,6 +308,7 @@ func (r *authStrategiesResource) Read(ctx context.Context, req resource.ReadRequ
 		}
 	}
 
+	resp.Diagnostics.Append(resp.State.Set(ctx, data)...)
 }
 
 // Update updates the resource and sets the updated Terraform state on success.

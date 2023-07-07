@@ -21,5 +21,5 @@ description: |-
 
 ### Optional
 
-- `email` (String) Email to login with (also used as admin email during finalize install)
-- `password` (String) Password to login with (also used as admin password during finalize install)
+- `email` (String) Email to login with
+- `password` (String) Password to login with

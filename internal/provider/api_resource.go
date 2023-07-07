@@ -40,7 +40,8 @@ func (r *apiResource) Schema(_ context.Context, _ resource.SchemaRequest, resp *
 	resp.Schema = schema.Schema{
 		Attributes: map[string]schema.Attribute{
 			"enabled": schema.BoolAttribute{
-				Required: true,
+				Required:    true,
+				Description: "Enable the Wiki.JS API",
 			},
 		},
 	}

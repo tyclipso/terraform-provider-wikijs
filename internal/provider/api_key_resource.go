@@ -59,20 +59,23 @@ func (r *apiKeyResource) Schema(_ context.Context, _ resource.SchemaRequest, res
 	resp.Schema = schema.Schema{
 		Attributes: map[string]schema.Attribute{
 			"id": schema.Int64Attribute{
-				Computed: true,
+				Computed:    true,
+				Description: "Internal Id of the API Key",
 				PlanModifiers: []planmodifier.Int64{
 					int64planmodifier.UseStateForUnknown(),
 					int64planmodifier.RequiresReplace(),
 				},
 			},
 			"name": schema.StringAttribute{
-				Required: true,
+				Required:    true,
+				Description: "Display name of the API Key (not unique)",
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
 			},
 			"full_access": schema.BoolAttribute{
-				Optional: true,
+				Optional:    true,
+				Description: "Set to true to create an API Key with full access rights. Mutually exclusive with group_id.",
 				PlanModifiers: []planmodifier.Bool{
 					boolplanmodifier.RequiresReplace(),
 				},
@@ -81,7 +84,8 @@ func (r *apiKeyResource) Schema(_ context.Context, _ resource.SchemaRequest, res
 				},
 			},
 			"group_id": schema.Int64Attribute{
-				Optional: true,
+				Optional:    true,
+				Description: "Mutually exclusive with full_access. List of group_ids the API Key should inherit it's permissions and page rules form.",
 				PlanModifiers: []planmodifier.Int64{
 					int64planmodifier.RequiresReplace(),
 				},
@@ -90,7 +94,8 @@ func (r *apiKeyResource) Schema(_ context.Context, _ resource.SchemaRequest, res
 				},
 			},
 			"key_short": schema.StringAttribute{
-				Computed: true,
+				Computed:    true,
+				Description: "Suffix of the actual API Key as shown in the Web UI (Hint: Wiki.JS always adds three dots before the actual suffix. You need to remove those if you need to match an actual key)",
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
@@ -119,14 +124,16 @@ func (r *apiKeyResource) Schema(_ context.Context, _ resource.SchemaRequest, res
 				},
 			},
 			"created_at": schema.StringAttribute{
-				Computed: true,
+				Computed:    true,
+				Description: "Creation time as returned by Wiki.JS (expect RFC3339 format)",
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"key": schema.StringAttribute{
-				Computed:  true,
-				Sensitive: true,
+				Computed:    true,
+				Sensitive:   true,
+				Description: "The actual API Key. Keep it secret!",
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},

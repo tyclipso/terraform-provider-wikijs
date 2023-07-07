@@ -24,19 +24,46 @@ description: |-
 
 Required:
 
-- `config` (Map of String, Sensitive)
-- `display_name` (String)
-- `strategy_key` (String)
+- `config` (Map of String, Sensitive) Map with config options for this specifc auth strategie
+
+```graphql
+query GetAuthStrategies {
+  authentication {
+    strategies {
+      title
+      key
+      props {
+        key
+        value
+      }
+    }
+  }
+}
+```
+- `display_name` (String) Name for this instance to be shown in the interface and at the login screen
+- `strategy_key` (String) Unique Identifier of the auth strategie to use (e.g. local, oauth2, oidc, keycloak, ldap)
+
+```graphql
+query GetAuthStrategies {
+  authentication {
+    strategies {
+      title
+      key
+      description
+    }
+  }
+}
+```
 
 Optional:
 
-- `auto_enroll_groups` (List of Number)
-- `domain_whitelist` (List of String)
-- `enabled` (Boolean)
-- `self_registration` (Boolean)
+- `auto_enroll_groups` (List of Number) When self_registration is set to true, this list must contain the group ids the newly created account is added to.
+- `domain_whitelist` (List of String) When self_registration is set to true, this list must contain the allowed domains
+- `enabled` (Boolean) Whether to enable this auth strategy instance
+- `self_registration` (Boolean) Automatically create user accounts for people who successfully login via this auth strategie
 
 Read-Only:
 
-- `key` (String)
+- `key` (String) Unique Key for this instance of the auth strategie
 
 

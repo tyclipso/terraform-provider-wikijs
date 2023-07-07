@@ -187,8 +187,7 @@ func (r *apiKeyResource) Create(ctx context.Context, req resource.CreateRequest,
 		return
 	}
 	for _, k := range wresp2.Authentication.ApiKeys {
-		suffix, _ := strings.CutPrefix(k.KeyShort, "...")
-		if k.Name == data.Name.ValueString() && strings.HasSuffix(wresp.Authentication.CreateApiKey.Key, suffix) {
+		if k.Name == data.Name.ValueString() && strings.HasSuffix(wresp.Authentication.CreateApiKey.Key, strings.TrimPrefix(k.KeyShort, "...")) {
 			data.Id = types.Int64Value(int64(k.Id))
 			data.KeyShort = types.StringValue(k.KeyShort)
 			data.Expiration = types.StringValue(k.Expiration)

@@ -8,7 +8,15 @@ require (
 	github.com/hashicorp/terraform-plugin-framework v1.3.2
 )
 
-require github.com/hashicorp/terraform-plugin-log v0.9.0 // indirect
+require (
+	github.com/agnivade/levenshtein v1.1.1 // indirect
+	github.com/alexflint/go-arg v1.4.2 // indirect
+	github.com/alexflint/go-scalar v1.0.0 // indirect
+	github.com/hashicorp/terraform-plugin-log v0.9.0 // indirect
+	golang.org/x/mod v0.10.0 // indirect
+	golang.org/x/tools v0.8.0 // indirect
+	gopkg.in/yaml.v2 v2.4.0 // indirect
+)
 
 require (
 	github.com/Masterminds/goutils v1.1.1 // indirect

@@ -60,10 +60,7 @@ Optional:
 - `auto_enroll_groups` (List of Number) When self_registration is set to true, this list must contain the group ids the newly created account is added to.
 - `domain_whitelist` (List of String) When self_registration is set to true, this list must contain the allowed domains
 - `enabled` (Boolean) Whether to enable this auth strategy instance
+- `key` (String) Unique Key for this instance of the auth strategy
 - `self_registration` (Boolean) Automatically create user accounts for people who successfully login via this auth strategie
-
-Read-Only:
-
-- `key` (String) Unique Key for this instance of the auth strategie
 
 

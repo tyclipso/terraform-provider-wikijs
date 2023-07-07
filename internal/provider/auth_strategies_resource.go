@@ -65,8 +65,9 @@ func (r *authStrategiesResource) Schema(_ context.Context, _ resource.SchemaRequ
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"key": schema.StringAttribute{
+							Optional:    true,
 							Computed:    true,
-							Description: "Unique Key for this instance of the auth strategie",
+							Description: "Unique Key for this instance of the auth strategy",
 							PlanModifiers: []planmodifier.String{
 								stringplanmodifier.UseStateForUnknown(),
 							},

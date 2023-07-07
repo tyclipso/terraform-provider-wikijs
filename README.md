@@ -1,8 +1,12 @@
 # Terraform Provider Wiki.js
 
+Please use the [Documentation](https://registry.terraform.io/providers/startnext/wikijs/latest/docs) in the [Terraform registry](https://registry.terraform.io/providers/startnext/wikijs/latest)
+
+This provider is developed internally at [Startnext GmbH](https://www.startnext.com). The repository on GitHub is only a mirror of our internal development repository.
+
 ## Requirements
 
-- [Terraform](https://www.terraform.io/downloads.html) >= 1.0
+- [Terraform](https://www.terraform.io/downloads.html) >= 1.4
 - [Go](https://golang.org/doc/install) >= 1.18
 
 ## Building The Provider
@@ -45,6 +49,8 @@ If you wish to work on the provider, you'll first need [Go](http://www.golang.or
 To compile the provider, run `go install`. This will build the provider and put the provider binary in the `$GOPATH/bin` directory.
 
 To generate or update documentation, run `go generate`.
+
+To change graphql queries, edit `wikijs/genqclient.grapqhl` and run `go generate ./wikijs`
 
 In order to run the full suite of Acceptance tests, run `make testacc`.
 

@@ -67,7 +67,7 @@ func (r *authStrategiesResource) Schema(_ context.Context, _ resource.SchemaRequ
 						"key": schema.StringAttribute{
 							Optional:    true,
 							Computed:    true,
-							Description: "Unique Key for this instance of the auth strategy",
+							Description: "Unique Key for this instance of the auth strategy. This resource can generate a unique key for you, but when you change the order of your auth strategies you have to explicitly set this key by yourself.",
 							PlanModifiers: []planmodifier.String{
 								stringplanmodifier.UseStateForUnknown(),
 							},
@@ -154,6 +154,8 @@ func (d *authStrategiesResource) Configure(_ context.Context, req resource.Confi
 func (r *authStrategiesResource) buildApiDataModel(ctx context.Context, data *authStrategiesResourceModel) ([]wikijs.AuthenticationStrategyInput, diag.Diagnostics) {
 	var result []wikijs.AuthenticationStrategyInput
 
+	used := map[string]bool{}
+
 	for i, s := range data.Strategies {
 		if s.Key.IsUnknown() {
 			if s.StrategyKey.ValueString() == "local" {
@@ -167,6 +169,11 @@ func (r *authStrategiesResource) buildApiDataModel(ctx context.Context, data *au
 			}
 			s.Key = data.Strategies[i].Key
 		}
+
+		if used[s.Key.ValueString()] {
+			return nil, diag.Diagnostics{diag.NewErrorDiagnostic("Auth Strategie Key must be unique", "Every auth strategy in the list attribute 'strategies' in you wikijs_auth_strategies resource needs to have a unique attribute key.\nThis error might also occur when you change the order of your auth strategies and have not set the keys explicitly.")}
+		}
+		used[s.Key.ValueString()] = true
 
 		var domainWhitelist []string
 		if diag := s.DomainWhitelist.ElementsAs(ctx, &domainWhitelist, false); diag.HasError() {

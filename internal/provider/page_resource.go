@@ -3,7 +3,9 @@ package provider
 import (
 	"context"
 	"fmt"
+	"strconv"
 
+	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/booldefault"
@@ -18,8 +20,9 @@ import (
 
 // Ensure the implementation satisfies the expected interfaces.
 var (
-	_ resource.Resource              = &pageResource{}
-	_ resource.ResourceWithConfigure = &pageResource{}
+	_ resource.Resource                = &pageResource{}
+	_ resource.ResourceWithConfigure   = &pageResource{}
+	_ resource.ResourceWithImportState = &pageResource{}
 )
 
 // NewPageResource is a helper function to simplify the provider implementation.
@@ -434,5 +437,13 @@ func (r *pageResource) Delete(ctx context.Context, req resource.DeleteRequest, r
 	if !wresp.Pages.Delete.ResponseResult.Succeeded {
 		resp.Diagnostics.AddError(fmt.Sprintf("Could not delete Wiki.js page: %s", wresp.Pages.Delete.ResponseResult.Slug), wresp.Pages.Delete.ResponseResult.Message)
 		return
+	}
+}
+
+func (r *pageResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
+	if id, err := strconv.Atoi(req.ID); err != nil {
+		resp.Diagnostics.AddAttributeError(path.Root("id"), "Could not parse id", err.Error())
+	} else {
+		resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), int64(id))...)
 	}
 }

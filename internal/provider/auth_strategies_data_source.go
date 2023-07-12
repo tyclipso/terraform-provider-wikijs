@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"strconv"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
@@ -127,7 +128,7 @@ func (d *authStrategiesDataSource) Read(ctx context.Context, req datasource.Read
 	}
 
 	type configValue struct {
-		Value string `json:"value"`
+		Value any `json:"value"`
 	}
 
 	state.Strategies = state.Strategies[:0]
@@ -138,12 +139,21 @@ func (d *authStrategiesDataSource) Read(ctx context.Context, req datasource.Read
 
 		configTmp := map[string]string{}
 		for _, c := range s.Config {
-			value := configValue{}
-			if err := json.Unmarshal([]byte(c.Value), &value); err != nil {
+			valueObj := configValue{}
+			if err := json.Unmarshal([]byte(c.Value), &valueObj); err != nil {
 				resp.Diagnostics.AddError("could not unmarshal json", err.Error())
 				return
 			}
-			configTmp[c.Key] = value.Value
+			switch value := valueObj.Value.(type) {
+			case bool:
+				configTmp[c.Key] = strconv.FormatBool(value)
+			case json.Number:
+				configTmp[c.Key] = value.String()
+			case string:
+				configTmp[c.Key] = value
+			default:
+				configTmp[c.Key] = fmt.Sprintf("%v", value)
+			}
 		}
 
 		config, diag := types.MapValueFrom(ctx, types.StringType, configTmp)

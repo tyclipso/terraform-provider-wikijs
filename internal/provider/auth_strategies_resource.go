@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"strconv"
 
 	"github.com/google/uuid"
 	"github.com/hashicorp/terraform-plugin-framework-validators/boolvalidator"
@@ -270,7 +271,7 @@ func (r *authStrategiesResource) Read(ctx context.Context, req resource.ReadRequ
 	}
 
 	type configValue struct {
-		Value string `json:"value"`
+		Value any `json:"value"`
 	}
 
 	data.Strategies = data.Strategies[:0]
@@ -281,12 +282,21 @@ func (r *authStrategiesResource) Read(ctx context.Context, req resource.ReadRequ
 
 		configTmp := map[string]string{}
 		for _, c := range s.Config {
-			value := configValue{}
-			if err := json.Unmarshal([]byte(c.Value), &value); err != nil {
+			valueObj := configValue{}
+			if err := json.Unmarshal([]byte(c.Value), &valueObj); err != nil {
 				resp.Diagnostics.AddError("could not unmarshal json", err.Error())
 				return
 			}
-			configTmp[c.Key] = value.Value
+			switch value := valueObj.Value.(type) {
+			case bool:
+				configTmp[c.Key] = strconv.FormatBool(value)
+			case json.Number:
+				configTmp[c.Key] = value.String()
+			case string:
+				configTmp[c.Key] = value
+			default:
+				configTmp[c.Key] = fmt.Sprintf("%v", value)
+			}
 		}
 
 		config, diag := types.MapValueFrom(ctx, types.StringType, configTmp)

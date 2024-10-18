@@ -146,6 +146,7 @@ func (p *WikiJSProvider) DataSources(ctx context.Context) []func() datasource.Da
 		NewApiKeysDataSource,
 		NewAuthStrategiesDataSource,
 		NewThemeConfigDataSource,
+		NewThemesDataSource,
 	}
 }
 

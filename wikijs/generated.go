@@ -1849,6 +1849,98 @@ func (v *GetSiteConfigSiteSiteQueryConfigSiteConfig) GetUploadForceDownload() bo
 	return v.UploadForceDownload
 }
 
+// GetThemeConfigResponse is returned by GetThemeConfig on success.
+type GetThemeConfigResponse struct {
+	Theming GetThemeConfigThemingThemingQuery `json:"theming"`
+}
+
+// GetTheming returns GetThemeConfigResponse.Theming, and is useful for accessing the field via an interface.
+func (v *GetThemeConfigResponse) GetTheming() GetThemeConfigThemingThemingQuery { return v.Theming }
+
+// GetThemeConfigThemingThemingQuery includes the requested fields of the GraphQL type ThemingQuery.
+type GetThemeConfigThemingThemingQuery struct {
+	Config GetThemeConfigThemingThemingQueryConfigThemingConfig `json:"config"`
+}
+
+// GetConfig returns GetThemeConfigThemingThemingQuery.Config, and is useful for accessing the field via an interface.
+func (v *GetThemeConfigThemingThemingQuery) GetConfig() GetThemeConfigThemingThemingQueryConfigThemingConfig {
+	return v.Config
+}
+
+// GetThemeConfigThemingThemingQueryConfigThemingConfig includes the requested fields of the GraphQL type ThemingConfig.
+type GetThemeConfigThemingThemingQueryConfigThemingConfig struct {
+	Theme       string `json:"theme"`
+	Iconset     string `json:"iconset"`
+	DarkMode    bool   `json:"darkMode"`
+	TocPosition string `json:"tocPosition"`
+	InjectCSS   string `json:"injectCSS"`
+	InjectHead  string `json:"injectHead"`
+	InjectBody  string `json:"injectBody"`
+}
+
+// GetTheme returns GetThemeConfigThemingThemingQueryConfigThemingConfig.Theme, and is useful for accessing the field via an interface.
+func (v *GetThemeConfigThemingThemingQueryConfigThemingConfig) GetTheme() string { return v.Theme }
+
+// GetIconset returns GetThemeConfigThemingThemingQueryConfigThemingConfig.Iconset, and is useful for accessing the field via an interface.
+func (v *GetThemeConfigThemingThemingQueryConfigThemingConfig) GetIconset() string { return v.Iconset }
+
+// GetDarkMode returns GetThemeConfigThemingThemingQueryConfigThemingConfig.DarkMode, and is useful for accessing the field via an interface.
+func (v *GetThemeConfigThemingThemingQueryConfigThemingConfig) GetDarkMode() bool { return v.DarkMode }
+
+// GetTocPosition returns GetThemeConfigThemingThemingQueryConfigThemingConfig.TocPosition, and is useful for accessing the field via an interface.
+func (v *GetThemeConfigThemingThemingQueryConfigThemingConfig) GetTocPosition() string {
+	return v.TocPosition
+}
+
+// GetInjectCSS returns GetThemeConfigThemingThemingQueryConfigThemingConfig.InjectCSS, and is useful for accessing the field via an interface.
+func (v *GetThemeConfigThemingThemingQueryConfigThemingConfig) GetInjectCSS() string {
+	return v.InjectCSS
+}
+
+// GetInjectHead returns GetThemeConfigThemingThemingQueryConfigThemingConfig.InjectHead, and is useful for accessing the field via an interface.
+func (v *GetThemeConfigThemingThemingQueryConfigThemingConfig) GetInjectHead() string {
+	return v.InjectHead
+}
+
+// GetInjectBody returns GetThemeConfigThemingThemingQueryConfigThemingConfig.InjectBody, and is useful for accessing the field via an interface.
+func (v *GetThemeConfigThemingThemingQueryConfigThemingConfig) GetInjectBody() string {
+	return v.InjectBody
+}
+
+// GetThemesResponse is returned by GetThemes on success.
+type GetThemesResponse struct {
+	Theming GetThemesThemingThemingQuery `json:"theming"`
+}
+
+// GetTheming returns GetThemesResponse.Theming, and is useful for accessing the field via an interface.
+func (v *GetThemesResponse) GetTheming() GetThemesThemingThemingQuery { return v.Theming }
+
+// GetThemesThemingThemingQuery includes the requested fields of the GraphQL type ThemingQuery.
+type GetThemesThemingThemingQuery struct {
+	Themes []GetThemesThemingThemingQueryThemesThemingTheme `json:"themes"`
+}
+
+// GetThemes returns GetThemesThemingThemingQuery.Themes, and is useful for accessing the field via an interface.
+func (v *GetThemesThemingThemingQuery) GetThemes() []GetThemesThemingThemingQueryThemesThemingTheme {
+	return v.Themes
+}
+
+// GetThemesThemingThemingQueryThemesThemingTheme includes the requested fields of the GraphQL type ThemingTheme.
+type GetThemesThemingThemingQueryThemesThemingTheme struct {
+	Key    string `json:"key"`
+	Title  string `json:"title"`
+	Author string `json:"author"`
+}
+
+// GetKey returns GetThemesThemingThemingQueryThemesThemingTheme.Key, and is useful for accessing the field via an interface.
+func (v *GetThemesThemingThemingQueryThemesThemingTheme) GetKey() string { return v.Key }
+
+// GetTitle returns GetThemesThemingThemingQueryThemesThemingTheme.Title, and is useful for accessing the field via an interface.
+func (v *GetThemesThemingThemingQueryThemesThemingTheme) GetTitle() string { return v.Title }
+
+// GetAuthor returns GetThemesThemingThemingQueryThemesThemingTheme.Author, and is useful for accessing the field via an interface.
+func (v *GetThemesThemingThemingQueryThemesThemingTheme) GetAuthor() string { return v.Author }
+
 // GroupAssignUserGroupsGroupMutation includes the requested fields of the GraphQL type GroupMutation.
 type GroupAssignUserGroupsGroupMutation struct {
 	AssignUser GroupAssignUserGroupsGroupMutationAssignUserDefaultResponse `json:"assignUser"`
@@ -2385,6 +2477,62 @@ type SetLocalizationResponse struct {
 // GetLocalization returns SetLocalizationResponse.Localization, and is useful for accessing the field via an interface.
 func (v *SetLocalizationResponse) GetLocalization() SetLocalizationLocalizationLocalizationMutation {
 	return v.Localization
+}
+
+// SetThemeConfigResponse is returned by SetThemeConfig on success.
+type SetThemeConfigResponse struct {
+	Theming SetThemeConfigThemingThemingMutation `json:"theming"`
+}
+
+// GetTheming returns SetThemeConfigResponse.Theming, and is useful for accessing the field via an interface.
+func (v *SetThemeConfigResponse) GetTheming() SetThemeConfigThemingThemingMutation { return v.Theming }
+
+// SetThemeConfigThemingThemingMutation includes the requested fields of the GraphQL type ThemingMutation.
+type SetThemeConfigThemingThemingMutation struct {
+	SetConfig SetThemeConfigThemingThemingMutationSetConfigDefaultResponse `json:"setConfig"`
+}
+
+// GetSetConfig returns SetThemeConfigThemingThemingMutation.SetConfig, and is useful for accessing the field via an interface.
+func (v *SetThemeConfigThemingThemingMutation) GetSetConfig() SetThemeConfigThemingThemingMutationSetConfigDefaultResponse {
+	return v.SetConfig
+}
+
+// SetThemeConfigThemingThemingMutationSetConfigDefaultResponse includes the requested fields of the GraphQL type DefaultResponse.
+type SetThemeConfigThemingThemingMutationSetConfigDefaultResponse struct {
+	ResponseResult SetThemeConfigThemingThemingMutationSetConfigDefaultResponseResponseResultResponseStatus `json:"responseResult"`
+}
+
+// GetResponseResult returns SetThemeConfigThemingThemingMutationSetConfigDefaultResponse.ResponseResult, and is useful for accessing the field via an interface.
+func (v *SetThemeConfigThemingThemingMutationSetConfigDefaultResponse) GetResponseResult() SetThemeConfigThemingThemingMutationSetConfigDefaultResponseResponseResultResponseStatus {
+	return v.ResponseResult
+}
+
+// SetThemeConfigThemingThemingMutationSetConfigDefaultResponseResponseResultResponseStatus includes the requested fields of the GraphQL type ResponseStatus.
+type SetThemeConfigThemingThemingMutationSetConfigDefaultResponseResponseResultResponseStatus struct {
+	Succeeded bool   `json:"succeeded"`
+	ErrorCode int    `json:"errorCode"`
+	Slug      string `json:"slug"`
+	Message   string `json:"message"`
+}
+
+// GetSucceeded returns SetThemeConfigThemingThemingMutationSetConfigDefaultResponseResponseResultResponseStatus.Succeeded, and is useful for accessing the field via an interface.
+func (v *SetThemeConfigThemingThemingMutationSetConfigDefaultResponseResponseResultResponseStatus) GetSucceeded() bool {
+	return v.Succeeded
+}
+
+// GetErrorCode returns SetThemeConfigThemingThemingMutationSetConfigDefaultResponseResponseResultResponseStatus.ErrorCode, and is useful for accessing the field via an interface.
+func (v *SetThemeConfigThemingThemingMutationSetConfigDefaultResponseResponseResultResponseStatus) GetErrorCode() int {
+	return v.ErrorCode
+}
+
+// GetSlug returns SetThemeConfigThemingThemingMutationSetConfigDefaultResponseResponseResultResponseStatus.Slug, and is useful for accessing the field via an interface.
+func (v *SetThemeConfigThemingThemingMutationSetConfigDefaultResponseResponseResultResponseStatus) GetSlug() string {
+	return v.Slug
+}
+
+// GetMessage returns SetThemeConfigThemingThemingMutationSetConfigDefaultResponseResponseResultResponseStatus.Message, and is useful for accessing the field via an interface.
+func (v *SetThemeConfigThemingThemingMutationSetConfigDefaultResponseResponseResultResponseStatus) GetMessage() string {
+	return v.Message
 }
 
 // UpdateGroupGroupsGroupMutation includes the requested fields of the GraphQL type GroupMutation.
@@ -2962,6 +3110,38 @@ func (v *__SetLocalizationInput) GetNamespacing() bool { return v.Namespacing }
 
 // GetNamespaces returns __SetLocalizationInput.Namespaces, and is useful for accessing the field via an interface.
 func (v *__SetLocalizationInput) GetNamespaces() []string { return v.Namespaces }
+
+// __SetThemeConfigInput is used internally by genqlient
+type __SetThemeConfigInput struct {
+	Theme       string `json:"theme"`
+	Iconset     string `json:"iconset"`
+	DarkMode    bool   `json:"darkMode"`
+	TocPosition string `json:"tocPosition"`
+	InjectCSS   string `json:"injectCSS"`
+	InjectHead  string `json:"injectHead"`
+	InjectBody  string `json:"injectBody"`
+}
+
+// GetTheme returns __SetThemeConfigInput.Theme, and is useful for accessing the field via an interface.
+func (v *__SetThemeConfigInput) GetTheme() string { return v.Theme }
+
+// GetIconset returns __SetThemeConfigInput.Iconset, and is useful for accessing the field via an interface.
+func (v *__SetThemeConfigInput) GetIconset() string { return v.Iconset }
+
+// GetDarkMode returns __SetThemeConfigInput.DarkMode, and is useful for accessing the field via an interface.
+func (v *__SetThemeConfigInput) GetDarkMode() bool { return v.DarkMode }
+
+// GetTocPosition returns __SetThemeConfigInput.TocPosition, and is useful for accessing the field via an interface.
+func (v *__SetThemeConfigInput) GetTocPosition() string { return v.TocPosition }
+
+// GetInjectCSS returns __SetThemeConfigInput.InjectCSS, and is useful for accessing the field via an interface.
+func (v *__SetThemeConfigInput) GetInjectCSS() string { return v.InjectCSS }
+
+// GetInjectHead returns __SetThemeConfigInput.InjectHead, and is useful for accessing the field via an interface.
+func (v *__SetThemeConfigInput) GetInjectHead() string { return v.InjectHead }
+
+// GetInjectBody returns __SetThemeConfigInput.InjectBody, and is useful for accessing the field via an interface.
+func (v *__SetThemeConfigInput) GetInjectBody() string { return v.InjectBody }
 
 // __UpdateGroupInput is used internally by genqlient
 type __UpdateGroupInput struct {
@@ -4117,6 +4297,80 @@ func GetSiteConfig(
 	return &data, err
 }
 
+// The query or mutation executed by GetThemeConfig.
+const GetThemeConfig_Operation = `
+query GetThemeConfig {
+	theming {
+		config {
+			theme
+			iconset
+			darkMode
+			tocPosition
+			injectCSS
+			injectHead
+			injectBody
+		}
+	}
+}
+`
+
+func GetThemeConfig(
+	ctx context.Context,
+	client graphql.Client,
+) (*GetThemeConfigResponse, error) {
+	req := &graphql.Request{
+		OpName: "GetThemeConfig",
+		Query:  GetThemeConfig_Operation,
+	}
+	var err error
+
+	var data GetThemeConfigResponse
+	resp := &graphql.Response{Data: &data}
+
+	err = client.MakeRequest(
+		ctx,
+		req,
+		resp,
+	)
+
+	return &data, err
+}
+
+// The query or mutation executed by GetThemes.
+const GetThemes_Operation = `
+query GetThemes {
+	theming {
+		themes {
+			key
+			title
+			author
+		}
+	}
+}
+`
+
+func GetThemes(
+	ctx context.Context,
+	client graphql.Client,
+) (*GetThemesResponse, error) {
+	req := &graphql.Request{
+		OpName: "GetThemes",
+		Query:  GetThemes_Operation,
+	}
+	var err error
+
+	var data GetThemesResponse
+	resp := &graphql.Response{Data: &data}
+
+	err = client.MakeRequest(
+		ctx,
+		req,
+		resp,
+	)
+
+	return &data, err
+}
+
 // The query or mutation executed by GroupAssignUser.
 const GroupAssignUser_Operation = `
 mutation GroupAssignUser ($groupId: Int!, $userId: Int!) {
@@ -4465,6 +4719,60 @@ func SetLocalization(
 	var err error
 
 	var data SetLocalizationResponse
+	resp := &graphql.Response{Data: &data}
+
+	err = client.MakeRequest(
+		ctx,
+		req,
+		resp,
+	)
+
+	return &data, err
+}
+
+// The query or mutation executed by SetThemeConfig.
+const SetThemeConfig_Operation = `
+mutation SetThemeConfig ($theme: String!, $iconset: String!, $darkMode: Boolean!, $tocPosition: String, $injectCSS: String, $injectHead: String, $injectBody: String) {
+	theming {
+		setConfig(theme: $theme, iconset: $iconset, darkMode: $darkMode, tocPosition: $tocPosition, injectCSS: $injectCSS, injectHead: $injectHead, injectBody: $injectBody) {
+			responseResult {
+				succeeded
+				errorCode
+				slug
+				message
+			}
+		}
+	}
+}
+`
+
+func SetThemeConfig(
+	ctx context.Context,
+	client graphql.Client,
+	theme string,
+	iconset string,
+	darkMode bool,
+	tocPosition string,
+	injectCSS string,
+	injectHead string,
+	injectBody string,
+) (*SetThemeConfigResponse, error) {
+	req := &graphql.Request{
+		OpName: "SetThemeConfig",
+		Query:  SetThemeConfig_Operation,
+		Variables: &__SetThemeConfigInput{
+			Theme:       theme,
+			Iconset:     iconset,
+			DarkMode:    darkMode,
+			TocPosition: tocPosition,
+			InjectCSS:   injectCSS,
+			InjectHead:  injectHead,
+			InjectBody:  injectBody,
+		},
+	}
+	var err error
+
+	var data SetThemeConfigResponse
 	resp := &graphql.Response{Data: &data}
 
 	err = client.MakeRequest(

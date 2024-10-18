@@ -1,6 +1,6 @@
-module gitlab.startnext.org/sre/terraform/terraform-provider-wikijs
+module github.com/tyclipso/terraform-provider-wikijs
 
-go 1.20
+go 1.23
 
 require (
 	github.com/Khan/genqlient v0.6.0
@@ -14,6 +14,9 @@ require (
 	github.com/alexflint/go-scalar v1.0.0 // indirect
 	github.com/hashicorp/terraform-plugin-log v0.9.0 // indirect
 	golang.org/x/mod v0.10.0 // indirect
+	golang.org/x/net v0.11.0 // indirect
+	golang.org/x/sys v0.9.0 // indirect
+	golang.org/x/text v0.10.0 // indirect
 	golang.org/x/tools v0.8.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 )
@@ -61,10 +64,6 @@ require (
 	github.com/vmihailenco/msgpack/v5 v5.3.5 // indirect
 	github.com/vmihailenco/tagparser/v2 v2.0.0 // indirect
 	github.com/zclconf/go-cty v1.13.1 // indirect
-	golang.org/x/crypto v0.10.0 // indirect
-	golang.org/x/net v0.11.0 // indirect
-	golang.org/x/sys v0.10.0 // indirect
-	golang.org/x/text v0.11.0 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20230629202037-9506855d4529 // indirect
 	google.golang.org/grpc v1.56.1 // indirect
 	google.golang.org/protobuf v1.31.0 // indirect

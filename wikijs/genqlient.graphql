@@ -477,6 +477,43 @@ query GetPageByPath($path: String!, $locale: String!) {
   }
 }
 
+query GetThemes {
+  theming {
+    themes {
+      key
+      title
+      author
+    }
+  }
+}
+
+query GetThemeConfig {
+  theming {
+    config {
+      theme
+      iconset
+      darkMode
+      tocPosition
+      injectCSS
+      injectHead
+      injectBody
+    }
+  }
+}
+
+mutation SetThemeConfig($theme: String!, $iconset: String!, $darkMode: Boolean!, $tocPosition: String, $injectCSS: String, $injectHead: String, $injectBody: String) {
+  theming {
+    setConfig(theme: $theme, iconset: $iconset, darkMode: $darkMode, tocPosition: $tocPosition, injectCSS: $injectCSS, injectHead: $injectHead, injectBody: $injectBody) {
+      responseResult {
+        succeeded
+        errorCode
+        slug
+        message
+      }
+    }
+  }
+}
+
 query GetApiState {
   authentication {
     apiState

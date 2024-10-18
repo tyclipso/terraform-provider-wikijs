@@ -132,6 +132,7 @@ func (p *WikiJSProvider) Resources(ctx context.Context) []func() resource.Resour
 		NewApiResource,
 		NewApiKeyResource,
 		NewAuthStrategiesResource,
+		NewThemeConfigResource,
 	}
 }
 

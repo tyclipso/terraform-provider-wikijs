@@ -7,7 +7,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	"gitlab.startnext.org/sre/terraform/terraform-provider-wikijs/wikijs"
+	"github.com/tyclipso/terraform-provider-wikijs/wikijs"
 )
 
 // Ensure the implementation satisfies the expected interfaces.

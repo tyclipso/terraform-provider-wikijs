@@ -14,8 +14,8 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringdefault"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/tyclipso/terraform-provider-wikijs/wikijs"
 	"github.com/vektah/gqlparser/v2/gqlerror"
-	"gitlab.startnext.org/sre/terraform/terraform-provider-wikijs/wikijs"
 )
 
 // Ensure the implementation satisfies the expected interfaces.

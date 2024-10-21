@@ -3,12 +3,16 @@
 page_title: "wikijs_themes Data Source - terraform-provider-wikijs"
 subcategory: ""
 description: |-
-  
+  The wikijs_themes Data Source implements the WikiJS API query theming{themes{…}}.
+  In wikijs v2 https://github.com/requarks/wiki/blob/main/server/graph/resolvers/theming.js#L16-L19 this contains only the default theme.
 ---
 
 # wikijs_themes (Data Source)
 
+The `wikijs_themes` Data Source implements the WikiJS API query `theming{themes{…}}`.
+In wikijs [v2][api-themes] this contains only the default theme.
 
+[api-themes]: https://github.com/requarks/wiki/blob/main/server/graph/resolvers/theming.js#L16-L19
 
 ## Example Usage
 
@@ -35,7 +39,7 @@ resource "wikijs_theme_config" "theme_config" {
 
 ### Required
 
-- `themes` (Attributes List) List of registered themes. In wikijs v2 this contains only the default theme (see [below for nested schema](#nestedatt--themes))
+- `themes` (Attributes List) List of registered themes. (see [below for nested schema](#nestedatt--themes))
 
 <a id="nestedatt--themes"></a>
 ### Nested Schema for `themes`

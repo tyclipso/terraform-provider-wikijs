@@ -41,8 +41,8 @@ func (d *themesDataSource) Schema(_ context.Context, req datasource.SchemaReques
 	resp.Schema = schema.Schema{
 		Attributes: map[string]schema.Attribute{
 			"themes": schema.ListNestedAttribute{
-				Required:    true,
-				Description: "List of registered themes. In wikijs v2 this contains only the default theme",
+				Required:            true,
+				MarkdownDescription: "List of registered themes.\n",
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"key": schema.StringAttribute{
@@ -58,6 +58,10 @@ func (d *themesDataSource) Schema(_ context.Context, req datasource.SchemaReques
 				},
 			},
 		},
+		MarkdownDescription: "The `{{ .Name }}` {{ .Type }} implements the WikiJS API query `theming{themes{…}}`.\n" +
+			"In wikijs [v2][api-themes] this contains only the default theme.\n" +
+			"\n" +
+			"[api-themes]: https://github.com/requarks/wiki/blob/main/server/graph/resolvers/theming.js#L16-L19",
 	}
 }
 

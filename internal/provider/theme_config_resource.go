@@ -65,42 +65,57 @@ func (r *themeConfigResource) Schema(_ context.Context, _ resource.SchemaRequest
 	resp.Schema = schema.Schema{
 		Attributes: map[string]schema.Attribute{
 			"theme": schema.StringAttribute{
-				Required:    true,
-				Description: "Themes affect how content pages are displayed. Other site sections (such as the editor or admin area) are not affected.",
+				Required: true,
+				MarkdownDescription: "Themes affect how content pages are displayed.\n" +
+					"  Other site sections (such as the editor or admin area) are not affected.",
 			},
 			"iconset": schema.StringAttribute{
-				Required:    true,
-				Description: "Set of icons to use for the sidebar navigation. Values: mdi, fa, fa4",
+				Required: true,
+				MarkdownDescription: "Set of icons to use for the sidebar navigation.\n" +
+					"  Accepted values: `mdi`, `fa`, `fa4`",
 			},
 			"dark_mode": schema.BoolAttribute{
-				Required:    true,
-				Description: "Dark Mode. Not recommended for accessibility. May not be supported by all themes.",
+				Required: true,
+				MarkdownDescription: "Dark Mode.\n" +
+					"  Not recommended for accessibility.\n" +
+					"  May not be supported by all themes.",
 			},
 			"toc_position": schema.StringAttribute{
-				Optional:    true,
-				Computed:    true,
-				Description: "Select whether the table of contents is shown on the \"left\", \"right\" or not at all (\"off\").",
-				Default:     stringdefault.StaticString(defaultThemeConfig.tocPosition),
+				Optional: true,
+				Computed: true,
+				Default:  stringdefault.StaticString(defaultThemeConfig.tocPosition),
+				MarkdownDescription: "Select whether the table of contents is shown on the left, right or not at all.\n" +
+					"  Accepted values: `left`, `right`, `off`",
 			},
 			"inject_css": schema.StringAttribute{
-				Optional:    true,
-				Computed:    true,
-				Description: "CSS code to inject after system default CSS. Consider using custom themes if you have a large amount of css code.\nInjecting too much CSS code will result in poor page load performance! CSS will automatically be minified.\nCAUTION: When adding styles for page content, you must scope them to the .contents class. Omitting this could break the layout of the editor!",
-				Default:     stringdefault.StaticString(defaultThemeConfig.injectCSS),
+				Optional: true,
+				Computed: true,
+				Default:  stringdefault.StaticString(defaultThemeConfig.injectCSS),
+				MarkdownDescription: "CSS code to inject after system default CSS.\n" +
+					"  Consider using custom themes if you have a large amount of css code.\n" +
+					"  Injecting too much CSS code will result in poor page load performance!\n" +
+					"  CSS will automatically be minified.\n" +
+					"  \n" +
+					"  **CAUTION**: When adding styles for page content, you must scope them to the `.contents` class.\n" +
+					"  Omitting this could break the layout of the editor!",
 			},
 			"inject_head": schema.StringAttribute{
-				Optional:    true,
-				Computed:    true,
-				Description: "HTML code to be injected just before the closing head tag. Usually for script tags.",
-				Default:     stringdefault.StaticString(defaultThemeConfig.injectHead),
+				Optional: true,
+				Computed: true,
+				Default:  stringdefault.StaticString(defaultThemeConfig.injectHead),
+				MarkdownDescription: "HTML code to be injected just before the closing head tag." +
+					"  Usually for script tags.",
 			},
 			"inject_body": schema.StringAttribute{
-				Optional:    true,
-				Computed:    true,
-				Description: "HTML code to be injected just before the closing body tag.",
-				Default:     stringdefault.StaticString(defaultThemeConfig.injectBody),
+				Optional:            true,
+				Computed:            true,
+				Default:             stringdefault.StaticString(defaultThemeConfig.injectBody),
+				MarkdownDescription: "HTML code to be injected just before the closing body tag.",
 			},
 		},
+		MarkdownDescription: "The `{{ .Name }}` {{ .Type }} implements the WikiJS API mutatation `theming{setConfig{…}}`.\n" +
+			"It can be used to manipulate the theme setting on instances with custom themes.\n" +
+			"The Schema descriptions are mostly lifted from the descriptions of the input fields in WikiJS.",
 	}
 }
 
@@ -134,7 +149,7 @@ func (r *themeConfigResource) ValidateConfig(ctx context.Context, req resource.V
 		resp.Diagnostics.AddAttributeError(
 			path.Root("iconset"),
 			"Attribute Configured Wrong",
-			fmt.Sprintf("Expected iconset to be one of %s", s),
+			fmt.Sprintf("Expected iconset to be one of %s.", s),
 		)
 		return
 	}
@@ -145,7 +160,7 @@ func (r *themeConfigResource) ValidateConfig(ctx context.Context, req resource.V
 		resp.Diagnostics.AddAttributeError(
 			path.Root("toc_position"),
 			"Attribute Configured Wrong",
-			fmt.Sprintf("Expected toc_position to be one of %s", s),
+			fmt.Sprintf("Expected toc_position to be one of %s.", s),
 		)
 		return
 	}

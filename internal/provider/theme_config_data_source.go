@@ -41,34 +41,47 @@ func (d *themeConfigDataSource) Schema(_ context.Context, req datasource.SchemaR
 	resp.Schema = schema.Schema{
 		Attributes: map[string]schema.Attribute{
 			"theme": schema.StringAttribute{
-				Computed:    true,
-				Description: "Themes affect how content pages are displayed. Other site sections (such as the editor or admin area) are not affected.",
+				Computed: true,
+				MarkdownDescription: "Themes affect how content pages are displayed.\n" +
+					"  Other site sections (such as the editor or admin area) are not affected.",
 			},
 			"iconset": schema.StringAttribute{
-				Computed:    true,
-				Description: "Set of icons to use for the sidebar navigation. Values: mdi, fa, fa4",
+				Computed:            true,
+				MarkdownDescription: "Set of icons to use for the sidebar navigation.",
 			},
 			"dark_mode": schema.BoolAttribute{
-				Computed:    true,
-				Description: "Dark Mode. Not recommended for accessibility. May not be supported by all themes.",
+				Computed: true,
+				MarkdownDescription: "Dark Mode.\n" +
+					"  Not recommended for accessibility.\n" +
+					"  May not be supported by all themes.",
 			},
 			"toc_position": schema.StringAttribute{
-				Computed:    true,
-				Description: "Select whether the table of contents is shown on the \"left\", \"right\" or not at all (\"off\").",
+				Computed:            true,
+				MarkdownDescription: "Select whether the table of contents is shown on the left, right or not at all.",
 			},
 			"inject_css": schema.StringAttribute{
-				Computed:    true,
-				Description: "CSS code to inject after system default CSS. Consider using custom themes if you have a large amount of css code.\nInjecting too much CSS code will result in poor page load performance! CSS will automatically be minified.\nCAUTION: When adding styles for page content, you must scope them to the .contents class. Omitting this could break the layout of the editor!",
+				Computed: true,
+				MarkdownDescription: "CSS code to inject after system default CSS.\n" +
+					"  Consider using custom themes if you have a large amount of css code.\n" +
+					"  Injecting too much CSS code will result in poor page load performance!\n" +
+					"  CSS will automatically be minified.\n" +
+					"  \n" +
+					"  **CAUTION**: When adding styles for page content, you must scope them to the `.contents` class.\n" +
+					"  Omitting this could break the layout of the editor!",
 			},
 			"inject_head": schema.StringAttribute{
-				Computed:    true,
-				Description: "HTML code to be injected just before the closing head tag. Usually for script tags.",
+				Computed: true,
+				MarkdownDescription: "HTML code to be injected just before the closing head tag." +
+					"  Usually for script tags.",
 			},
 			"inject_body": schema.StringAttribute{
-				Computed:    true,
-				Description: "HTML code to be injected just before the closing body tag.",
+				Computed:            true,
+				MarkdownDescription: "HTML code to be injected just before the closing body tag.",
 			},
 		},
+		MarkdownDescription: "The `{{ .Name }}` {{ .Type }} implements the WikiJS API query `theming{config{…}}`.\n" +
+			"It can be used to read the current state and only change one of the required or any of the optional, without touching the required.\n" +
+			"The Schema descriptions are directly lifted from the descriptions of the input fields in WikiJS.",
 	}
 }
 

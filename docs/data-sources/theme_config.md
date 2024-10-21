@@ -3,12 +3,16 @@
 page_title: "wikijs_theme_config Data Source - terraform-provider-wikijs"
 subcategory: ""
 description: |-
-  
+  The wikijs_theme_config Data Source implements the WikiJS API query theming{config{…}}.
+  It can be used to read the current state and only change one of the required or any of the optional, without touching the required.
+  The Schema descriptions are directly lifted from the descriptions of the input fields in WikiJS.
 ---
 
 # wikijs_theme_config (Data Source)
 
-
+The `wikijs_theme_config` Data Source implements the WikiJS API query `theming{config{…}}`.
+It can be used to read the current state and only change one of the required or any of the optional, without touching the required.
+The Schema descriptions are directly lifted from the descriptions of the input fields in WikiJS.
 
 ## Example Usage
 
@@ -22,7 +26,7 @@ data "wikijs_theme_config" "config" {}
 resource "wikijs_theme_config" "config" {
   theme = data.wikijs_theme_config.config.theme
   iconset = data.wikijs_theme_config.data.iconset
-  # Only switch globally to dark mode
+  # Only switch dark mode globally on
   dark_mode = true
 }
 ```
@@ -32,14 +36,21 @@ resource "wikijs_theme_config" "config" {
 
 ### Read-Only
 
-- `dark_mode` (Boolean) Dark Mode. Not recommended for accessibility. May not be supported by all themes.
-- `iconset` (String) Set of icons to use for the sidebar navigation. Values: mdi, fa, fa4
+- `dark_mode` (Boolean) Dark Mode.
+  Not recommended for accessibility.
+  May not be supported by all themes.
+- `iconset` (String) Set of icons to use for the sidebar navigation.
 - `inject_body` (String) HTML code to be injected just before the closing body tag.
-- `inject_css` (String) CSS code to inject after system default CSS. Consider using custom themes if you have a large amount of css code.
-Injecting too much CSS code will result in poor page load performance! CSS will automatically be minified.
-CAUTION: When adding styles for page content, you must scope them to the .contents class. Omitting this could break the layout of the editor!
-- `inject_head` (String) HTML code to be injected just before the closing head tag. Usually for script tags.
-- `theme` (String) Themes affect how content pages are displayed. Other site sections (such as the editor or admin area) are not affected.
-- `toc_position` (String) Select whether the table of contents is shown on the "left", "right" or not at all ("off").
+- `inject_css` (String) CSS code to inject after system default CSS.
+  Consider using custom themes if you have a large amount of css code.
+  Injecting too much CSS code will result in poor page load performance!
+  CSS will automatically be minified.
+  
+  **CAUTION**: When adding styles for page content, you must scope them to the `.contents` class.
+  Omitting this could break the layout of the editor!
+- `inject_head` (String) HTML code to be injected just before the closing head tag.  Usually for script tags.
+- `theme` (String) Themes affect how content pages are displayed.
+  Other site sections (such as the editor or admin area) are not affected.
+- `toc_position` (String) Select whether the table of contents is shown on the left, right or not at all.
 
 

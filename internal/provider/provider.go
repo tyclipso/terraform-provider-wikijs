@@ -62,6 +62,11 @@ func (p *WikiJSProvider) Schema(ctx context.Context, req provider.SchemaRequest,
 				Optional:            true,
 			},
 		},
+		MarkdownDescription: "The WikiJS provider aims to implement the complete GraphQL API of WikiJS.\n" +
+			"It should be possible to configure any instance of WikiJS via this provider.\n" +
+			"The main focus is for administration backend to be complete but also provide necessary resources and data_source to aid with that.\n" +
+			"\n" +
+			"Use the navigation to the left to read about the available resources.",
 	}
 }
 

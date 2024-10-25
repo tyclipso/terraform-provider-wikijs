@@ -1,6 +1,6 @@
-# The following example shows how to configure the wikijs theme
-# Since v2 of Wiki.js does not allow for dynamic addition of
-# custom themes you need to provide your own string there
+# The following example shows how to configure the wikijs theme. Since
+# v2 of Wiki.js does not allow for dynamic addition of custom themes you
+# need to provide your own string there
 
 resource "wikijs_theme_config" "config" {
   theme     = "custom_name"

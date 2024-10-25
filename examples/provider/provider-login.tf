@@ -1,5 +1,4 @@
-# If you want to edit content or administer the wiki
-# you need to login
+# If you want to edit content or administer the wiki you need to login
 
 terraform {
   required_providers {

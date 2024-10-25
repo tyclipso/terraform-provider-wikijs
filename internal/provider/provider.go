@@ -138,6 +138,7 @@ func (p *WikiJSProvider) Resources(ctx context.Context) []func() resource.Resour
 		NewApiKeyResource,
 		NewAuthStrategiesResource,
 		NewThemeConfigResource,
+		NewRenderersResource,
 	}
 }
 
@@ -152,6 +153,7 @@ func (p *WikiJSProvider) DataSources(ctx context.Context) []func() datasource.Da
 		NewAuthStrategiesDataSource,
 		NewThemeConfigDataSource,
 		NewThemesDataSource,
+		NewRenderersDataSource,
 	}
 }
 

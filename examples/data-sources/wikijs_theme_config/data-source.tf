@@ -5,7 +5,7 @@
 data "wikijs_theme_config" "config" {}
 
 resource "wikijs_theme_config" "config" {
-  theme = data.wikijs_theme_config.config.theme
+  theme   = data.wikijs_theme_config.config.theme
   iconset = data.wikijs_theme_config.data.iconset
   # Only switch dark mode globally on
   dark_mode = true

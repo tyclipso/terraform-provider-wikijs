@@ -616,3 +616,40 @@ mutation SetAuthStrategies($strategies: [AuthenticationStrategyInput]!) {
     }
   }
 }
+
+query GetRenderers(
+  # @genqlient(omitempty: true)
+  $filter: String,
+  # @genqlient(omitempty: true)
+  $orderBy: String
+  ) {
+  rendering {
+    renderers(filter: $filter, orderBy: $orderBy) {
+      isEnabled
+      key
+      title
+      description
+      icon
+      dependsOn
+      input
+      output
+      config {
+        key
+        value
+      }
+    }
+  }
+}
+
+mutation SetRenderers($renderers: [RendererInput]) {
+  rendering {
+    updateRenderers(renderers: $renderers) {
+      responseResult {
+        succeeded
+        errorCode
+        slug
+        message
+      }
+    }
+  }
+}

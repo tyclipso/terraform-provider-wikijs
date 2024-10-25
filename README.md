@@ -1,6 +1,6 @@
 # Terraform Provider Wiki.js
 
-Please use the [Documentation](https://registry.terraform.io/providers/tyclispo/wikijs/latest/docs) in the [Terraform registry](https://registry.terraform.io/providers/tyclipso/wikijs/latest)
+Please use the [Documentation](https://registry.terraform.io/providers/tyclipso/wikijs/latest/docs) in the [Terraform registry](https://registry.terraform.io/providers/tyclipso/wikijs/latest)
 
 This provider is a fork from the internal provider of [Startnext GmbH](https://www.startnext.com).
 It implements more of the API components of Wiki.js and improves on documentation.

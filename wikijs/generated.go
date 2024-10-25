@@ -1615,6 +1615,88 @@ type GetPageResponse struct {
 // GetPages returns GetPageResponse.Pages, and is useful for accessing the field via an interface.
 func (v *GetPageResponse) GetPages() GetPagePagesPageQuery { return v.Pages }
 
+// GetRenderersRenderingRenderingQuery includes the requested fields of the GraphQL type RenderingQuery.
+type GetRenderersRenderingRenderingQuery struct {
+	Renderers []GetRenderersRenderingRenderingQueryRenderersRenderer `json:"renderers"`
+}
+
+// GetRenderers returns GetRenderersRenderingRenderingQuery.Renderers, and is useful for accessing the field via an interface.
+func (v *GetRenderersRenderingRenderingQuery) GetRenderers() []GetRenderersRenderingRenderingQueryRenderersRenderer {
+	return v.Renderers
+}
+
+// GetRenderersRenderingRenderingQueryRenderersRenderer includes the requested fields of the GraphQL type Renderer.
+type GetRenderersRenderingRenderingQueryRenderersRenderer struct {
+	IsEnabled   bool                                                                     `json:"isEnabled"`
+	Key         string                                                                   `json:"key"`
+	Title       string                                                                   `json:"title"`
+	Description string                                                                   `json:"description"`
+	Icon        string                                                                   `json:"icon"`
+	DependsOn   string                                                                   `json:"dependsOn"`
+	Input       string                                                                   `json:"input"`
+	Output      string                                                                   `json:"output"`
+	Config      []GetRenderersRenderingRenderingQueryRenderersRendererConfigKeyValuePair `json:"config"`
+}
+
+// GetIsEnabled returns GetRenderersRenderingRenderingQueryRenderersRenderer.IsEnabled, and is useful for accessing the field via an interface.
+func (v *GetRenderersRenderingRenderingQueryRenderersRenderer) GetIsEnabled() bool {
+	return v.IsEnabled
+}
+
+// GetKey returns GetRenderersRenderingRenderingQueryRenderersRenderer.Key, and is useful for accessing the field via an interface.
+func (v *GetRenderersRenderingRenderingQueryRenderersRenderer) GetKey() string { return v.Key }
+
+// GetTitle returns GetRenderersRenderingRenderingQueryRenderersRenderer.Title, and is useful for accessing the field via an interface.
+func (v *GetRenderersRenderingRenderingQueryRenderersRenderer) GetTitle() string { return v.Title }
+
+// GetDescription returns GetRenderersRenderingRenderingQueryRenderersRenderer.Description, and is useful for accessing the field via an interface.
+func (v *GetRenderersRenderingRenderingQueryRenderersRenderer) GetDescription() string {
+	return v.Description
+}
+
+// GetIcon returns GetRenderersRenderingRenderingQueryRenderersRenderer.Icon, and is useful for accessing the field via an interface.
+func (v *GetRenderersRenderingRenderingQueryRenderersRenderer) GetIcon() string { return v.Icon }
+
+// GetDependsOn returns GetRenderersRenderingRenderingQueryRenderersRenderer.DependsOn, and is useful for accessing the field via an interface.
+func (v *GetRenderersRenderingRenderingQueryRenderersRenderer) GetDependsOn() string {
+	return v.DependsOn
+}
+
+// GetInput returns GetRenderersRenderingRenderingQueryRenderersRenderer.Input, and is useful for accessing the field via an interface.
+func (v *GetRenderersRenderingRenderingQueryRenderersRenderer) GetInput() string { return v.Input }
+
+// GetOutput returns GetRenderersRenderingRenderingQueryRenderersRenderer.Output, and is useful for accessing the field via an interface.
+func (v *GetRenderersRenderingRenderingQueryRenderersRenderer) GetOutput() string { return v.Output }
+
+// GetConfig returns GetRenderersRenderingRenderingQueryRenderersRenderer.Config, and is useful for accessing the field via an interface.
+func (v *GetRenderersRenderingRenderingQueryRenderersRenderer) GetConfig() []GetRenderersRenderingRenderingQueryRenderersRendererConfigKeyValuePair {
+	return v.Config
+}
+
+// GetRenderersRenderingRenderingQueryRenderersRendererConfigKeyValuePair includes the requested fields of the GraphQL type KeyValuePair.
+type GetRenderersRenderingRenderingQueryRenderersRendererConfigKeyValuePair struct {
+	Key   string `json:"key"`
+	Value string `json:"value"`
+}
+
+// GetKey returns GetRenderersRenderingRenderingQueryRenderersRendererConfigKeyValuePair.Key, and is useful for accessing the field via an interface.
+func (v *GetRenderersRenderingRenderingQueryRenderersRendererConfigKeyValuePair) GetKey() string {
+	return v.Key
+}
+
+// GetValue returns GetRenderersRenderingRenderingQueryRenderersRendererConfigKeyValuePair.Value, and is useful for accessing the field via an interface.
+func (v *GetRenderersRenderingRenderingQueryRenderersRendererConfigKeyValuePair) GetValue() string {
+	return v.Value
+}
+
+// GetRenderersResponse is returned by GetRenderers on success.
+type GetRenderersResponse struct {
+	Rendering GetRenderersRenderingRenderingQuery `json:"rendering"`
+}
+
+// GetRendering returns GetRenderersResponse.Rendering, and is useful for accessing the field via an interface.
+func (v *GetRenderersResponse) GetRendering() GetRenderersRenderingRenderingQuery { return v.Rendering }
+
 // GetSiteConfigResponse is returned by GetSiteConfig on success.
 type GetSiteConfigResponse struct {
 	Site GetSiteConfigSiteSiteQuery `json:"site"`
@@ -2247,6 +2329,21 @@ const (
 	PageRuleMatchTag   PageRuleMatch = "TAG"
 )
 
+type RendererInput struct {
+	IsEnabled bool                `json:"isEnabled"`
+	Key       string              `json:"key"`
+	Config    []KeyValuePairInput `json:"config"`
+}
+
+// GetIsEnabled returns RendererInput.IsEnabled, and is useful for accessing the field via an interface.
+func (v *RendererInput) GetIsEnabled() bool { return v.IsEnabled }
+
+// GetKey returns RendererInput.Key, and is useful for accessing the field via an interface.
+func (v *RendererInput) GetKey() string { return v.Key }
+
+// GetConfig returns RendererInput.Config, and is useful for accessing the field via an interface.
+func (v *RendererInput) GetConfig() []KeyValuePairInput { return v.Config }
+
 // RevokeApiKeyAuthenticationAuthenticationMutation includes the requested fields of the GraphQL type AuthenticationMutation.
 type RevokeApiKeyAuthenticationAuthenticationMutation struct {
 	RevokeApiKey RevokeApiKeyAuthenticationAuthenticationMutationRevokeApiKeyDefaultResponse `json:"revokeApiKey"`
@@ -2477,6 +2574,64 @@ type SetLocalizationResponse struct {
 // GetLocalization returns SetLocalizationResponse.Localization, and is useful for accessing the field via an interface.
 func (v *SetLocalizationResponse) GetLocalization() SetLocalizationLocalizationLocalizationMutation {
 	return v.Localization
+}
+
+// SetRenderersRenderingRenderingMutation includes the requested fields of the GraphQL type RenderingMutation.
+type SetRenderersRenderingRenderingMutation struct {
+	UpdateRenderers SetRenderersRenderingRenderingMutationUpdateRenderersDefaultResponse `json:"updateRenderers"`
+}
+
+// GetUpdateRenderers returns SetRenderersRenderingRenderingMutation.UpdateRenderers, and is useful for accessing the field via an interface.
+func (v *SetRenderersRenderingRenderingMutation) GetUpdateRenderers() SetRenderersRenderingRenderingMutationUpdateRenderersDefaultResponse {
+	return v.UpdateRenderers
+}
+
+// SetRenderersRenderingRenderingMutationUpdateRenderersDefaultResponse includes the requested fields of the GraphQL type DefaultResponse.
+type SetRenderersRenderingRenderingMutationUpdateRenderersDefaultResponse struct {
+	ResponseResult SetRenderersRenderingRenderingMutationUpdateRenderersDefaultResponseResponseResultResponseStatus `json:"responseResult"`
+}
+
+// GetResponseResult returns SetRenderersRenderingRenderingMutationUpdateRenderersDefaultResponse.ResponseResult, and is useful for accessing the field via an interface.
+func (v *SetRenderersRenderingRenderingMutationUpdateRenderersDefaultResponse) GetResponseResult() SetRenderersRenderingRenderingMutationUpdateRenderersDefaultResponseResponseResultResponseStatus {
+	return v.ResponseResult
+}
+
+// SetRenderersRenderingRenderingMutationUpdateRenderersDefaultResponseResponseResultResponseStatus includes the requested fields of the GraphQL type ResponseStatus.
+type SetRenderersRenderingRenderingMutationUpdateRenderersDefaultResponseResponseResultResponseStatus struct {
+	Succeeded bool   `json:"succeeded"`
+	ErrorCode int    `json:"errorCode"`
+	Slug      string `json:"slug"`
+	Message   string `json:"message"`
+}
+
+// GetSucceeded returns SetRenderersRenderingRenderingMutationUpdateRenderersDefaultResponseResponseResultResponseStatus.Succeeded, and is useful for accessing the field via an interface.
+func (v *SetRenderersRenderingRenderingMutationUpdateRenderersDefaultResponseResponseResultResponseStatus) GetSucceeded() bool {
+	return v.Succeeded
+}
+
+// GetErrorCode returns SetRenderersRenderingRenderingMutationUpdateRenderersDefaultResponseResponseResultResponseStatus.ErrorCode, and is useful for accessing the field via an interface.
+func (v *SetRenderersRenderingRenderingMutationUpdateRenderersDefaultResponseResponseResultResponseStatus) GetErrorCode() int {
+	return v.ErrorCode
+}
+
+// GetSlug returns SetRenderersRenderingRenderingMutationUpdateRenderersDefaultResponseResponseResultResponseStatus.Slug, and is useful for accessing the field via an interface.
+func (v *SetRenderersRenderingRenderingMutationUpdateRenderersDefaultResponseResponseResultResponseStatus) GetSlug() string {
+	return v.Slug
+}
+
+// GetMessage returns SetRenderersRenderingRenderingMutationUpdateRenderersDefaultResponseResponseResultResponseStatus.Message, and is useful for accessing the field via an interface.
+func (v *SetRenderersRenderingRenderingMutationUpdateRenderersDefaultResponseResponseResultResponseStatus) GetMessage() string {
+	return v.Message
+}
+
+// SetRenderersResponse is returned by SetRenderers on success.
+type SetRenderersResponse struct {
+	Rendering SetRenderersRenderingRenderingMutation `json:"rendering"`
+}
+
+// GetRendering returns SetRenderersResponse.Rendering, and is useful for accessing the field via an interface.
+func (v *SetRenderersResponse) GetRendering() SetRenderersRenderingRenderingMutation {
+	return v.Rendering
 }
 
 // SetThemeConfigResponse is returned by SetThemeConfig on success.
@@ -3015,6 +3170,18 @@ type __GetPageInput struct {
 // GetId returns __GetPageInput.Id, and is useful for accessing the field via an interface.
 func (v *__GetPageInput) GetId() int { return v.Id }
 
+// __GetRenderersInput is used internally by genqlient
+type __GetRenderersInput struct {
+	Filter  string `json:"filter,omitempty"`
+	OrderBy string `json:"orderBy,omitempty"`
+}
+
+// GetFilter returns __GetRenderersInput.Filter, and is useful for accessing the field via an interface.
+func (v *__GetRenderersInput) GetFilter() string { return v.Filter }
+
+// GetOrderBy returns __GetRenderersInput.OrderBy, and is useful for accessing the field via an interface.
+func (v *__GetRenderersInput) GetOrderBy() string { return v.OrderBy }
+
 // __GroupAssignUserInput is used internally by genqlient
 type __GroupAssignUserInput struct {
 	GroupId int `json:"groupId"`
@@ -3110,6 +3277,14 @@ func (v *__SetLocalizationInput) GetNamespacing() bool { return v.Namespacing }
 
 // GetNamespaces returns __SetLocalizationInput.Namespaces, and is useful for accessing the field via an interface.
 func (v *__SetLocalizationInput) GetNamespaces() []string { return v.Namespaces }
+
+// __SetRenderersInput is used internally by genqlient
+type __SetRenderersInput struct {
+	Renderers []RendererInput `json:"renderers"`
+}
+
+// GetRenderers returns __SetRenderersInput.Renderers, and is useful for accessing the field via an interface.
+func (v *__SetRenderersInput) GetRenderers() []RendererInput { return v.Renderers }
 
 // __SetThemeConfigInput is used internally by genqlient
 type __SetThemeConfigInput struct {
@@ -4224,6 +4399,58 @@ func GetPageByPath(
 	return &data, err
 }
 
+// The query or mutation executed by GetRenderers.
+const GetRenderers_Operation = `
+query GetRenderers (# @genqlient(omitempty: true)
+$filter: String, # @genqlient(omitempty: true)
+$orderBy: String) {
+	rendering {
+		renderers(filter: $filter, orderBy: $orderBy) {
+			isEnabled
+			key
+			title
+			description
+			icon
+			dependsOn
+			input
+			output
+			config {
+				key
+				value
+			}
+		}
+	}
+}
+`
+
+func GetRenderers(
+	ctx context.Context,
+	client graphql.Client,
+	filter string,
+	orderBy string,
+) (*GetRenderersResponse, error) {
+	req := &graphql.Request{
+		OpName: "GetRenderers",
+		Query:  GetRenderers_Operation,
+		Variables: &__GetRenderersInput{
+			Filter:  filter,
+			OrderBy: orderBy,
+		},
+	}
+	var err error
+
+	var data GetRenderersResponse
+	resp := &graphql.Response{Data: &data}
+
+	err = client.MakeRequest(
+		ctx,
+		req,
+		resp,
+	)
+
+	return &data, err
+}
+
 // The query or mutation executed by GetSiteConfig.
 const GetSiteConfig_Operation = `
 query GetSiteConfig {
@@ -4719,6 +4946,48 @@ func SetLocalization(
 	var err error
 
 	var data SetLocalizationResponse
+	resp := &graphql.Response{Data: &data}
+
+	err = client.MakeRequest(
+		ctx,
+		req,
+		resp,
+	)
+
+	return &data, err
+}
+
+// The query or mutation executed by SetRenderers.
+const SetRenderers_Operation = `
+mutation SetRenderers ($renderers: [RendererInput]) {
+	rendering {
+		updateRenderers(renderers: $renderers) {
+			responseResult {
+				succeeded
+				errorCode
+				slug
+				message
+			}
+		}
+	}
+}
+`
+
+func SetRenderers(
+	ctx context.Context,
+	client graphql.Client,
+	renderers []RendererInput,
+) (*SetRenderersResponse, error) {
+	req := &graphql.Request{
+		OpName: "SetRenderers",
+		Query:  SetRenderers_Operation,
+		Variables: &__SetRenderersInput{
+			Renderers: renderers,
+		},
+	}
+	var err error
+
+	var data SetRenderersResponse
 	resp := &graphql.Response{Data: &data}
 
 	err = client.MakeRequest(

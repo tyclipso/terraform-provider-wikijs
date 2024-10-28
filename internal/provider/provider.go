@@ -154,6 +154,7 @@ func (p *WikiJSProvider) DataSources(ctx context.Context) []func() datasource.Da
 		NewThemeConfigDataSource,
 		NewThemesDataSource,
 		NewRenderersDataSource,
+		NewSearchEnginesDataSource,
 	}
 }
 

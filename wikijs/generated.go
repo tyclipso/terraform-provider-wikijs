@@ -2411,6 +2411,64 @@ const (
 	PageRuleMatchTag   PageRuleMatch = "TAG"
 )
 
+// RebuildSearchIndexResponse is returned by RebuildSearchIndex on success.
+type RebuildSearchIndexResponse struct {
+	Search RebuildSearchIndexSearchSearchMutation `json:"search"`
+}
+
+// GetSearch returns RebuildSearchIndexResponse.Search, and is useful for accessing the field via an interface.
+func (v *RebuildSearchIndexResponse) GetSearch() RebuildSearchIndexSearchSearchMutation {
+	return v.Search
+}
+
+// RebuildSearchIndexSearchSearchMutation includes the requested fields of the GraphQL type SearchMutation.
+type RebuildSearchIndexSearchSearchMutation struct {
+	RebuildIndex RebuildSearchIndexSearchSearchMutationRebuildIndexDefaultResponse `json:"rebuildIndex"`
+}
+
+// GetRebuildIndex returns RebuildSearchIndexSearchSearchMutation.RebuildIndex, and is useful for accessing the field via an interface.
+func (v *RebuildSearchIndexSearchSearchMutation) GetRebuildIndex() RebuildSearchIndexSearchSearchMutationRebuildIndexDefaultResponse {
+	return v.RebuildIndex
+}
+
+// RebuildSearchIndexSearchSearchMutationRebuildIndexDefaultResponse includes the requested fields of the GraphQL type DefaultResponse.
+type RebuildSearchIndexSearchSearchMutationRebuildIndexDefaultResponse struct {
+	ResponseResult RebuildSearchIndexSearchSearchMutationRebuildIndexDefaultResponseResponseResultResponseStatus `json:"responseResult"`
+}
+
+// GetResponseResult returns RebuildSearchIndexSearchSearchMutationRebuildIndexDefaultResponse.ResponseResult, and is useful for accessing the field via an interface.
+func (v *RebuildSearchIndexSearchSearchMutationRebuildIndexDefaultResponse) GetResponseResult() RebuildSearchIndexSearchSearchMutationRebuildIndexDefaultResponseResponseResultResponseStatus {
+	return v.ResponseResult
+}
+
+// RebuildSearchIndexSearchSearchMutationRebuildIndexDefaultResponseResponseResultResponseStatus includes the requested fields of the GraphQL type ResponseStatus.
+type RebuildSearchIndexSearchSearchMutationRebuildIndexDefaultResponseResponseResultResponseStatus struct {
+	Succeeded bool   `json:"succeeded"`
+	ErrorCode int    `json:"errorCode"`
+	Slug      string `json:"slug"`
+	Message   string `json:"message"`
+}
+
+// GetSucceeded returns RebuildSearchIndexSearchSearchMutationRebuildIndexDefaultResponseResponseResultResponseStatus.Succeeded, and is useful for accessing the field via an interface.
+func (v *RebuildSearchIndexSearchSearchMutationRebuildIndexDefaultResponseResponseResultResponseStatus) GetSucceeded() bool {
+	return v.Succeeded
+}
+
+// GetErrorCode returns RebuildSearchIndexSearchSearchMutationRebuildIndexDefaultResponseResponseResultResponseStatus.ErrorCode, and is useful for accessing the field via an interface.
+func (v *RebuildSearchIndexSearchSearchMutationRebuildIndexDefaultResponseResponseResultResponseStatus) GetErrorCode() int {
+	return v.ErrorCode
+}
+
+// GetSlug returns RebuildSearchIndexSearchSearchMutationRebuildIndexDefaultResponseResponseResultResponseStatus.Slug, and is useful for accessing the field via an interface.
+func (v *RebuildSearchIndexSearchSearchMutationRebuildIndexDefaultResponseResponseResultResponseStatus) GetSlug() string {
+	return v.Slug
+}
+
+// GetMessage returns RebuildSearchIndexSearchSearchMutationRebuildIndexDefaultResponseResponseResultResponseStatus.Message, and is useful for accessing the field via an interface.
+func (v *RebuildSearchIndexSearchSearchMutationRebuildIndexDefaultResponseResponseResultResponseStatus) GetMessage() string {
+	return v.Message
+}
+
 type RendererInput struct {
 	IsEnabled bool                `json:"isEnabled"`
 	Key       string              `json:"key"`
@@ -4996,6 +5054,44 @@ func Login(
 	var err error
 
 	var data LoginResponse
+	resp := &graphql.Response{Data: &data}
+
+	err = client.MakeRequest(
+		ctx,
+		req,
+		resp,
+	)
+
+	return &data, err
+}
+
+// The query or mutation executed by RebuildSearchIndex.
+const RebuildSearchIndex_Operation = `
+mutation RebuildSearchIndex {
+	search {
+		rebuildIndex {
+			responseResult {
+				succeeded
+				errorCode
+				slug
+				message
+			}
+		}
+	}
+}
+`
+
+func RebuildSearchIndex(
+	ctx context.Context,
+	client graphql.Client,
+) (*RebuildSearchIndexResponse, error) {
+	req := &graphql.Request{
+		OpName: "RebuildSearchIndex",
+		Query:  RebuildSearchIndex_Operation,
+	}
+	var err error
+
+	var data RebuildSearchIndexResponse
 	resp := &graphql.Response{Data: &data}
 
 	err = client.MakeRequest(

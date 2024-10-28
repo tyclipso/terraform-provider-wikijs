@@ -689,3 +689,16 @@ mutation SetSearchEngines($engines: [SearchEngineInput]) {
     }
   }
 }
+
+mutation RebuildSearchIndex {
+  search {
+    rebuildIndex {
+      responseResult {
+        succeeded
+        errorCode
+        slug
+        message
+      }
+    }
+  }
+}

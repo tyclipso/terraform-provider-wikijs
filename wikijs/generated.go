@@ -2484,6 +2484,21 @@ func (v *RevokeApiKeyResponse) GetAuthentication() RevokeApiKeyAuthenticationAut
 	return v.Authentication
 }
 
+type SearchEngineInput struct {
+	IsEnabled bool                `json:"isEnabled"`
+	Key       string              `json:"key"`
+	Config    []KeyValuePairInput `json:"config"`
+}
+
+// GetIsEnabled returns SearchEngineInput.IsEnabled, and is useful for accessing the field via an interface.
+func (v *SearchEngineInput) GetIsEnabled() bool { return v.IsEnabled }
+
+// GetKey returns SearchEngineInput.Key, and is useful for accessing the field via an interface.
+func (v *SearchEngineInput) GetKey() string { return v.Key }
+
+// GetConfig returns SearchEngineInput.Config, and is useful for accessing the field via an interface.
+func (v *SearchEngineInput) GetConfig() []KeyValuePairInput { return v.Config }
+
 // SetApiStateAuthenticationAuthenticationMutation includes the requested fields of the GraphQL type AuthenticationMutation.
 type SetApiStateAuthenticationAuthenticationMutation struct {
 	SetApiState SetApiStateAuthenticationAuthenticationMutationSetApiStateDefaultResponse `json:"setApiState"`
@@ -2714,6 +2729,62 @@ type SetRenderersResponse struct {
 // GetRendering returns SetRenderersResponse.Rendering, and is useful for accessing the field via an interface.
 func (v *SetRenderersResponse) GetRendering() SetRenderersRenderingRenderingMutation {
 	return v.Rendering
+}
+
+// SetSearchEnginesResponse is returned by SetSearchEngines on success.
+type SetSearchEnginesResponse struct {
+	Search SetSearchEnginesSearchSearchMutation `json:"search"`
+}
+
+// GetSearch returns SetSearchEnginesResponse.Search, and is useful for accessing the field via an interface.
+func (v *SetSearchEnginesResponse) GetSearch() SetSearchEnginesSearchSearchMutation { return v.Search }
+
+// SetSearchEnginesSearchSearchMutation includes the requested fields of the GraphQL type SearchMutation.
+type SetSearchEnginesSearchSearchMutation struct {
+	UpdateSearchEngines SetSearchEnginesSearchSearchMutationUpdateSearchEnginesDefaultResponse `json:"updateSearchEngines"`
+}
+
+// GetUpdateSearchEngines returns SetSearchEnginesSearchSearchMutation.UpdateSearchEngines, and is useful for accessing the field via an interface.
+func (v *SetSearchEnginesSearchSearchMutation) GetUpdateSearchEngines() SetSearchEnginesSearchSearchMutationUpdateSearchEnginesDefaultResponse {
+	return v.UpdateSearchEngines
+}
+
+// SetSearchEnginesSearchSearchMutationUpdateSearchEnginesDefaultResponse includes the requested fields of the GraphQL type DefaultResponse.
+type SetSearchEnginesSearchSearchMutationUpdateSearchEnginesDefaultResponse struct {
+	ResponseResult SetSearchEnginesSearchSearchMutationUpdateSearchEnginesDefaultResponseResponseResultResponseStatus `json:"responseResult"`
+}
+
+// GetResponseResult returns SetSearchEnginesSearchSearchMutationUpdateSearchEnginesDefaultResponse.ResponseResult, and is useful for accessing the field via an interface.
+func (v *SetSearchEnginesSearchSearchMutationUpdateSearchEnginesDefaultResponse) GetResponseResult() SetSearchEnginesSearchSearchMutationUpdateSearchEnginesDefaultResponseResponseResultResponseStatus {
+	return v.ResponseResult
+}
+
+// SetSearchEnginesSearchSearchMutationUpdateSearchEnginesDefaultResponseResponseResultResponseStatus includes the requested fields of the GraphQL type ResponseStatus.
+type SetSearchEnginesSearchSearchMutationUpdateSearchEnginesDefaultResponseResponseResultResponseStatus struct {
+	Succeeded bool   `json:"succeeded"`
+	ErrorCode int    `json:"errorCode"`
+	Slug      string `json:"slug"`
+	Message   string `json:"message"`
+}
+
+// GetSucceeded returns SetSearchEnginesSearchSearchMutationUpdateSearchEnginesDefaultResponseResponseResultResponseStatus.Succeeded, and is useful for accessing the field via an interface.
+func (v *SetSearchEnginesSearchSearchMutationUpdateSearchEnginesDefaultResponseResponseResultResponseStatus) GetSucceeded() bool {
+	return v.Succeeded
+}
+
+// GetErrorCode returns SetSearchEnginesSearchSearchMutationUpdateSearchEnginesDefaultResponseResponseResultResponseStatus.ErrorCode, and is useful for accessing the field via an interface.
+func (v *SetSearchEnginesSearchSearchMutationUpdateSearchEnginesDefaultResponseResponseResultResponseStatus) GetErrorCode() int {
+	return v.ErrorCode
+}
+
+// GetSlug returns SetSearchEnginesSearchSearchMutationUpdateSearchEnginesDefaultResponseResponseResultResponseStatus.Slug, and is useful for accessing the field via an interface.
+func (v *SetSearchEnginesSearchSearchMutationUpdateSearchEnginesDefaultResponseResponseResultResponseStatus) GetSlug() string {
+	return v.Slug
+}
+
+// GetMessage returns SetSearchEnginesSearchSearchMutationUpdateSearchEnginesDefaultResponseResponseResultResponseStatus.Message, and is useful for accessing the field via an interface.
+func (v *SetSearchEnginesSearchSearchMutationUpdateSearchEnginesDefaultResponseResponseResultResponseStatus) GetMessage() string {
+	return v.Message
 }
 
 // SetThemeConfigResponse is returned by SetThemeConfig on success.
@@ -3379,6 +3450,14 @@ type __SetRenderersInput struct {
 
 // GetRenderers returns __SetRenderersInput.Renderers, and is useful for accessing the field via an interface.
 func (v *__SetRenderersInput) GetRenderers() []RendererInput { return v.Renderers }
+
+// __SetSearchEnginesInput is used internally by genqlient
+type __SetSearchEnginesInput struct {
+	Engines []SearchEngineInput `json:"engines"`
+}
+
+// GetEngines returns __SetSearchEnginesInput.Engines, and is useful for accessing the field via an interface.
+func (v *__SetSearchEnginesInput) GetEngines() []SearchEngineInput { return v.Engines }
 
 // __SetThemeConfigInput is used internally by genqlient
 type __SetThemeConfigInput struct {
@@ -5133,6 +5212,48 @@ func SetRenderers(
 	var err error
 
 	var data SetRenderersResponse
+	resp := &graphql.Response{Data: &data}
+
+	err = client.MakeRequest(
+		ctx,
+		req,
+		resp,
+	)
+
+	return &data, err
+}
+
+// The query or mutation executed by SetSearchEngines.
+const SetSearchEngines_Operation = `
+mutation SetSearchEngines ($engines: [SearchEngineInput]) {
+	search {
+		updateSearchEngines(engines: $engines) {
+			responseResult {
+				succeeded
+				errorCode
+				slug
+				message
+			}
+		}
+	}
+}
+`
+
+func SetSearchEngines(
+	ctx context.Context,
+	client graphql.Client,
+	engines []SearchEngineInput,
+) (*SetSearchEnginesResponse, error) {
+	req := &graphql.Request{
+		OpName: "SetSearchEngines",
+		Query:  SetSearchEngines_Operation,
+		Variables: &__SetSearchEnginesInput{
+			Engines: engines,
+		},
+	}
+	var err error
+
+	var data SetSearchEnginesResponse
 	resp := &graphql.Response{Data: &data}
 
 	err = client.MakeRequest(

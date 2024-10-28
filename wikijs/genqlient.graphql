@@ -622,7 +622,7 @@ query GetRenderers(
   $filter: String,
   # @genqlient(omitempty: true)
   $orderBy: String
-  ) {
+) {
   rendering {
     renderers(filter: $filter, orderBy: $orderBy) {
       isEnabled
@@ -649,6 +649,29 @@ mutation SetRenderers($renderers: [RendererInput]) {
         errorCode
         slug
         message
+      }
+    }
+  }
+}
+
+query GetSearchEngines(
+  # @genqlient(omitempty: true)
+  $filter: String,
+  # @genqlient(omitempty: true)
+  $orderBy: String
+) {
+  search {
+    searchEngines(filter: $filter, orderBy: $orderBy) {
+      isEnabled
+      key
+      title
+      description
+      logo
+      website
+      isAvailable
+      config {
+        key
+        value
       }
     }
   }

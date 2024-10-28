@@ -1697,6 +1697,88 @@ type GetRenderersResponse struct {
 // GetRendering returns GetRenderersResponse.Rendering, and is useful for accessing the field via an interface.
 func (v *GetRenderersResponse) GetRendering() GetRenderersRenderingRenderingQuery { return v.Rendering }
 
+// GetSearchEnginesResponse is returned by GetSearchEngines on success.
+type GetSearchEnginesResponse struct {
+	Search GetSearchEnginesSearchSearchQuery `json:"search"`
+}
+
+// GetSearch returns GetSearchEnginesResponse.Search, and is useful for accessing the field via an interface.
+func (v *GetSearchEnginesResponse) GetSearch() GetSearchEnginesSearchSearchQuery { return v.Search }
+
+// GetSearchEnginesSearchSearchQuery includes the requested fields of the GraphQL type SearchQuery.
+type GetSearchEnginesSearchSearchQuery struct {
+	SearchEngines []GetSearchEnginesSearchSearchQuerySearchEnginesSearchEngine `json:"searchEngines"`
+}
+
+// GetSearchEngines returns GetSearchEnginesSearchSearchQuery.SearchEngines, and is useful for accessing the field via an interface.
+func (v *GetSearchEnginesSearchSearchQuery) GetSearchEngines() []GetSearchEnginesSearchSearchQuerySearchEnginesSearchEngine {
+	return v.SearchEngines
+}
+
+// GetSearchEnginesSearchSearchQuerySearchEnginesSearchEngine includes the requested fields of the GraphQL type SearchEngine.
+type GetSearchEnginesSearchSearchQuerySearchEnginesSearchEngine struct {
+	IsEnabled   bool                                                                           `json:"isEnabled"`
+	Key         string                                                                         `json:"key"`
+	Title       string                                                                         `json:"title"`
+	Description string                                                                         `json:"description"`
+	Logo        string                                                                         `json:"logo"`
+	Website     string                                                                         `json:"website"`
+	IsAvailable bool                                                                           `json:"isAvailable"`
+	Config      []GetSearchEnginesSearchSearchQuerySearchEnginesSearchEngineConfigKeyValuePair `json:"config"`
+}
+
+// GetIsEnabled returns GetSearchEnginesSearchSearchQuerySearchEnginesSearchEngine.IsEnabled, and is useful for accessing the field via an interface.
+func (v *GetSearchEnginesSearchSearchQuerySearchEnginesSearchEngine) GetIsEnabled() bool {
+	return v.IsEnabled
+}
+
+// GetKey returns GetSearchEnginesSearchSearchQuerySearchEnginesSearchEngine.Key, and is useful for accessing the field via an interface.
+func (v *GetSearchEnginesSearchSearchQuerySearchEnginesSearchEngine) GetKey() string { return v.Key }
+
+// GetTitle returns GetSearchEnginesSearchSearchQuerySearchEnginesSearchEngine.Title, and is useful for accessing the field via an interface.
+func (v *GetSearchEnginesSearchSearchQuerySearchEnginesSearchEngine) GetTitle() string {
+	return v.Title
+}
+
+// GetDescription returns GetSearchEnginesSearchSearchQuerySearchEnginesSearchEngine.Description, and is useful for accessing the field via an interface.
+func (v *GetSearchEnginesSearchSearchQuerySearchEnginesSearchEngine) GetDescription() string {
+	return v.Description
+}
+
+// GetLogo returns GetSearchEnginesSearchSearchQuerySearchEnginesSearchEngine.Logo, and is useful for accessing the field via an interface.
+func (v *GetSearchEnginesSearchSearchQuerySearchEnginesSearchEngine) GetLogo() string { return v.Logo }
+
+// GetWebsite returns GetSearchEnginesSearchSearchQuerySearchEnginesSearchEngine.Website, and is useful for accessing the field via an interface.
+func (v *GetSearchEnginesSearchSearchQuerySearchEnginesSearchEngine) GetWebsite() string {
+	return v.Website
+}
+
+// GetIsAvailable returns GetSearchEnginesSearchSearchQuerySearchEnginesSearchEngine.IsAvailable, and is useful for accessing the field via an interface.
+func (v *GetSearchEnginesSearchSearchQuerySearchEnginesSearchEngine) GetIsAvailable() bool {
+	return v.IsAvailable
+}
+
+// GetConfig returns GetSearchEnginesSearchSearchQuerySearchEnginesSearchEngine.Config, and is useful for accessing the field via an interface.
+func (v *GetSearchEnginesSearchSearchQuerySearchEnginesSearchEngine) GetConfig() []GetSearchEnginesSearchSearchQuerySearchEnginesSearchEngineConfigKeyValuePair {
+	return v.Config
+}
+
+// GetSearchEnginesSearchSearchQuerySearchEnginesSearchEngineConfigKeyValuePair includes the requested fields of the GraphQL type KeyValuePair.
+type GetSearchEnginesSearchSearchQuerySearchEnginesSearchEngineConfigKeyValuePair struct {
+	Key   string `json:"key"`
+	Value string `json:"value"`
+}
+
+// GetKey returns GetSearchEnginesSearchSearchQuerySearchEnginesSearchEngineConfigKeyValuePair.Key, and is useful for accessing the field via an interface.
+func (v *GetSearchEnginesSearchSearchQuerySearchEnginesSearchEngineConfigKeyValuePair) GetKey() string {
+	return v.Key
+}
+
+// GetValue returns GetSearchEnginesSearchSearchQuerySearchEnginesSearchEngineConfigKeyValuePair.Value, and is useful for accessing the field via an interface.
+func (v *GetSearchEnginesSearchSearchQuerySearchEnginesSearchEngineConfigKeyValuePair) GetValue() string {
+	return v.Value
+}
+
 // GetSiteConfigResponse is returned by GetSiteConfig on success.
 type GetSiteConfigResponse struct {
 	Site GetSiteConfigSiteSiteQuery `json:"site"`
@@ -3182,6 +3264,18 @@ func (v *__GetRenderersInput) GetFilter() string { return v.Filter }
 // GetOrderBy returns __GetRenderersInput.OrderBy, and is useful for accessing the field via an interface.
 func (v *__GetRenderersInput) GetOrderBy() string { return v.OrderBy }
 
+// __GetSearchEnginesInput is used internally by genqlient
+type __GetSearchEnginesInput struct {
+	Filter  string `json:"filter,omitempty"`
+	OrderBy string `json:"orderBy,omitempty"`
+}
+
+// GetFilter returns __GetSearchEnginesInput.Filter, and is useful for accessing the field via an interface.
+func (v *__GetSearchEnginesInput) GetFilter() string { return v.Filter }
+
+// GetOrderBy returns __GetSearchEnginesInput.OrderBy, and is useful for accessing the field via an interface.
+func (v *__GetSearchEnginesInput) GetOrderBy() string { return v.OrderBy }
+
 // __GroupAssignUserInput is used internally by genqlient
 type __GroupAssignUserInput struct {
 	GroupId int `json:"groupId"`
@@ -4440,6 +4534,57 @@ func GetRenderers(
 	var err error
 
 	var data GetRenderersResponse
+	resp := &graphql.Response{Data: &data}
+
+	err = client.MakeRequest(
+		ctx,
+		req,
+		resp,
+	)
+
+	return &data, err
+}
+
+// The query or mutation executed by GetSearchEngines.
+const GetSearchEngines_Operation = `
+query GetSearchEngines (# @genqlient(omitempty: true)
+$filter: String, # @genqlient(omitempty: true)
+$orderBy: String) {
+	search {
+		searchEngines(filter: $filter, orderBy: $orderBy) {
+			isEnabled
+			key
+			title
+			description
+			logo
+			website
+			isAvailable
+			config {
+				key
+				value
+			}
+		}
+	}
+}
+`
+
+func GetSearchEngines(
+	ctx context.Context,
+	client graphql.Client,
+	filter string,
+	orderBy string,
+) (*GetSearchEnginesResponse, error) {
+	req := &graphql.Request{
+		OpName: "GetSearchEngines",
+		Query:  GetSearchEngines_Operation,
+		Variables: &__GetSearchEnginesInput{
+			Filter:  filter,
+			OrderBy: orderBy,
+		},
+	}
+	var err error
+
+	var data GetSearchEnginesResponse
 	resp := &graphql.Response{Data: &data}
 
 	err = client.MakeRequest(

@@ -53,43 +53,49 @@ func (d *searchEnginesDataSource) Schema(_ context.Context, req datasource.Schem
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"is_enabled": schema.BoolAttribute{
-							Computed:            true,
-							MarkdownDescription: "",
+							Computed: true,
+							MarkdownDescription: "Either if the search engine is active or not.\n" +
+								"  You can use this field in the `search_engines` resource.\n",
 						},
 						"key": schema.StringAttribute{
-							Computed:            true,
-							MarkdownDescription: "",
+							Computed: true,
+							MarkdownDescription: "The unique identifier of each search engine.\n" +
+								"  This is set in code and you can use this field in the `search_engines` resource.",
 						},
 						"title": schema.StringAttribute{
 							Computed:            true,
-							MarkdownDescription: "",
+							MarkdownDescription: "The title of the search engine shown in the backend.\n",
 						},
 						"description": schema.StringAttribute{
 							Computed:            true,
-							MarkdownDescription: "",
+							MarkdownDescription: "The description of the search engines shown in the backend.\n",
 						},
 						"logo": schema.StringAttribute{
 							Computed:            true,
-							MarkdownDescription: "",
+							MarkdownDescription: "The logo of the search engine shown in the backend.\n",
 						},
 						"website": schema.StringAttribute{
 							Computed:            true,
-							MarkdownDescription: "",
+							MarkdownDescription: "The website of the search engine.\n",
 						},
 						"is_available": schema.BoolAttribute{
-							Computed:            true,
-							MarkdownDescription: "",
+							Computed: true,
+							MarkdownDescription: "Wether the implementation of this search engine is finished and can be used.\n" +
+								"Check this field before enabling a search engine with the resource `wikijs_search_engines`.\n",
 						},
 						"config": schema.MapAttribute{
-							Computed:            true,
-							ElementType:         types.StringType,
-							MarkdownDescription: "",
+							Computed:    true,
+							ElementType: types.StringType,
+							MarkdownDescription: "A list of Key/Value pairs of config for each search engine.\n" +
+								"  Some take none, others have a long list.\n" +
+								"  You can use this field in the `search_engines` resource.\n",
 						},
 					},
 				},
 			},
 		},
-		MarkdownDescription: "",
+		MarkdownDescription: "The `{{ .Name }}` {{ .Type }} implements the WikiJS API query `search{searchEngines{…}}`.\n" +
+			"You can use this {{ .Type }} to manipulate only certain fields with the `search_engines` resource.\n",
 	}
 }
 

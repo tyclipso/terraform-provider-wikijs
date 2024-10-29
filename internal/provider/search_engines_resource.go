@@ -118,19 +118,20 @@ func (r *searchEnginesResource) Configure(_ context.Context, req resource.Config
 }
 
 func (r *searchEnginesResource) ModifyPlan(ctx context.Context, req resource.ModifyPlanRequest, resp *resource.ModifyPlanResponse) {
-	var data, plan *searchEnginesResourceModel
+	var data, plan, state *searchEnginesResourceModel
 	resp.Diagnostics.Append(req.Config.Get(ctx, &data)...)
 	resp.Diagnostics.Append(req.Plan.Get(ctx, &plan)...)
+	resp.Diagnostics.Append(req.State.Get(ctx, &state)...)
 
 	if resp.Diagnostics.HasError() {
 		return
 	}
 
-	if !reflect.DeepEqual(plan, data) {
+	if !reflect.DeepEqual(plan, state) {
 		resp.Diagnostics.AddWarning(
-			"Resource is changed and will be updated",
-			"This will trigger a IndexRebuild."+
-				"Please make sure that this additional load does not impact the current performance.",
+			"Resource is created or changed and will be updated",
+			"This will trigger an IndexRebuild."+
+				"Please make sure that this additional load does not impact the performance.",
 		)
 	}
 

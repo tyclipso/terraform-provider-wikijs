@@ -49,7 +49,7 @@ func (d *searchEnginesDataSource) Schema(_ context.Context, req datasource.Schem
 		Attributes: map[string]schema.Attribute{
 			"search_engines": schema.ListNestedAttribute{
 				Required:            true,
-				MarkdownDescription: "List of search_engines in the system.\n",
+				MarkdownDescription: "List of search engines in the system.\n",
 				NestedObject: schema.NestedAttributeObject{
 					Attributes: map[string]schema.Attribute{
 						"is_enabled": schema.BoolAttribute{
@@ -81,7 +81,7 @@ func (d *searchEnginesDataSource) Schema(_ context.Context, req datasource.Schem
 						"is_available": schema.BoolAttribute{
 							Computed: true,
 							MarkdownDescription: "Wether the implementation of this search engine is finished and can be used.\n" +
-								"Check this field before enabling a search engine with the resource `wikijs_search_engines`.\n",
+								"  Check this field before enabling a search engine with the resource `wikijs_search_engines`.\n",
 						},
 						"config": schema.MapAttribute{
 							Computed:    true,

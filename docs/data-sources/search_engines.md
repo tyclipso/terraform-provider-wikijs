@@ -28,7 +28,7 @@ data "wikijs_search_engines" "search_engines" {
 
 ### Required
 
-- `search_engines` (Attributes List) List of search_engines in the system. (see [below for nested schema](#nestedatt--search_engines))
+- `search_engines` (Attributes List) List of search engines in the system. (see [below for nested schema](#nestedatt--search_engines))
 
 <a id="nestedatt--search_engines"></a>
 ### Nested Schema for `search_engines`
@@ -40,7 +40,7 @@ Read-Only:
   You can use this field in the `search_engines` resource.
 - `description` (String) The description of the search engines shown in the backend.
 - `is_available` (Boolean) Wether the implementation of this search engine is finished and can be used.
-Check this field before enabling a search engine with the resource `wikijs_search_engines`.
+  Check this field before enabling a search engine with the resource `wikijs_search_engines`.
 - `is_enabled` (Boolean) Either if the search engine is active or not.
   You can use this field in the `search_engines` resource.
 - `key` (String) The unique identifier of each search engine.

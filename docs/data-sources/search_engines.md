@@ -35,7 +35,7 @@ data "wikijs_search_engines" "search_engines" {
 
 Read-Only:
 
-- `config` (Map of String) A list of Key/Value pairs of config for each search engine.
+- `config` (Map of String, Sensitive) A list of Key/Value pairs of config for each search engine.
   Some take none, others have a long list.
   You can use this field in the `search_engines` resource.
 - `description` (String) The description of the search engines shown in the backend.

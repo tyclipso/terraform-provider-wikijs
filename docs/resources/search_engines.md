@@ -186,6 +186,6 @@ Required:
 
 Optional:
 
-- `config` (Map of String) Map with config options for this specific search engine.
+- `config` (Map of String, Sensitive) Map with config options for this specific search engine.
 
 

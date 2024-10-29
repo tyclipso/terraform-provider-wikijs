@@ -19,7 +19,7 @@ You can use this data source to manipulate only certain fields with the `rendere
 # certain renderers. Note that this data source only takes an empty
 # renderers list.
 data "wikijs_theme_renderers" "renderers" {
-	renderers = []
+  renderers = []
 }
 ```
 

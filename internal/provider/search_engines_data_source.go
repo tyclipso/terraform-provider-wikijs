@@ -86,6 +86,7 @@ func (d *searchEnginesDataSource) Schema(_ context.Context, req datasource.Schem
 						"config": schema.MapAttribute{
 							Computed:    true,
 							ElementType: types.StringType,
+							Sensitive:   true,
 							MarkdownDescription: "A list of Key/Value pairs of config for each search engine.\n" +
 								"  Some take none, others have a long list.\n" +
 								"  You can use this field in the `search_engines` resource.\n",

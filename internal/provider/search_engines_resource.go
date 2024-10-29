@@ -64,6 +64,7 @@ func (r *searchEnginesResource) Schema(_ context.Context, req resource.SchemaReq
 						"config": schema.MapAttribute{
 							Optional:            true,
 							ElementType:         types.StringType,
+							Sensitive:           true,
 							MarkdownDescription: "Map with config options for this specific search engine.\n",
 						},
 					},

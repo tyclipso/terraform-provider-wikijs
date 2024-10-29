@@ -131,7 +131,7 @@ func (r *searchEnginesResource) ModifyPlan(ctx context.Context, req resource.Mod
 	if !reflect.DeepEqual(plan, state) {
 		resp.Diagnostics.AddWarning(
 			"Resource is created or changed and will be updated",
-			"This will trigger an IndexRebuild."+
+			"This will trigger an IndexRebuild. "+
 				"Please make sure that this additional load does not impact the performance.",
 		)
 	}
@@ -141,16 +141,16 @@ func (r *searchEnginesResource) ModifyPlan(ctx context.Context, req resource.Mod
 		resp.Diagnostics.AddError("Get Search Engines Request failed", err.Error())
 	}
 	isAvailable := map[string]bool{}
-	for _, s := range wresp.Search.SearchEngines {
-		isAvailable[s.Key] = s.IsAvailable
+	for _, ws := range wresp.Search.SearchEngines {
+		isAvailable[ws.Key] = ws.IsAvailable
 	}
 
 	for _, s := range data.SearchEngines {
-		if s.IsEnabled.ValueBool() && !isAvailable[s.Key.String()] {
+		if s.IsEnabled.ValueBool() && !isAvailable[s.Key.ValueString()] {
 			resp.Diagnostics.AddAttributeError(
 				path.Root("is_enabled"),
 				"Attribute Configured Wrong",
-				fmt.Sprintf("%s cannot be enabled as search engine as it is not made available in the wikijs.", s.Key),
+				fmt.Sprintf("%s cannot be enabled as search engine as it is not made available in the wikijs.", s.Key.ValueString()),
 			)
 		}
 	}
@@ -176,7 +176,7 @@ func (r *searchEnginesResource) ValidateConfig(ctx context.Context, req resource
 		resp.Diagnostics.AddAttributeError(
 			path.Root("is_enabled"),
 			"Attribute Configured Wrong",
-			"At any given time exactly one search engine needs to be enabled."+
+			"At any given time exactly one search engine needs to be enabled.\n"+
 				"Maybe enable the default search engine with the key 'db'.",
 		)
 	}
@@ -186,7 +186,7 @@ func (r *searchEnginesResource) ValidateConfig(ctx context.Context, req resource
 		resp.Diagnostics.AddAttributeError(
 			path.Root("key"),
 			"Attribute Configured Wrong",
-			fmt.Sprintf("Only one search engine can be enabled at any time."+
+			fmt.Sprintf("Only one search engine can be enabled at any time.\n"+
 				"Currently %s are enabled.", k),
 		)
 	}

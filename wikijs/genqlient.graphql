@@ -622,7 +622,7 @@ query GetRenderers(
   $filter: String,
   # @genqlient(omitempty: true)
   $orderBy: String
-  ) {
+) {
   rendering {
     renderers(filter: $filter, orderBy: $orderBy) {
       isEnabled
@@ -644,6 +644,55 @@ query GetRenderers(
 mutation SetRenderers($renderers: [RendererInput]) {
   rendering {
     updateRenderers(renderers: $renderers) {
+      responseResult {
+        succeeded
+        errorCode
+        slug
+        message
+      }
+    }
+  }
+}
+
+query GetSearchEngines(
+  # @genqlient(omitempty: true)
+  $filter: String,
+  # @genqlient(omitempty: true)
+  $orderBy: String
+) {
+  search {
+    searchEngines(filter: $filter, orderBy: $orderBy) {
+      isEnabled
+      key
+      title
+      description
+      logo
+      website
+      isAvailable
+      config {
+        key
+        value
+      }
+    }
+  }
+}
+
+mutation SetSearchEngines($engines: [SearchEngineInput]) {
+  search {
+    updateSearchEngines(engines: $engines) {
+      responseResult {
+        succeeded
+        errorCode
+        slug
+        message
+      }
+    }
+  }
+}
+
+mutation RebuildSearchIndex {
+  search {
+    rebuildIndex {
       responseResult {
         succeeded
         errorCode

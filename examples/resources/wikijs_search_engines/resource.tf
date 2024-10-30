@@ -30,7 +30,6 @@ resource "wikijs_search_engines" "search_engines" {
       is_enabled = false
       config = {
         "appId"     = ""
-        "key"       = ""
         "indexName" = "wiki"
       }
     },

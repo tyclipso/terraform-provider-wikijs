@@ -59,23 +59,25 @@ func (r *apiKeyResource) Schema(_ context.Context, _ resource.SchemaRequest, res
 	resp.Schema = schema.Schema{
 		Attributes: map[string]schema.Attribute{
 			"id": schema.Int64Attribute{
-				Computed:    true,
-				Description: "Internal Id of the API Key",
+				Computed:            true,
+				MarkdownDescription: "Internal ID of the API Key.",
 				PlanModifiers: []planmodifier.Int64{
 					int64planmodifier.UseStateForUnknown(),
 					int64planmodifier.RequiresReplace(),
 				},
 			},
 			"name": schema.StringAttribute{
-				Required:    true,
-				Description: "Display name of the API Key (not unique)",
+				Required: true,
+				MarkdownDescription: "Display name of the API key.\n" +
+					"  Does not need to unique.",
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
 			},
 			"full_access": schema.BoolAttribute{
-				Optional:    true,
-				Description: "Set to true to create an API Key with full access rights. Mutually exclusive with group_id.",
+				Optional: true,
+				MarkdownDescription: "Set to true to create an API key with full access rights (admin).\n" +
+					"  It is mutually exclusive with the `group_id`.",
 				PlanModifiers: []planmodifier.Bool{
 					boolplanmodifier.RequiresReplace(),
 				},
@@ -84,8 +86,9 @@ func (r *apiKeyResource) Schema(_ context.Context, _ resource.SchemaRequest, res
 				},
 			},
 			"group_id": schema.Int64Attribute{
-				Optional:    true,
-				Description: "Mutually exclusive with full_access. List of group_ids the API Key should inherit it's permissions and page rules form.",
+				Optional: true,
+				MarkdownDescription: "Integer of `group_id` the API key should inherit the permissions and page rules from. \n" +
+					"  It is mutually exclusive with `full_access`.",
 				PlanModifiers: []planmodifier.Int64{
 					int64planmodifier.RequiresReplace(),
 				},
@@ -94,51 +97,60 @@ func (r *apiKeyResource) Schema(_ context.Context, _ resource.SchemaRequest, res
 				},
 			},
 			"key_short": schema.StringAttribute{
-				Computed:    true,
-				Description: "Suffix of the actual API Key as shown in the Web UI (Hint: Wiki.JS always adds three dots before the actual suffix. You need to remove those if you need to match an actual key)",
+				Computed: true,
+				MarkdownDescription: "Suffix of the actual API key as shown in the Web UI. \n" +
+					"\n" +
+					"  Hint: Wiki.JS always adds three dots before the suffix.\n" +
+					"  You need to remove them to programatically reuse the key.",
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"expires_in": schema.StringAttribute{
-				Required:    true,
-				Description: "When creating an API Key wiki.js expects an expiration timespan (e. g. '1d' '20h')",
+				Required:            true,
+				MarkdownDescription: "When creating an API key wiki.JS expects an expiration timespan (e.g. '30d', '20h').",
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.RequiresReplace(),
 				},
 			},
 			"expiration": schema.StringAttribute{
-				Computed:    true,
-				Description: "The actual expiration date of this key",
+				Computed:            true,
+				MarkdownDescription: "The actual expiration date of this key.",
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"min_remaining_duration": schema.StringAttribute{
-				Optional:    true,
-				Computed:    true,
-				Description: "Set a minimum duration the api key needs to remain active. This field is changed when the expiration dates comes to close and triggers a replace",
+				Optional: true,
+				Computed: true,
+				MarkdownDescription: "Set a minimum duration the API key need to remain active.\n" +
+					"  This field is changed when the expiration date come to close and triggers a replace.",
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 					stringplanmodifier.RequiresReplace(),
 				},
 			},
 			"created_at": schema.StringAttribute{
-				Computed:    true,
-				Description: "Creation time as returned by Wiki.JS (expect RFC3339 format)",
+				Computed: true,
+				MarkdownDescription: "Creation time as returned by Wiki.JS.\n" +
+					"  Expect RFC3339 as format.",
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 			"key": schema.StringAttribute{
-				Computed:    true,
-				Sensitive:   true,
-				Description: "The actual API Key. Keep it secret!",
+				Computed:  true,
+				Sensitive: true,
+				MarkdownDescription: "The actual API key.\n" +
+					"  Keep this SECRET!",
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
 		},
+		MarkdownDescription: "The `{{ .Name }}` {{ .Type }} implements the Wiki.JS API mutations `authentication{createApiKey{…}}` and `authentication{revokeApiKey{…}}`.\n" +
+			"It can be used to create and destroy API keys and also ensure that API keys are always valid.\n" +
+			"For that you need to define the `min_remaining_duration` that Terraform can see that it needs to renew/create a new API key.",
 	}
 }
 

@@ -3,12 +3,16 @@
 page_title: "wikijs_api_keys Data Source - terraform-provider-wikijs"
 subcategory: ""
 description: |-
-  
+  The wikijs_api_keys Data Source implements the WikiJS API query authentication{apiKeys{…}}.
+    It can be used to list the API keys known to the WikiJS instance.
+    You can also use it to query and match it.
 ---
 
 # wikijs_api_keys (Data Source)
 
-
+The `wikijs_api_keys` Data Source implements the WikiJS API query `authentication{apiKeys{…}}`.
+  It can be used to list the API keys known to the WikiJS instance.
+  You can also use it to query and match it.
 
 
 
@@ -17,19 +21,24 @@ description: |-
 
 ### Read-Only
 
-- `api_keys` (Attributes List) List of all API Keys known to wiki.js, see the nested object for details. (see [below for nested schema](#nestedatt--api_keys))
+- `api_keys` (Attributes List) List of all API keys known to Wiki.JS.
+  See the nested object for details. (see [below for nested schema](#nestedatt--api_keys))
 
 <a id="nestedatt--api_keys"></a>
 ### Nested Schema for `api_keys`
 
 Read-Only:
 
-- `created_at` (String) Creation time as returned by Wiki.JS (expect RFC3339 format)
-- `expiration` (String) Expiration time as returned by Wiki.JS (expect RFC3339 format)
-- `id` (Number) Internal Id of the API Key
-- `is_revoked` (Boolean) Whether the API Key is revoked
-- `key_short` (String) Suffix of the actual API Key as shown in the Web UI (Hint: Wiki.JS always adds three dots before the actual suffix. You need to remove those if you need to match an actual key)
-- `name` (String) Display name of the API Key (not unique)
-- `updated_at` (String) Time of last updated of the key as returned by Wiki.JS (expect RFC3339 format)
+- `created_at` (String) Creation time as returned by Wiki.JS.
+  Expect RFC3339 format.
+- `expiration` (String) Expiration time as returned by Wiki.jS.
+  Expect RFC3339 format.
+- `id` (Number) Internal Id of the API key.
+- `is_revoked` (Boolean) Whether the API key is revoked.
+- `key_short` (String) Suffix of the actual API key as shown in the Web UI.
+  Hint: Wiki.JS always adds three dots before the actual suffix.
+  You need to remove those prior to using the value programmatically.
+- `name` (String) Displayname of the API key (not unique)
+- `updated_at` (String) Time of last update of the key as returned by Wiki.jS.  Expect RFC3339 format.
 
 

@@ -40,10 +40,12 @@ func (r *apiResource) Schema(_ context.Context, _ resource.SchemaRequest, resp *
 	resp.Schema = schema.Schema{
 		Attributes: map[string]schema.Attribute{
 			"enabled": schema.BoolAttribute{
-				Required:    true,
-				Description: "Enable the Wiki.JS API",
+				Required:            true,
+				MarkdownDescription: "Enable the Wiki.JS API.",
 			},
 		},
+		MarkdownDescription: "The `{{ .Name }}` {{ .Type }} implements the WikiJS API mutation `authentication{setApiState{…}}`.\n" +
+			"With that you can enable or disable the API endpoint.",
 	}
 }
 

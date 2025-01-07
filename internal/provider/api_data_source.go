@@ -40,10 +40,12 @@ func (d *apiDataSource) Schema(_ context.Context, _ datasource.SchemaRequest, re
 	resp.Schema = schema.Schema{
 		Attributes: map[string]schema.Attribute{
 			"enabled": schema.BoolAttribute{
-				Computed:    true,
-				Description: "States whether the Wiki.JS API is enabled",
+				Computed:            true,
+				MarkdownDescription: "States whether the Wiki.js API is enabled.",
 			},
 		},
+		MarkdownDescription: "The `{{ .Name }}` {{ .Type }} implements the Wiki.JS API query `authentication{apiState{…}}`.\n" +
+			"It can be used to check if the API endpoint is enabled.",
 	}
 }
 

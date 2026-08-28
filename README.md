@@ -8,7 +8,7 @@ It implements more of the API components of Wiki.js and improves on documentatio
 ## Requirements
 
 - [Terraform](https://www.terraform.io/downloads.html) >= 1.4
-- [Go](https://golang.org/doc/install) >= 1.18
+- [Go](https://golang.org/doc/install) >= 1.24
 
 ## Building The Provider
 

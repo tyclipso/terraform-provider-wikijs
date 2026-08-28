@@ -56,6 +56,17 @@ debug: build-debug
 .PHONY: dlv
 dlv: build-debug
 	dlv exec $(BIN_DIR)/$(BINARY) -- -debug
+	
+## tools: list the module's registered tools
+.PHONY: tools
+tools:
+	go tool
+
+## tools-update: bump all tool dependencies
+.PHONY: tools-update
+tools-update:
+	go get tool
+	go mod tidy
 
 ## generate: run all code and doc generators
 .PHONY: generate

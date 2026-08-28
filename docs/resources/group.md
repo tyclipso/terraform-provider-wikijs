@@ -49,5 +49,3 @@ Required:
 Read-Only:
 
 - `id` (String) Internal ID for this rule
-
-

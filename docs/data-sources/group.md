@@ -45,5 +45,3 @@ Read-Only:
   - TAG
 - `path` (String) Path to match on
 - `roles` (List of String) Permissions of this role (see: https://github.com/requarks/wiki/blob/db8a09fe8c267a54fbbfabe0dc871a2108824968/client/components/admin/admin-groups-edit-permissions.vue#L43)
-
-

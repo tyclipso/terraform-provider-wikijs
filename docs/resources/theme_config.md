@@ -80,5 +80,3 @@ resource "wikijs_theme_config" "config" {
 - `inject_head` (String) HTML code to be injected just before the closing head tag.  Usually for script tags.
 - `toc_position` (String) Select whether the table of contents is shown on the left, right or not at all.
   Accepted values: `left`, `right`, `off`
-
-

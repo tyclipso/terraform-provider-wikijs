@@ -62,5 +62,3 @@ Optional:
 - `enabled` (Boolean) Whether to enable this auth strategy instance
 - `key` (String) Unique Key for this instance of the auth strategy. This resource can generate a unique key for you, but when you change the order of your auth strategies you have to explicitly set this key by yourself.
 - `self_registration` (Boolean) Automatically create user accounts for people who successfully login via this auth strategie
-
-

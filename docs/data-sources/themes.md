@@ -48,5 +48,3 @@ Read-Only:
 - `author` (String)
 - `key` (String)
 - `title` (String)
-
-

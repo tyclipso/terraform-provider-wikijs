@@ -24,5 +24,3 @@ description: |-
 
 - `auto_update` (Boolean) Automatically download updates to this locale as they become available.
 - `namespacing` (Boolean) Enables multiple language versions of the same page.
-
-

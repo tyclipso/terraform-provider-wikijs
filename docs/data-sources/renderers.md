@@ -52,5 +52,3 @@ Read-Only:
 - `output` (String) What kind of output format this renderer produces.
   This could be for example `html` or `null`.
 - `title` (String) The title of the renderer shown in the backend.
-
-

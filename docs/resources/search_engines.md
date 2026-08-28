@@ -10,7 +10,7 @@ description: |-
   If you are unsure about the key and config fields, you can query the API after activating it manually or with the wikijs_api resource.
   Make sure that the search provider isAvailable before you try to set isEnabled and that you have always exactly one search engine enabled.
   The query with the minimal information you need is as follows:
-  graphql
+  
   query{
     search{
       searchEngines{
@@ -186,5 +186,3 @@ Required:
 Optional:
 
 - `config` (Map of String, Sensitive) Map with config options for this specific search engine.
-
-

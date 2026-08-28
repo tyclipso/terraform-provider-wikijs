@@ -27,8 +27,11 @@ export PATH := $(TOOL_DIR):$(PATH)
 GOLANGCI_LINT_VERSION ?= v2.13.2
 GORELEASER_VERSION    ?= v2.18.0
 
-GOLANGCI_LINT_PKG := github.com/golangci/golangci-lint/v2/cmd/golangci-lint
-GORELEASER_PKG    := github.com/goreleaser/goreleaser/v2
+GOLANGCI_LINT_MOD := github.com/golangci/golangci-lint/v2
+GORELEASER_MOD    := github.com/goreleaser/goreleaser/v2
+
+GOLANGCI_LINT_PKG := $(GOLANGCI_LINT_MOD)/cmd/golangci-lint
+GORELEASER_PKG    := $(GORELEASER_MOD)
 
 # Ensure presence of tool bin dir
 $(TOOL_DIR):
@@ -93,11 +96,33 @@ tools: tools-mod $(TOOL_DIR)/.golangci-lint-$(GOLANGCI_LINT_VERSION) $(TOOL_DIR)
 tools-mod: | $(TOOL_DIR)
 	go build -o $(TOOL_DIR)/ tool
 
+# $(1) display name, $(2) module path, $(3) currently pinned version
+define check_tool
+	latest=$$(go list -m -f '{{.Version}}' $(2)@latest 2>/dev/null); \
+	if [ -z "$$latest" ]; then \
+		echo "  $(1): could not query $(2)"; \
+	elif [ "$$latest" = "$(3)" ]; then \
+		echo "  $(1): $(3) (current)"; \
+	else \
+		echo "  $(1): $(3) -> $$latest"; \
+	fi
+endef
+
+## tools-outdated: report newer releases of the standalone pinned tools
+.PHONY: tools-outdated
+tools-outdated:
+	@echo "Standalone tools pinned in $(firstword $(MAKEFILE_LIST)):"
+	@$(call check_tool,golangci-lint,$(GOLANGCI_LINT_MOD),$(GOLANGCI_LINT_VERSION))
+	@$(call check_tool,goreleaser,$(GORELEASER_MOD),$(GORELEASER_VERSION))
+
+
 ## tools-update: bump all tool dependencies
 .PHONY: tools-update
 tools-update:
 	go get tool
 	go mod tidy
+	@echo
+	@$(MAKE) --no-print-directory tools-outdated
 
 ## generate: run all code and doc generators
 .PHONY: generate

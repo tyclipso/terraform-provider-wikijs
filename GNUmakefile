@@ -22,9 +22,29 @@ MIRROR_KEEP    ?= 7
 TOOL_DIR := $(CURDIR)/bin/tools
 export PATH := $(TOOL_DIR):$(PATH)
 
+# Keep high dependency tools out of the package chain and instead install them
+# directly to a pinned version for easier make handling
+GOLANGCI_LINT_VERSION ?= v2.13.2
+GORELEASER_VERSION    ?= v2.18.0
+
+GOLANGCI_LINT_PKG := github.com/golangci/golangci-lint/v2/cmd/golangci-lint
+GORELEASER_PKG    := github.com/goreleaser/goreleaser/v2
+
 # Ensure presence of tool bin dir
 $(TOOL_DIR):
 	mkdir -p $@
+
+# Stamp files: bumping a version variable invalidates the stamp and
+# triggers a reinstall, which a plain binary target would not.
+$(TOOL_DIR)/.golangci-lint-$(GOLANGCI_LINT_VERSION): | $(TOOL_DIR)
+	GOBIN=$(TOOL_DIR) go install $(GOLANGCI_LINT_PKG)@$(GOLANGCI_LINT_VERSION)
+	rm -f $(TOOL_DIR)/.golangci-lint-*
+	touch $@
+
+$(TOOL_DIR)/.goreleaser-$(GORELEASER_VERSION): | $(TOOL_DIR)
+	GOBIN=$(TOOL_DIR) go install $(GORELEASER_PKG)@$(GORELEASER_VERSION)
+	rm -f $(TOOL_DIR)/.goreleaser-*
+	touch $@
 
 # Package holding the //go:generate directive for tfplugindocs.
 DOCS_PKG ?= .
@@ -65,12 +85,12 @@ debug: build-debug
 dlv: build-debug $(TOOL_DIR)/dlv
 	dlv exec $(BIN_DIR)/$(BINARY) -- -debug
 	
-## tools: build the module's pinned tools into bin/tools
+## tools: build module-pinned tools and install standalone ones
 .PHONY: tools
-tools: | $(TOOL_DIR)
-	go build -o $(TOOL_DIR)/ tool
+tools: tools-mod $(TOOL_DIR)/.golangci-lint-$(GOLANGCI_LINT_VERSION) $(TOOL_DIR)/.goreleaser-$(GORELEASER_VERSION)
 
-$(TOOL_DIR)/%: | $(TOOL_DIR)
+.PHONY: tools-mod
+tools-mod: | $(TOOL_DIR)
 	go build -o $(TOOL_DIR)/ tool
 
 ## tools-update: bump all tool dependencies
@@ -133,7 +153,7 @@ vet:
 
 ## lint: run golangci-lint using the repo config
 .PHONY: lint
-lint: $(TOOL_DIR)/golangci-lint
+lint: $(TOOL_DIR)/.golangci-lint-$(GOLANGCI_LINT_VERSION)
 	golangci-lint run
 
 ## tidy: tidy and verify module dependencies
@@ -166,7 +186,7 @@ testacc:
 
 ## snapshot: build a release package locally without tagging
 .PHONY: snapshot
-snapshot: $(TOOL_DIR)/goreleaser
+snapshot: $(TOOL_DIR)/.goreleaser-$(GORELEASER_VERSION)
 	goreleaser release --snapshot --clean
 
 ## check: everything CI should agree with, minus acceptance tests

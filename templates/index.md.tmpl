@@ -1,7 +1,7 @@
 ---
-page_title: "Provider: WikiJS
+page_title: "Provider: WikiJS"
 description: |-
-	The WikiJS provider provides utilities for working, configuring and querying the WikiJS GraphQL API
+  The WikiJS provider provides utilities for working, configuring and querying the WikiJS GraphQL API
 ---
 
 # WikiJS Provider

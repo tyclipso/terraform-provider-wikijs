@@ -55,7 +55,7 @@ debug: build-debug
 ## dlv: run the provider under delve in debug mode
 .PHONY: dlv
 dlv: build-debug
-	dlv exec $(BIN_DIR)/$(BINARY) -- -debug
+	go tool dlv exec $(BIN_DIR)/$(BINARY) -- -debug
 	
 ## tools: list the module's registered tools
 .PHONY: tools
@@ -123,7 +123,7 @@ vet:
 ## lint: run golangci-lint using the repo config
 .PHONY: lint
 lint:
-	golangci-lint run
+	go tool golangci-lint run
 
 ## tidy: tidy and verify module dependencies
 .PHONY: tidy
@@ -156,7 +156,7 @@ testacc:
 ## snapshot: build a release package locally without tagging
 .PHONY: snapshot
 snapshot:
-	goreleaser release --snapshot --clean
+	go tool goreleaser release --snapshot --clean
 
 ## check: everything CI should agree with, minus acceptance tests
 .PHONY: check

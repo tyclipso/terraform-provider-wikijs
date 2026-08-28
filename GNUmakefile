@@ -87,7 +87,33 @@ debug: build-debug
 .PHONY: dlv
 dlv: build-debug $(TOOL_DIR)/dlv
 	dlv exec $(BIN_DIR)/$(BINARY) -- -debug
-	
+
+## tool: list developer tools, pinned versions and install state
+.PHONY: tool
+tool:
+	@row() { \
+		name="$$1"; pinned="$$2"; \
+		if [ -x "$(TOOL_DIR)/$$name" ]; then \
+			installed=$$(go version -m "$(TOOL_DIR)/$$name" 2>/dev/null | awk '$$1=="mod"{print $$3; exit}'); \
+			if [ "$$installed" = "$$pinned" ]; then state="built"; \
+			else state="stale: $$installed"; fi; \
+		else \
+			state="not built"; \
+		fi; \
+		printf '  %-16s %-12s %s\n' "$$name" "$$pinned" "$$state"; \
+	}; \
+	echo "Module tools (go.mod tool block):"; \
+	go list -f '{{with .Module}}{{.Version}}{{end}} {{.ImportPath}}' tool | \
+	while read -r version pkg; do \
+		name="$${pkg##*/}"; \
+		case "$$name" in v[0-9]*) rest="$${pkg%/*}"; name="$${rest##*/}";; esac; \
+		row "$$name" "$$version"; \
+	done; \
+	echo; \
+	echo "Standalone tools (pinned in $(firstword $(MAKEFILE_LIST))):"; \
+	row golangci-lint "$(GOLANGCI_LINT_VERSION)"; \
+	row goreleaser "$(GORELEASER_VERSION)"
+
 ## tools: build module-pinned tools and install standalone ones
 .PHONY: tools
 tools: tools-mod $(TOOL_DIR)/.golangci-lint-$(GOLANGCI_LINT_VERSION) $(TOOL_DIR)/.goreleaser-$(GORELEASER_VERSION)
@@ -152,7 +178,7 @@ mirror:
 		-o $(MIRROR_DIR)/$(BINARY)_v$(MIRROR_VERSION) .
 	@echo
 	@echo "Installed $(MIRROR_VERSION) for $(PLATFORM)."
-	@echo "In the testbed: comment out dev_overrides, then terraform init -upgrade"
+	@echo "In the testbed: comment out `dev_overrides`, then `terraform init -upgrade`"
 
 ## mirror-clean: drop mirror builds older than MIRROR_KEEP days
 .PHONY: mirror-clean

@@ -187,9 +187,19 @@ mirror-clean:
 	find $(MIRROR_ROOT) -mindepth 1 -maxdepth 1 -type d \
 		-name '99.0.*' -mtime +$(MIRROR_KEEP) -exec rm -rf {} +
 
-## clean: remove ./bin and prune old mirror builds
+## clean: remove build artifacts and prune old mirror builds
 .PHONY: clean
 clean: mirror-clean
+	rm -f $(BIN_DIR)/$(BINARY)
+
+## clean-tools: remove built developer tools
+.PHONY: clean-tools
+clean-tools:
+	rm -rf $(TOOL_DIR)
+
+## binclean: clean plus developer tools
+.PHONY: binclean
+distclean: clean clean-tools
 	rm -rf $(BIN_DIR)
 
 ## fmt: gofmt the tree

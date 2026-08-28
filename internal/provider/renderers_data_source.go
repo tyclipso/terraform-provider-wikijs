@@ -102,7 +102,7 @@ func (d *renderersDataSource) Schema(_ context.Context, req datasource.SchemaReq
 				},
 			},
 		},
-		MarkdownDescription: "The `{{ .Name }}` {{ .Type }} implements the WikiJS API query `rendering{renderers{…}}`.\n" +
+		MarkdownDescription: "The `wikijs_renderers` Data Source implements the WikiJS API query `rendering{renderers{…}}`.\n" +
 			"You can use this data source to manipulate only certain fields with the `renderers` resource.\n",
 	}
 }

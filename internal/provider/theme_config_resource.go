@@ -113,7 +113,7 @@ func (r *themeConfigResource) Schema(_ context.Context, _ resource.SchemaRequest
 				MarkdownDescription: "HTML code to be injected just before the closing body tag.",
 			},
 		},
-		MarkdownDescription: "The `{{ .Name }}` {{ .Type }} implements the WikiJS API mutatation `theming{setConfig{…}}`.\n" +
+		MarkdownDescription: "The `wikijs_theme_config` Resource implements the WikiJS API mutatation `theming{setConfig{…}}`.\n" +
 			"It can be used to manipulate the theme setting on instances with custom themes.\n" +
 			"The Schema descriptions are mostly lifted from the descriptions of the input fields in WikiJS.",
 	}

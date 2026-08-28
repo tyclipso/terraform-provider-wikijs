@@ -64,10 +64,10 @@ func (r *renderersResource) Schema(_ context.Context, req resource.SchemaRequest
 				},
 			},
 		},
-		MarkdownDescription: "The `{{ .Name }}` {{ .Type }} implements the WikiJS API mutatation `rendering{updateRenderers{renderers{…}}}`.\n" +
+		MarkdownDescription: "The `wikijs_renderers` Resource implements the WikiJS API mutatation `rendering{updateRenderers{renderers{…}}}`.\n" +
 			"\n" +
 			"**Be aware**.\n" +
-			"This {{ .Type }} supports only one instance as the implementation needs the complete configuration of renderers.\n" +
+			"This Resource supports only one instance as the implementation needs the complete configuration of renderers.\n" +
 			"You cannot specify one renderer with its config as this will erase the complete list.\n" +
 			"If you are unsure about the `key` and `config` fields, you can query the API after activating it manually or with the `wikijs_api` resource.\n" +
 			"The query with the minimal information you need is as follows:\n" +
@@ -88,7 +88,7 @@ func (r *renderersResource) Schema(_ context.Context, req resource.SchemaRequest
 			"}\n" +
 			"```\n" +
 			"\n" +
-			"The `title` field is not needed in the `{{ .Name }}` {{ .Type }} but is necessary for the graphql query.\n" +
+			"The `title` field is not needed in the `wikijs_renderers` Resource but is necessary for the graphql query.\n" +
 			"You get back a JSON in the `config.value` field where you have to look for another `value` field.",
 	}
 }

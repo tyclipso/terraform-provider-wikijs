@@ -71,10 +71,10 @@ func (r *searchEnginesResource) Schema(_ context.Context, req resource.SchemaReq
 				},
 			},
 		},
-		MarkdownDescription: "The `{{ .Name }}` {{ .Type }} implements the WikiJS API mutatation `search{updateSearchEngines{engines{…}}}`.\n" +
+		MarkdownDescription: "The `wikijs_search_engines` Resource implements the WikiJS API mutatation `search{updateSearchEngines{engines{…}}}`.\n" +
 			"\n" +
 			"**Be aware**.\n" +
-			"This {{ .Type }} supports only one instance as the implementation needs the complete configuration of search engines.\n" +
+			"This Resource supports only one instance as the implementation needs the complete configuration of search engines.\n" +
 			"You cannot specify one search engine with its config as this will erase the complete list.\n" +
 			"If you are unsure about the `key` and `config` fields, you can query the API after activating it manually or with the `wikijs_api` resource.\n" +
 			"Make sure that the search provider `isAvailable` before you try to set `isEnabled` and that you have always exactly one search engine enabled.\n" +
@@ -97,7 +97,7 @@ func (r *searchEnginesResource) Schema(_ context.Context, req resource.SchemaReq
 			"}\n" +
 			"```\n" +
 			"\n" +
-			"The `title` field is not needed in the `{{ .Name }}` {{ .Type }} but is necessary for the graphql query.\n" +
+			"The `title` field is not needed in the `wikijs_search_engines` Resource but is necessary for the graphql query.\n" +
 			"You get back a JSON in the `config.value` field where you have to look for another `value` field.",
 	}
 }

@@ -18,6 +18,12 @@ MIRROR_ROOT    ?= $(HOME)/.terraform.d/plugins/registry.terraform.io/tyclipso/wi
 MIRROR_DIR      = $(MIRROR_ROOT)/$(MIRROR_VERSION)/$(PLATFORM)
 MIRROR_KEEP    ?= 7
 
+# Set variables for terraform.local registry
+# PROVIDER_VERSION needs to be set outside
+TERRAFORM_LOCAL_VERSION  = $(PROVIDER_VERSION)
+TERRAFORM_LOCAL_ROOT    ?= $(HOME)/.terraform.d/plugins/terraform.local/tyclipso/wikijs
+TERRAFORM_LOCAL_DIR      = $(TERRAFORM_LOCAL_ROOT)/$(TERRAFORM_LOCAL_VERSION)/$(PLATFORM)
+
 # Set directory for tool binaries and make it available in PATH
 TOOL_DIR := $(CURDIR)/bin/tools
 export PATH := $(TOOL_DIR):$(PATH)
@@ -169,6 +175,27 @@ docs: $(TOOL_DIR)/tfplugindocs
 check-generate: generate
 	git diff --exit-code -- docs wikijs examples
 
+## terraform.local: build a versioned package into the terraform.local filesystem_mirror
+.PHONY: terraform.local
+terraform.local:
+	mkdir -p $(TERRAFORM_LOCAL_DIR)
+	CGO_ENABLED=0 go build \
+		-ldflags="-X 'main.Version=$(TERRAFORM_LOCAL_VERSION)'" \
+		-o $(TERRAFORM_LOCAL_DIR)/$(BINARY)_v$(TERRAFORM_LOCAL_VERSION) .
+	@echo
+	@echo "Installed $(TERRAFORM_LOCAL_VERSION) for $(PLATFORM)."
+	@echo "In the testbed: rewrite all `required_providers`, to use the new registry terraform.local"
+	@echo "After that to transfer existing ressources to the new provider, run"
+	@echo "`terraform state replace-provider tyclipso/wikijs terraform.local/tyclipso/wikijs`"
+	@echo "Skip if starting from clean slate. Finally run `terraform init`"
+
+## terraform.local-clean: remove all terraform.local builds
+.PHONY: terraform.local-clean
+terraform.local-clean:
+	@test -d $(TERRAFORM_LOCAL_ROOT) || { echo "no mirror at $(TERRAFORM_LOCAL_ROOT)"; exit 0; }
+	find $(TERRAFORM_LOCAL_ROOT) -mindepth 1 -maxdepth 1 -type d \
+		-name '*.*.*' -exec rm -rf {} +
+
 ## mirror: build a versioned package into the local filesystem_mirror
 .PHONY: mirror
 mirror:
@@ -189,7 +216,7 @@ mirror-clean:
 
 ## clean: remove build artifacts and prune old mirror builds
 .PHONY: clean
-clean: mirror-clean
+clean: mirror-clean terraform.local-clean
 	rm -f $(BIN_DIR)/$(BINARY)
 
 ## clean-tools: remove built developer tools

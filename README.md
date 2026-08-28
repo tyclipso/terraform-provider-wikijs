@@ -26,6 +26,13 @@ Alternatively a `Makefile` is included that should cover nearly everything neede
 Use `make help` to get a list with a brief description of each target.
 The `make` default nearly acts like a `go install`.
 
+## `.envrc`
+
+Certain variables can be managed easier by using `direnv` with an `.envrc`.
+The included `example.envrc` can be copied and customized as `.envrc`.
+It currently handles go tool invocation as well as setting up build variables.
+This allows for skipping all `export` sections in the build instructions as well as not having to call `go tool …`.
+
 ## Using the provider locally
 
 There are multiple ways how to interact with the provider locally.

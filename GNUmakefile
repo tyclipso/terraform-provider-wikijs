@@ -18,6 +18,14 @@ MIRROR_ROOT    ?= $(HOME)/.terraform.d/plugins/registry.terraform.io/tyclipso/wi
 MIRROR_DIR      = $(MIRROR_ROOT)/$(MIRROR_VERSION)/$(PLATFORM)
 MIRROR_KEEP    ?= 7
 
+# Set directory for tool binaries and make it available in PATH
+TOOL_DIR := $(CURDIR)/bin/tools
+export PATH := $(TOOL_DIR):$(PATH)
+
+# Ensure presence of tool bin dir
+$(TOOL_DIR):
+	mkdir -p $@
+
 # Package holding the //go:generate directive for tfplugindocs.
 DOCS_PKG ?= .
 
@@ -54,13 +62,16 @@ debug: build-debug
 
 ## dlv: run the provider under delve in debug mode
 .PHONY: dlv
-dlv: build-debug
-	go tool dlv exec $(BIN_DIR)/$(BINARY) -- -debug
+dlv: build-debug $(TOOL_DIR)/dlv
+	dlv exec $(BIN_DIR)/$(BINARY) -- -debug
 	
-## tools: list the module's registered tools
+## tools: build the module's pinned tools into bin/tools
 .PHONY: tools
-tools:
-	go tool
+tools: | $(TOOL_DIR)
+	go build -o $(TOOL_DIR)/ tool
+
+$(TOOL_DIR)/%: | $(TOOL_DIR)
+	go build -o $(TOOL_DIR)/ tool
 
 ## tools-update: bump all tool dependencies
 .PHONY: tools-update
@@ -74,12 +85,12 @@ generate: graphql docs
 
 ## graphql: regenerate the genqlient bindings in ./wikijs
 .PHONY: graphql
-graphql:
+graphql: $(TOOL_DIR)/genqlient
 	go generate ./wikijs
 
 ## docs: regenerate the registry documentation
 .PHONY: docs
-docs:
+docs: $(TOOL_DIR)/tfplugindocs
 	go generate $(DOCS_PKG)
 
 ## check-generate: fail if generated files are not committed
@@ -122,8 +133,8 @@ vet:
 
 ## lint: run golangci-lint using the repo config
 .PHONY: lint
-lint:
-	go tool golangci-lint run
+lint: $(TOOL_DIR)/golangci-lint
+	golangci-lint run
 
 ## tidy: tidy and verify module dependencies
 .PHONY: tidy
@@ -155,8 +166,8 @@ testacc:
 
 ## snapshot: build a release package locally without tagging
 .PHONY: snapshot
-snapshot:
-	go tool goreleaser release --snapshot --clean
+snapshot: $(TOOL_DIR)/goreleaser
+	goreleaser release --snapshot --clean
 
 ## check: everything CI should agree with, minus acceptance tests
 .PHONY: check

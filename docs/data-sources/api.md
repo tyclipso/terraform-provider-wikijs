@@ -18,5 +18,3 @@ description: |-
 ### Read-Only
 
 - `enabled` (Boolean) States whether the Wiki.JS API is enabled
-
-

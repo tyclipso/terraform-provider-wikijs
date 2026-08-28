@@ -2411,6 +2411,14 @@ const (
 	PageRuleMatchTag   PageRuleMatch = "TAG"
 )
 
+var AllPageRuleMatch = []PageRuleMatch{
+	PageRuleMatchStart,
+	PageRuleMatchExact,
+	PageRuleMatchEnd,
+	PageRuleMatchRegex,
+	PageRuleMatchTag,
+}
+
 // RebuildSearchIndexResponse is returned by RebuildSearchIndex on success.
 type RebuildSearchIndexResponse struct {
 	Search RebuildSearchIndexSearchSearchMutation `json:"search"`
@@ -3801,7 +3809,7 @@ func (v *__UpdateSiteConfigInput) GetUploadScanSVG() bool { return v.UploadScanS
 // GetUploadForceDownload returns __UpdateSiteConfigInput.UploadForceDownload, and is useful for accessing the field via an interface.
 func (v *__UpdateSiteConfigInput) GetUploadForceDownload() bool { return v.UploadForceDownload }
 
-// The query or mutation executed by CreateApiKey.
+// The mutation executed by CreateApiKey.
 const CreateApiKey_Operation = `
 mutation CreateApiKey ($name: String!, $expiration: String!, $fullAccess: Boolean!, $group: Int) {
 	authentication {
@@ -3819,14 +3827,14 @@ mutation CreateApiKey ($name: String!, $expiration: String!, $fullAccess: Boolea
 `
 
 func CreateApiKey(
-	ctx context.Context,
-	client graphql.Client,
+	ctx_ context.Context,
+	client_ graphql.Client,
 	name string,
 	expiration string,
 	fullAccess bool,
 	group int,
-) (*CreateApiKeyResponse, error) {
-	req := &graphql.Request{
+) (data_ *CreateApiKeyResponse, err_ error) {
+	req_ := &graphql.Request{
 		OpName: "CreateApiKey",
 		Query:  CreateApiKey_Operation,
 		Variables: &__CreateApiKeyInput{
@@ -3836,21 +3844,20 @@ func CreateApiKey(
 			Group:      group,
 		},
 	}
-	var err error
 
-	var data CreateApiKeyResponse
-	resp := &graphql.Response{Data: &data}
+	data_ = &CreateApiKeyResponse{}
+	resp_ := &graphql.Response{Data: data_}
 
-	err = client.MakeRequest(
-		ctx,
-		req,
-		resp,
+	err_ = client_.MakeRequest(
+		ctx_,
+		req_,
+		resp_,
 	)
 
-	return &data, err
+	return data_, err_
 }
 
-// The query or mutation executed by CreateGroup.
+// The mutation executed by CreateGroup.
 const CreateGroup_Operation = `
 mutation CreateGroup ($name: String!) {
 	groups {
@@ -3894,32 +3901,31 @@ mutation CreateGroup ($name: String!) {
 `
 
 func CreateGroup(
-	ctx context.Context,
-	client graphql.Client,
+	ctx_ context.Context,
+	client_ graphql.Client,
 	name string,
-) (*CreateGroupResponse, error) {
-	req := &graphql.Request{
+) (data_ *CreateGroupResponse, err_ error) {
+	req_ := &graphql.Request{
 		OpName: "CreateGroup",
 		Query:  CreateGroup_Operation,
 		Variables: &__CreateGroupInput{
 			Name: name,
 		},
 	}
-	var err error
 
-	var data CreateGroupResponse
-	resp := &graphql.Response{Data: &data}
+	data_ = &CreateGroupResponse{}
+	resp_ := &graphql.Response{Data: data_}
 
-	err = client.MakeRequest(
-		ctx,
-		req,
-		resp,
+	err_ = client_.MakeRequest(
+		ctx_,
+		req_,
+		resp_,
 	)
 
-	return &data, err
+	return data_, err_
 }
 
-// The query or mutation executed by CreatePage.
+// The mutation executed by CreatePage.
 const CreatePage_Operation = `
 mutation CreatePage ($content: String!, $description: String!, $editor: String!, $isPublished: Boolean!, $isPrivate: Boolean!, $locale: String!, $path: String!, $publishEndDate: Date, $publishStartDate: Date, $scriptCss: String, $scriptJs: String, $tags: [String]!, $title: String!) {
 	pages {
@@ -3968,8 +3974,8 @@ mutation CreatePage ($content: String!, $description: String!, $editor: String!,
 `
 
 func CreatePage(
-	ctx context.Context,
-	client graphql.Client,
+	ctx_ context.Context,
+	client_ graphql.Client,
 	content string,
 	description string,
 	editor string,
@@ -3983,8 +3989,8 @@ func CreatePage(
 	scriptJs string,
 	tags []string,
 	title string,
-) (*CreatePageResponse, error) {
-	req := &graphql.Request{
+) (data_ *CreatePageResponse, err_ error) {
+	req_ := &graphql.Request{
 		OpName: "CreatePage",
 		Query:  CreatePage_Operation,
 		Variables: &__CreatePageInput{
@@ -4003,21 +4009,20 @@ func CreatePage(
 			Title:            title,
 		},
 	}
-	var err error
 
-	var data CreatePageResponse
-	resp := &graphql.Response{Data: &data}
+	data_ = &CreatePageResponse{}
+	resp_ := &graphql.Response{Data: data_}
 
-	err = client.MakeRequest(
-		ctx,
-		req,
-		resp,
+	err_ = client_.MakeRequest(
+		ctx_,
+		req_,
+		resp_,
 	)
 
-	return &data, err
+	return data_, err_
 }
 
-// The query or mutation executed by DeleteGroup.
+// The mutation executed by DeleteGroup.
 const DeleteGroup_Operation = `
 mutation DeleteGroup ($id: Int!) {
 	groups {
@@ -4034,32 +4039,31 @@ mutation DeleteGroup ($id: Int!) {
 `
 
 func DeleteGroup(
-	ctx context.Context,
-	client graphql.Client,
+	ctx_ context.Context,
+	client_ graphql.Client,
 	id int,
-) (*DeleteGroupResponse, error) {
-	req := &graphql.Request{
+) (data_ *DeleteGroupResponse, err_ error) {
+	req_ := &graphql.Request{
 		OpName: "DeleteGroup",
 		Query:  DeleteGroup_Operation,
 		Variables: &__DeleteGroupInput{
 			Id: id,
 		},
 	}
-	var err error
 
-	var data DeleteGroupResponse
-	resp := &graphql.Response{Data: &data}
+	data_ = &DeleteGroupResponse{}
+	resp_ := &graphql.Response{Data: data_}
 
-	err = client.MakeRequest(
-		ctx,
-		req,
-		resp,
+	err_ = client_.MakeRequest(
+		ctx_,
+		req_,
+		resp_,
 	)
 
-	return &data, err
+	return data_, err_
 }
 
-// The query or mutation executed by DeletePage.
+// The mutation executed by DeletePage.
 const DeletePage_Operation = `
 mutation DeletePage ($id: Int!) {
 	pages {
@@ -4076,32 +4080,31 @@ mutation DeletePage ($id: Int!) {
 `
 
 func DeletePage(
-	ctx context.Context,
-	client graphql.Client,
+	ctx_ context.Context,
+	client_ graphql.Client,
 	id int,
-) (*DeletePageResponse, error) {
-	req := &graphql.Request{
+) (data_ *DeletePageResponse, err_ error) {
+	req_ := &graphql.Request{
 		OpName: "DeletePage",
 		Query:  DeletePage_Operation,
 		Variables: &__DeletePageInput{
 			Id: id,
 		},
 	}
-	var err error
 
-	var data DeletePageResponse
-	resp := &graphql.Response{Data: &data}
+	data_ = &DeletePageResponse{}
+	resp_ := &graphql.Response{Data: data_}
 
-	err = client.MakeRequest(
-		ctx,
-		req,
-		resp,
+	err_ = client_.MakeRequest(
+		ctx_,
+		req_,
+		resp_,
 	)
 
-	return &data, err
+	return data_, err_
 }
 
-// The query or mutation executed by DownloadLocale.
+// The mutation executed by DownloadLocale.
 const DownloadLocale_Operation = `
 mutation DownloadLocale ($locale: String!) {
 	localization {
@@ -4118,32 +4121,31 @@ mutation DownloadLocale ($locale: String!) {
 `
 
 func DownloadLocale(
-	ctx context.Context,
-	client graphql.Client,
+	ctx_ context.Context,
+	client_ graphql.Client,
 	locale string,
-) (*DownloadLocaleResponse, error) {
-	req := &graphql.Request{
+) (data_ *DownloadLocaleResponse, err_ error) {
+	req_ := &graphql.Request{
 		OpName: "DownloadLocale",
 		Query:  DownloadLocale_Operation,
 		Variables: &__DownloadLocaleInput{
 			Locale: locale,
 		},
 	}
-	var err error
 
-	var data DownloadLocaleResponse
-	resp := &graphql.Response{Data: &data}
+	data_ = &DownloadLocaleResponse{}
+	resp_ := &graphql.Response{Data: data_}
 
-	err = client.MakeRequest(
-		ctx,
-		req,
-		resp,
+	err_ = client_.MakeRequest(
+		ctx_,
+		req_,
+		resp_,
 	)
 
-	return &data, err
+	return data_, err_
 }
 
-// The query or mutation executed by FlushPageCache.
+// The mutation executed by FlushPageCache.
 const FlushPageCache_Operation = `
 mutation FlushPageCache {
 	pages {
@@ -4160,28 +4162,27 @@ mutation FlushPageCache {
 `
 
 func FlushPageCache(
-	ctx context.Context,
-	client graphql.Client,
-) (*FlushPageCacheResponse, error) {
-	req := &graphql.Request{
+	ctx_ context.Context,
+	client_ graphql.Client,
+) (data_ *FlushPageCacheResponse, err_ error) {
+	req_ := &graphql.Request{
 		OpName: "FlushPageCache",
 		Query:  FlushPageCache_Operation,
 	}
-	var err error
 
-	var data FlushPageCacheResponse
-	resp := &graphql.Response{Data: &data}
+	data_ = &FlushPageCacheResponse{}
+	resp_ := &graphql.Response{Data: data_}
 
-	err = client.MakeRequest(
-		ctx,
-		req,
-		resp,
+	err_ = client_.MakeRequest(
+		ctx_,
+		req_,
+		resp_,
 	)
 
-	return &data, err
+	return data_, err_
 }
 
-// The query or mutation executed by GetApiKeys.
+// The query executed by GetApiKeys.
 const GetApiKeys_Operation = `
 query GetApiKeys {
 	authentication {
@@ -4199,28 +4200,27 @@ query GetApiKeys {
 `
 
 func GetApiKeys(
-	ctx context.Context,
-	client graphql.Client,
-) (*GetApiKeysResponse, error) {
-	req := &graphql.Request{
+	ctx_ context.Context,
+	client_ graphql.Client,
+) (data_ *GetApiKeysResponse, err_ error) {
+	req_ := &graphql.Request{
 		OpName: "GetApiKeys",
 		Query:  GetApiKeys_Operation,
 	}
-	var err error
 
-	var data GetApiKeysResponse
-	resp := &graphql.Response{Data: &data}
+	data_ = &GetApiKeysResponse{}
+	resp_ := &graphql.Response{Data: data_}
 
-	err = client.MakeRequest(
-		ctx,
-		req,
-		resp,
+	err_ = client_.MakeRequest(
+		ctx_,
+		req_,
+		resp_,
 	)
 
-	return &data, err
+	return data_, err_
 }
 
-// The query or mutation executed by GetApiState.
+// The query executed by GetApiState.
 const GetApiState_Operation = `
 query GetApiState {
 	authentication {
@@ -4230,28 +4230,27 @@ query GetApiState {
 `
 
 func GetApiState(
-	ctx context.Context,
-	client graphql.Client,
-) (*GetApiStateResponse, error) {
-	req := &graphql.Request{
+	ctx_ context.Context,
+	client_ graphql.Client,
+) (data_ *GetApiStateResponse, err_ error) {
+	req_ := &graphql.Request{
 		OpName: "GetApiState",
 		Query:  GetApiState_Operation,
 	}
-	var err error
 
-	var data GetApiStateResponse
-	resp := &graphql.Response{Data: &data}
+	data_ = &GetApiStateResponse{}
+	resp_ := &graphql.Response{Data: data_}
 
-	err = client.MakeRequest(
-		ctx,
-		req,
-		resp,
+	err_ = client_.MakeRequest(
+		ctx_,
+		req_,
+		resp_,
 	)
 
-	return &data, err
+	return data_, err_
 }
 
-// The query or mutation executed by GetAuthStrategies.
+// The query executed by GetAuthStrategies.
 const GetAuthStrategies_Operation = `
 query GetAuthStrategies ($enabledOnly: Boolean) {
 	authentication {
@@ -4285,32 +4284,31 @@ query GetAuthStrategies ($enabledOnly: Boolean) {
 `
 
 func GetAuthStrategies(
-	ctx context.Context,
-	client graphql.Client,
+	ctx_ context.Context,
+	client_ graphql.Client,
 	enabledOnly bool,
-) (*GetAuthStrategiesResponse, error) {
-	req := &graphql.Request{
+) (data_ *GetAuthStrategiesResponse, err_ error) {
+	req_ := &graphql.Request{
 		OpName: "GetAuthStrategies",
 		Query:  GetAuthStrategies_Operation,
 		Variables: &__GetAuthStrategiesInput{
 			EnabledOnly: enabledOnly,
 		},
 	}
-	var err error
 
-	var data GetAuthStrategiesResponse
-	resp := &graphql.Response{Data: &data}
+	data_ = &GetAuthStrategiesResponse{}
+	resp_ := &graphql.Response{Data: data_}
 
-	err = client.MakeRequest(
-		ctx,
-		req,
-		resp,
+	err_ = client_.MakeRequest(
+		ctx_,
+		req_,
+		resp_,
 	)
 
-	return &data, err
+	return data_, err_
 }
 
-// The query or mutation executed by GetGroup.
+// The query executed by GetGroup.
 const GetGroup_Operation = `
 query GetGroup ($id: Int!) {
 	groups {
@@ -4346,32 +4344,31 @@ query GetGroup ($id: Int!) {
 `
 
 func GetGroup(
-	ctx context.Context,
-	client graphql.Client,
+	ctx_ context.Context,
+	client_ graphql.Client,
 	id int,
-) (*GetGroupResponse, error) {
-	req := &graphql.Request{
+) (data_ *GetGroupResponse, err_ error) {
+	req_ := &graphql.Request{
 		OpName: "GetGroup",
 		Query:  GetGroup_Operation,
 		Variables: &__GetGroupInput{
 			Id: id,
 		},
 	}
-	var err error
 
-	var data GetGroupResponse
-	resp := &graphql.Response{Data: &data}
+	data_ = &GetGroupResponse{}
+	resp_ := &graphql.Response{Data: data_}
 
-	err = client.MakeRequest(
-		ctx,
-		req,
-		resp,
+	err_ = client_.MakeRequest(
+		ctx_,
+		req_,
+		resp_,
 	)
 
-	return &data, err
+	return data_, err_
 }
 
-// The query or mutation executed by GetGroups.
+// The query executed by GetGroups.
 const GetGroups_Operation = `
 query GetGroups ($filter: String, $orderBy: String) {
 	groups {
@@ -4388,12 +4385,12 @@ query GetGroups ($filter: String, $orderBy: String) {
 `
 
 func GetGroups(
-	ctx context.Context,
-	client graphql.Client,
+	ctx_ context.Context,
+	client_ graphql.Client,
 	filter string,
 	orderBy string,
-) (*GetGroupsResponse, error) {
-	req := &graphql.Request{
+) (data_ *GetGroupsResponse, err_ error) {
+	req_ := &graphql.Request{
 		OpName: "GetGroups",
 		Query:  GetGroups_Operation,
 		Variables: &__GetGroupsInput{
@@ -4401,21 +4398,20 @@ func GetGroups(
 			OrderBy: orderBy,
 		},
 	}
-	var err error
 
-	var data GetGroupsResponse
-	resp := &graphql.Response{Data: &data}
+	data_ = &GetGroupsResponse{}
+	resp_ := &graphql.Response{Data: data_}
 
-	err = client.MakeRequest(
-		ctx,
-		req,
-		resp,
+	err_ = client_.MakeRequest(
+		ctx_,
+		req_,
+		resp_,
 	)
 
-	return &data, err
+	return data_, err_
 }
 
-// The query or mutation executed by GetLocales.
+// The query executed by GetLocales.
 const GetLocales_Operation = `
 query GetLocales {
 	localization {
@@ -4435,28 +4431,27 @@ query GetLocales {
 `
 
 func GetLocales(
-	ctx context.Context,
-	client graphql.Client,
-) (*GetLocalesResponse, error) {
-	req := &graphql.Request{
+	ctx_ context.Context,
+	client_ graphql.Client,
+) (data_ *GetLocalesResponse, err_ error) {
+	req_ := &graphql.Request{
 		OpName: "GetLocales",
 		Query:  GetLocales_Operation,
 	}
-	var err error
 
-	var data GetLocalesResponse
-	resp := &graphql.Response{Data: &data}
+	data_ = &GetLocalesResponse{}
+	resp_ := &graphql.Response{Data: data_}
 
-	err = client.MakeRequest(
-		ctx,
-		req,
-		resp,
+	err_ = client_.MakeRequest(
+		ctx_,
+		req_,
+		resp_,
 	)
 
-	return &data, err
+	return data_, err_
 }
 
-// The query or mutation executed by GetLocalization.
+// The query executed by GetLocalization.
 const GetLocalization_Operation = `
 query GetLocalization {
 	localization {
@@ -4471,28 +4466,27 @@ query GetLocalization {
 `
 
 func GetLocalization(
-	ctx context.Context,
-	client graphql.Client,
-) (*GetLocalizationResponse, error) {
-	req := &graphql.Request{
+	ctx_ context.Context,
+	client_ graphql.Client,
+) (data_ *GetLocalizationResponse, err_ error) {
+	req_ := &graphql.Request{
 		OpName: "GetLocalization",
 		Query:  GetLocalization_Operation,
 	}
-	var err error
 
-	var data GetLocalizationResponse
-	resp := &graphql.Response{Data: &data}
+	data_ = &GetLocalizationResponse{}
+	resp_ := &graphql.Response{Data: data_}
 
-	err = client.MakeRequest(
-		ctx,
-		req,
-		resp,
+	err_ = client_.MakeRequest(
+		ctx_,
+		req_,
+		resp_,
 	)
 
-	return &data, err
+	return data_, err_
 }
 
-// The query or mutation executed by GetPage.
+// The query executed by GetPage.
 const GetPage_Operation = `
 query GetPage ($id: Int!) {
 	pages {
@@ -4535,32 +4529,31 @@ query GetPage ($id: Int!) {
 `
 
 func GetPage(
-	ctx context.Context,
-	client graphql.Client,
+	ctx_ context.Context,
+	client_ graphql.Client,
 	id int,
-) (*GetPageResponse, error) {
-	req := &graphql.Request{
+) (data_ *GetPageResponse, err_ error) {
+	req_ := &graphql.Request{
 		OpName: "GetPage",
 		Query:  GetPage_Operation,
 		Variables: &__GetPageInput{
 			Id: id,
 		},
 	}
-	var err error
 
-	var data GetPageResponse
-	resp := &graphql.Response{Data: &data}
+	data_ = &GetPageResponse{}
+	resp_ := &graphql.Response{Data: data_}
 
-	err = client.MakeRequest(
-		ctx,
-		req,
-		resp,
+	err_ = client_.MakeRequest(
+		ctx_,
+		req_,
+		resp_,
 	)
 
-	return &data, err
+	return data_, err_
 }
 
-// The query or mutation executed by GetPageByPath.
+// The query executed by GetPageByPath.
 const GetPageByPath_Operation = `
 query GetPageByPath ($path: String!, $locale: String!) {
 	pages {
@@ -4603,12 +4596,12 @@ query GetPageByPath ($path: String!, $locale: String!) {
 `
 
 func GetPageByPath(
-	ctx context.Context,
-	client graphql.Client,
+	ctx_ context.Context,
+	client_ graphql.Client,
 	path string,
 	locale string,
-) (*GetPageByPathResponse, error) {
-	req := &graphql.Request{
+) (data_ *GetPageByPathResponse, err_ error) {
+	req_ := &graphql.Request{
 		OpName: "GetPageByPath",
 		Query:  GetPageByPath_Operation,
 		Variables: &__GetPageByPathInput{
@@ -4616,25 +4609,22 @@ func GetPageByPath(
 			Locale: locale,
 		},
 	}
-	var err error
 
-	var data GetPageByPathResponse
-	resp := &graphql.Response{Data: &data}
+	data_ = &GetPageByPathResponse{}
+	resp_ := &graphql.Response{Data: data_}
 
-	err = client.MakeRequest(
-		ctx,
-		req,
-		resp,
+	err_ = client_.MakeRequest(
+		ctx_,
+		req_,
+		resp_,
 	)
 
-	return &data, err
+	return data_, err_
 }
 
-// The query or mutation executed by GetRenderers.
+// The query executed by GetRenderers.
 const GetRenderers_Operation = `
-query GetRenderers (# @genqlient(omitempty: true)
-$filter: String, # @genqlient(omitempty: true)
-$orderBy: String) {
+query GetRenderers ($filter: String, $orderBy: String) {
 	rendering {
 		renderers(filter: $filter, orderBy: $orderBy) {
 			isEnabled
@@ -4655,12 +4645,12 @@ $orderBy: String) {
 `
 
 func GetRenderers(
-	ctx context.Context,
-	client graphql.Client,
+	ctx_ context.Context,
+	client_ graphql.Client,
 	filter string,
 	orderBy string,
-) (*GetRenderersResponse, error) {
-	req := &graphql.Request{
+) (data_ *GetRenderersResponse, err_ error) {
+	req_ := &graphql.Request{
 		OpName: "GetRenderers",
 		Query:  GetRenderers_Operation,
 		Variables: &__GetRenderersInput{
@@ -4668,25 +4658,22 @@ func GetRenderers(
 			OrderBy: orderBy,
 		},
 	}
-	var err error
 
-	var data GetRenderersResponse
-	resp := &graphql.Response{Data: &data}
+	data_ = &GetRenderersResponse{}
+	resp_ := &graphql.Response{Data: data_}
 
-	err = client.MakeRequest(
-		ctx,
-		req,
-		resp,
+	err_ = client_.MakeRequest(
+		ctx_,
+		req_,
+		resp_,
 	)
 
-	return &data, err
+	return data_, err_
 }
 
-// The query or mutation executed by GetSearchEngines.
+// The query executed by GetSearchEngines.
 const GetSearchEngines_Operation = `
-query GetSearchEngines (# @genqlient(omitempty: true)
-$filter: String, # @genqlient(omitempty: true)
-$orderBy: String) {
+query GetSearchEngines ($filter: String, $orderBy: String) {
 	search {
 		searchEngines(filter: $filter, orderBy: $orderBy) {
 			isEnabled
@@ -4706,12 +4693,12 @@ $orderBy: String) {
 `
 
 func GetSearchEngines(
-	ctx context.Context,
-	client graphql.Client,
+	ctx_ context.Context,
+	client_ graphql.Client,
 	filter string,
 	orderBy string,
-) (*GetSearchEnginesResponse, error) {
-	req := &graphql.Request{
+) (data_ *GetSearchEnginesResponse, err_ error) {
+	req_ := &graphql.Request{
 		OpName: "GetSearchEngines",
 		Query:  GetSearchEngines_Operation,
 		Variables: &__GetSearchEnginesInput{
@@ -4719,21 +4706,20 @@ func GetSearchEngines(
 			OrderBy: orderBy,
 		},
 	}
-	var err error
 
-	var data GetSearchEnginesResponse
-	resp := &graphql.Response{Data: &data}
+	data_ = &GetSearchEnginesResponse{}
+	resp_ := &graphql.Response{Data: data_}
 
-	err = client.MakeRequest(
-		ctx,
-		req,
-		resp,
+	err_ = client_.MakeRequest(
+		ctx_,
+		req_,
+		resp_,
 	)
 
-	return &data, err
+	return data_, err_
 }
 
-// The query or mutation executed by GetSiteConfig.
+// The query executed by GetSiteConfig.
 const GetSiteConfig_Operation = `
 query GetSiteConfig {
 	site {
@@ -4785,28 +4771,27 @@ query GetSiteConfig {
 `
 
 func GetSiteConfig(
-	ctx context.Context,
-	client graphql.Client,
-) (*GetSiteConfigResponse, error) {
-	req := &graphql.Request{
+	ctx_ context.Context,
+	client_ graphql.Client,
+) (data_ *GetSiteConfigResponse, err_ error) {
+	req_ := &graphql.Request{
 		OpName: "GetSiteConfig",
 		Query:  GetSiteConfig_Operation,
 	}
-	var err error
 
-	var data GetSiteConfigResponse
-	resp := &graphql.Response{Data: &data}
+	data_ = &GetSiteConfigResponse{}
+	resp_ := &graphql.Response{Data: data_}
 
-	err = client.MakeRequest(
-		ctx,
-		req,
-		resp,
+	err_ = client_.MakeRequest(
+		ctx_,
+		req_,
+		resp_,
 	)
 
-	return &data, err
+	return data_, err_
 }
 
-// The query or mutation executed by GetThemeConfig.
+// The query executed by GetThemeConfig.
 const GetThemeConfig_Operation = `
 query GetThemeConfig {
 	theming {
@@ -4824,28 +4809,27 @@ query GetThemeConfig {
 `
 
 func GetThemeConfig(
-	ctx context.Context,
-	client graphql.Client,
-) (*GetThemeConfigResponse, error) {
-	req := &graphql.Request{
+	ctx_ context.Context,
+	client_ graphql.Client,
+) (data_ *GetThemeConfigResponse, err_ error) {
+	req_ := &graphql.Request{
 		OpName: "GetThemeConfig",
 		Query:  GetThemeConfig_Operation,
 	}
-	var err error
 
-	var data GetThemeConfigResponse
-	resp := &graphql.Response{Data: &data}
+	data_ = &GetThemeConfigResponse{}
+	resp_ := &graphql.Response{Data: data_}
 
-	err = client.MakeRequest(
-		ctx,
-		req,
-		resp,
+	err_ = client_.MakeRequest(
+		ctx_,
+		req_,
+		resp_,
 	)
 
-	return &data, err
+	return data_, err_
 }
 
-// The query or mutation executed by GetThemes.
+// The query executed by GetThemes.
 const GetThemes_Operation = `
 query GetThemes {
 	theming {
@@ -4859,28 +4843,27 @@ query GetThemes {
 `
 
 func GetThemes(
-	ctx context.Context,
-	client graphql.Client,
-) (*GetThemesResponse, error) {
-	req := &graphql.Request{
+	ctx_ context.Context,
+	client_ graphql.Client,
+) (data_ *GetThemesResponse, err_ error) {
+	req_ := &graphql.Request{
 		OpName: "GetThemes",
 		Query:  GetThemes_Operation,
 	}
-	var err error
 
-	var data GetThemesResponse
-	resp := &graphql.Response{Data: &data}
+	data_ = &GetThemesResponse{}
+	resp_ := &graphql.Response{Data: data_}
 
-	err = client.MakeRequest(
-		ctx,
-		req,
-		resp,
+	err_ = client_.MakeRequest(
+		ctx_,
+		req_,
+		resp_,
 	)
 
-	return &data, err
+	return data_, err_
 }
 
-// The query or mutation executed by GroupAssignUser.
+// The mutation executed by GroupAssignUser.
 const GroupAssignUser_Operation = `
 mutation GroupAssignUser ($groupId: Int!, $userId: Int!) {
 	groups {
@@ -4897,12 +4880,12 @@ mutation GroupAssignUser ($groupId: Int!, $userId: Int!) {
 `
 
 func GroupAssignUser(
-	ctx context.Context,
-	client graphql.Client,
+	ctx_ context.Context,
+	client_ graphql.Client,
 	groupId int,
 	userId int,
-) (*GroupAssignUserResponse, error) {
-	req := &graphql.Request{
+) (data_ *GroupAssignUserResponse, err_ error) {
+	req_ := &graphql.Request{
 		OpName: "GroupAssignUser",
 		Query:  GroupAssignUser_Operation,
 		Variables: &__GroupAssignUserInput{
@@ -4910,21 +4893,20 @@ func GroupAssignUser(
 			UserId:  userId,
 		},
 	}
-	var err error
 
-	var data GroupAssignUserResponse
-	resp := &graphql.Response{Data: &data}
+	data_ = &GroupAssignUserResponse{}
+	resp_ := &graphql.Response{Data: data_}
 
-	err = client.MakeRequest(
-		ctx,
-		req,
-		resp,
+	err_ = client_.MakeRequest(
+		ctx_,
+		req_,
+		resp_,
 	)
 
-	return &data, err
+	return data_, err_
 }
 
-// The query or mutation executed by GroupUnassignUser.
+// The mutation executed by GroupUnassignUser.
 const GroupUnassignUser_Operation = `
 mutation GroupUnassignUser ($groupId: Int!, $userId: Int!) {
 	groups {
@@ -4941,12 +4923,12 @@ mutation GroupUnassignUser ($groupId: Int!, $userId: Int!) {
 `
 
 func GroupUnassignUser(
-	ctx context.Context,
-	client graphql.Client,
+	ctx_ context.Context,
+	client_ graphql.Client,
 	groupId int,
 	userId int,
-) (*GroupUnassignUserResponse, error) {
-	req := &graphql.Request{
+) (data_ *GroupUnassignUserResponse, err_ error) {
+	req_ := &graphql.Request{
 		OpName: "GroupUnassignUser",
 		Query:  GroupUnassignUser_Operation,
 		Variables: &__GroupUnassignUserInput{
@@ -4954,21 +4936,20 @@ func GroupUnassignUser(
 			UserId:  userId,
 		},
 	}
-	var err error
 
-	var data GroupUnassignUserResponse
-	resp := &graphql.Response{Data: &data}
+	data_ = &GroupUnassignUserResponse{}
+	resp_ := &graphql.Response{Data: data_}
 
-	err = client.MakeRequest(
-		ctx,
-		req,
-		resp,
+	err_ = client_.MakeRequest(
+		ctx_,
+		req_,
+		resp_,
 	)
 
-	return &data, err
+	return data_, err_
 }
 
-// The query or mutation executed by ListGroups.
+// The query executed by ListGroups.
 const ListGroups_Operation = `
 query ListGroups ($filter: String, $orderBy: String) {
 	groups {
@@ -4985,12 +4966,12 @@ query ListGroups ($filter: String, $orderBy: String) {
 `
 
 func ListGroups(
-	ctx context.Context,
-	client graphql.Client,
+	ctx_ context.Context,
+	client_ graphql.Client,
 	filter string,
 	orderBy string,
-) (*ListGroupsResponse, error) {
-	req := &graphql.Request{
+) (data_ *ListGroupsResponse, err_ error) {
+	req_ := &graphql.Request{
 		OpName: "ListGroups",
 		Query:  ListGroups_Operation,
 		Variables: &__ListGroupsInput{
@@ -4998,21 +4979,20 @@ func ListGroups(
 			OrderBy: orderBy,
 		},
 	}
-	var err error
 
-	var data ListGroupsResponse
-	resp := &graphql.Response{Data: &data}
+	data_ = &ListGroupsResponse{}
+	resp_ := &graphql.Response{Data: data_}
 
-	err = client.MakeRequest(
-		ctx,
-		req,
-		resp,
+	err_ = client_.MakeRequest(
+		ctx_,
+		req_,
+		resp_,
 	)
 
-	return &data, err
+	return data_, err_
 }
 
-// The query or mutation executed by Login.
+// The mutation executed by Login.
 const Login_Operation = `
 mutation Login ($username: String!, $password: String!, $strategy: String!) {
 	authentication {
@@ -5036,13 +5016,13 @@ mutation Login ($username: String!, $password: String!, $strategy: String!) {
 `
 
 func Login(
-	ctx context.Context,
-	client graphql.Client,
+	ctx_ context.Context,
+	client_ graphql.Client,
 	username string,
 	password string,
 	strategy string,
-) (*LoginResponse, error) {
-	req := &graphql.Request{
+) (data_ *LoginResponse, err_ error) {
+	req_ := &graphql.Request{
 		OpName: "Login",
 		Query:  Login_Operation,
 		Variables: &__LoginInput{
@@ -5051,21 +5031,20 @@ func Login(
 			Strategy: strategy,
 		},
 	}
-	var err error
 
-	var data LoginResponse
-	resp := &graphql.Response{Data: &data}
+	data_ = &LoginResponse{}
+	resp_ := &graphql.Response{Data: data_}
 
-	err = client.MakeRequest(
-		ctx,
-		req,
-		resp,
+	err_ = client_.MakeRequest(
+		ctx_,
+		req_,
+		resp_,
 	)
 
-	return &data, err
+	return data_, err_
 }
 
-// The query or mutation executed by RebuildSearchIndex.
+// The mutation executed by RebuildSearchIndex.
 const RebuildSearchIndex_Operation = `
 mutation RebuildSearchIndex {
 	search {
@@ -5082,28 +5061,27 @@ mutation RebuildSearchIndex {
 `
 
 func RebuildSearchIndex(
-	ctx context.Context,
-	client graphql.Client,
-) (*RebuildSearchIndexResponse, error) {
-	req := &graphql.Request{
+	ctx_ context.Context,
+	client_ graphql.Client,
+) (data_ *RebuildSearchIndexResponse, err_ error) {
+	req_ := &graphql.Request{
 		OpName: "RebuildSearchIndex",
 		Query:  RebuildSearchIndex_Operation,
 	}
-	var err error
 
-	var data RebuildSearchIndexResponse
-	resp := &graphql.Response{Data: &data}
+	data_ = &RebuildSearchIndexResponse{}
+	resp_ := &graphql.Response{Data: data_}
 
-	err = client.MakeRequest(
-		ctx,
-		req,
-		resp,
+	err_ = client_.MakeRequest(
+		ctx_,
+		req_,
+		resp_,
 	)
 
-	return &data, err
+	return data_, err_
 }
 
-// The query or mutation executed by RevokeApiKey.
+// The mutation executed by RevokeApiKey.
 const RevokeApiKey_Operation = `
 mutation RevokeApiKey ($id: Int!) {
 	authentication {
@@ -5120,32 +5098,31 @@ mutation RevokeApiKey ($id: Int!) {
 `
 
 func RevokeApiKey(
-	ctx context.Context,
-	client graphql.Client,
+	ctx_ context.Context,
+	client_ graphql.Client,
 	id int,
-) (*RevokeApiKeyResponse, error) {
-	req := &graphql.Request{
+) (data_ *RevokeApiKeyResponse, err_ error) {
+	req_ := &graphql.Request{
 		OpName: "RevokeApiKey",
 		Query:  RevokeApiKey_Operation,
 		Variables: &__RevokeApiKeyInput{
 			Id: id,
 		},
 	}
-	var err error
 
-	var data RevokeApiKeyResponse
-	resp := &graphql.Response{Data: &data}
+	data_ = &RevokeApiKeyResponse{}
+	resp_ := &graphql.Response{Data: data_}
 
-	err = client.MakeRequest(
-		ctx,
-		req,
-		resp,
+	err_ = client_.MakeRequest(
+		ctx_,
+		req_,
+		resp_,
 	)
 
-	return &data, err
+	return data_, err_
 }
 
-// The query or mutation executed by SetApiState.
+// The mutation executed by SetApiState.
 const SetApiState_Operation = `
 mutation SetApiState ($enabled: Boolean!) {
 	authentication {
@@ -5162,32 +5139,31 @@ mutation SetApiState ($enabled: Boolean!) {
 `
 
 func SetApiState(
-	ctx context.Context,
-	client graphql.Client,
+	ctx_ context.Context,
+	client_ graphql.Client,
 	enabled bool,
-) (*SetApiStateResponse, error) {
-	req := &graphql.Request{
+) (data_ *SetApiStateResponse, err_ error) {
+	req_ := &graphql.Request{
 		OpName: "SetApiState",
 		Query:  SetApiState_Operation,
 		Variables: &__SetApiStateInput{
 			Enabled: enabled,
 		},
 	}
-	var err error
 
-	var data SetApiStateResponse
-	resp := &graphql.Response{Data: &data}
+	data_ = &SetApiStateResponse{}
+	resp_ := &graphql.Response{Data: data_}
 
-	err = client.MakeRequest(
-		ctx,
-		req,
-		resp,
+	err_ = client_.MakeRequest(
+		ctx_,
+		req_,
+		resp_,
 	)
 
-	return &data, err
+	return data_, err_
 }
 
-// The query or mutation executed by SetAuthStrategies.
+// The mutation executed by SetAuthStrategies.
 const SetAuthStrategies_Operation = `
 mutation SetAuthStrategies ($strategies: [AuthenticationStrategyInput]!) {
 	authentication {
@@ -5204,32 +5180,31 @@ mutation SetAuthStrategies ($strategies: [AuthenticationStrategyInput]!) {
 `
 
 func SetAuthStrategies(
-	ctx context.Context,
-	client graphql.Client,
+	ctx_ context.Context,
+	client_ graphql.Client,
 	strategies []AuthenticationStrategyInput,
-) (*SetAuthStrategiesResponse, error) {
-	req := &graphql.Request{
+) (data_ *SetAuthStrategiesResponse, err_ error) {
+	req_ := &graphql.Request{
 		OpName: "SetAuthStrategies",
 		Query:  SetAuthStrategies_Operation,
 		Variables: &__SetAuthStrategiesInput{
 			Strategies: strategies,
 		},
 	}
-	var err error
 
-	var data SetAuthStrategiesResponse
-	resp := &graphql.Response{Data: &data}
+	data_ = &SetAuthStrategiesResponse{}
+	resp_ := &graphql.Response{Data: data_}
 
-	err = client.MakeRequest(
-		ctx,
-		req,
-		resp,
+	err_ = client_.MakeRequest(
+		ctx_,
+		req_,
+		resp_,
 	)
 
-	return &data, err
+	return data_, err_
 }
 
-// The query or mutation executed by SetLocalization.
+// The mutation executed by SetLocalization.
 const SetLocalization_Operation = `
 mutation SetLocalization ($locale: String!, $autoUpdate: Boolean!, $namespacing: Boolean!, $namespaces: [String]!) {
 	localization {
@@ -5246,14 +5221,14 @@ mutation SetLocalization ($locale: String!, $autoUpdate: Boolean!, $namespacing:
 `
 
 func SetLocalization(
-	ctx context.Context,
-	client graphql.Client,
+	ctx_ context.Context,
+	client_ graphql.Client,
 	locale string,
 	autoUpdate bool,
 	namespacing bool,
 	namespaces []string,
-) (*SetLocalizationResponse, error) {
-	req := &graphql.Request{
+) (data_ *SetLocalizationResponse, err_ error) {
+	req_ := &graphql.Request{
 		OpName: "SetLocalization",
 		Query:  SetLocalization_Operation,
 		Variables: &__SetLocalizationInput{
@@ -5263,21 +5238,20 @@ func SetLocalization(
 			Namespaces:  namespaces,
 		},
 	}
-	var err error
 
-	var data SetLocalizationResponse
-	resp := &graphql.Response{Data: &data}
+	data_ = &SetLocalizationResponse{}
+	resp_ := &graphql.Response{Data: data_}
 
-	err = client.MakeRequest(
-		ctx,
-		req,
-		resp,
+	err_ = client_.MakeRequest(
+		ctx_,
+		req_,
+		resp_,
 	)
 
-	return &data, err
+	return data_, err_
 }
 
-// The query or mutation executed by SetRenderers.
+// The mutation executed by SetRenderers.
 const SetRenderers_Operation = `
 mutation SetRenderers ($renderers: [RendererInput]) {
 	rendering {
@@ -5294,32 +5268,31 @@ mutation SetRenderers ($renderers: [RendererInput]) {
 `
 
 func SetRenderers(
-	ctx context.Context,
-	client graphql.Client,
+	ctx_ context.Context,
+	client_ graphql.Client,
 	renderers []RendererInput,
-) (*SetRenderersResponse, error) {
-	req := &graphql.Request{
+) (data_ *SetRenderersResponse, err_ error) {
+	req_ := &graphql.Request{
 		OpName: "SetRenderers",
 		Query:  SetRenderers_Operation,
 		Variables: &__SetRenderersInput{
 			Renderers: renderers,
 		},
 	}
-	var err error
 
-	var data SetRenderersResponse
-	resp := &graphql.Response{Data: &data}
+	data_ = &SetRenderersResponse{}
+	resp_ := &graphql.Response{Data: data_}
 
-	err = client.MakeRequest(
-		ctx,
-		req,
-		resp,
+	err_ = client_.MakeRequest(
+		ctx_,
+		req_,
+		resp_,
 	)
 
-	return &data, err
+	return data_, err_
 }
 
-// The query or mutation executed by SetSearchEngines.
+// The mutation executed by SetSearchEngines.
 const SetSearchEngines_Operation = `
 mutation SetSearchEngines ($engines: [SearchEngineInput]) {
 	search {
@@ -5336,32 +5309,31 @@ mutation SetSearchEngines ($engines: [SearchEngineInput]) {
 `
 
 func SetSearchEngines(
-	ctx context.Context,
-	client graphql.Client,
+	ctx_ context.Context,
+	client_ graphql.Client,
 	engines []SearchEngineInput,
-) (*SetSearchEnginesResponse, error) {
-	req := &graphql.Request{
+) (data_ *SetSearchEnginesResponse, err_ error) {
+	req_ := &graphql.Request{
 		OpName: "SetSearchEngines",
 		Query:  SetSearchEngines_Operation,
 		Variables: &__SetSearchEnginesInput{
 			Engines: engines,
 		},
 	}
-	var err error
 
-	var data SetSearchEnginesResponse
-	resp := &graphql.Response{Data: &data}
+	data_ = &SetSearchEnginesResponse{}
+	resp_ := &graphql.Response{Data: data_}
 
-	err = client.MakeRequest(
-		ctx,
-		req,
-		resp,
+	err_ = client_.MakeRequest(
+		ctx_,
+		req_,
+		resp_,
 	)
 
-	return &data, err
+	return data_, err_
 }
 
-// The query or mutation executed by SetThemeConfig.
+// The mutation executed by SetThemeConfig.
 const SetThemeConfig_Operation = `
 mutation SetThemeConfig ($theme: String!, $iconset: String!, $darkMode: Boolean!, $tocPosition: String, $injectCSS: String, $injectHead: String, $injectBody: String) {
 	theming {
@@ -5378,8 +5350,8 @@ mutation SetThemeConfig ($theme: String!, $iconset: String!, $darkMode: Boolean!
 `
 
 func SetThemeConfig(
-	ctx context.Context,
-	client graphql.Client,
+	ctx_ context.Context,
+	client_ graphql.Client,
 	theme string,
 	iconset string,
 	darkMode bool,
@@ -5387,8 +5359,8 @@ func SetThemeConfig(
 	injectCSS string,
 	injectHead string,
 	injectBody string,
-) (*SetThemeConfigResponse, error) {
-	req := &graphql.Request{
+) (data_ *SetThemeConfigResponse, err_ error) {
+	req_ := &graphql.Request{
 		OpName: "SetThemeConfig",
 		Query:  SetThemeConfig_Operation,
 		Variables: &__SetThemeConfigInput{
@@ -5401,21 +5373,20 @@ func SetThemeConfig(
 			InjectBody:  injectBody,
 		},
 	}
-	var err error
 
-	var data SetThemeConfigResponse
-	resp := &graphql.Response{Data: &data}
+	data_ = &SetThemeConfigResponse{}
+	resp_ := &graphql.Response{Data: data_}
 
-	err = client.MakeRequest(
-		ctx,
-		req,
-		resp,
+	err_ = client_.MakeRequest(
+		ctx_,
+		req_,
+		resp_,
 	)
 
-	return &data, err
+	return data_, err_
 }
 
-// The query or mutation executed by UpdateGroup.
+// The mutation executed by UpdateGroup.
 const UpdateGroup_Operation = `
 mutation UpdateGroup ($id: Int!, $name: String!, $redirectOnLogin: String!, $permissions: [String]!, $pageRules: [PageRuleInput]!) {
 	groups {
@@ -5432,15 +5403,15 @@ mutation UpdateGroup ($id: Int!, $name: String!, $redirectOnLogin: String!, $per
 `
 
 func UpdateGroup(
-	ctx context.Context,
-	client graphql.Client,
+	ctx_ context.Context,
+	client_ graphql.Client,
 	id int,
 	name string,
 	redirectOnLogin string,
 	permissions []string,
 	pageRules []PageRuleInput,
-) (*UpdateGroupResponse, error) {
-	req := &graphql.Request{
+) (data_ *UpdateGroupResponse, err_ error) {
+	req_ := &graphql.Request{
 		OpName: "UpdateGroup",
 		Query:  UpdateGroup_Operation,
 		Variables: &__UpdateGroupInput{
@@ -5451,21 +5422,20 @@ func UpdateGroup(
 			PageRules:       pageRules,
 		},
 	}
-	var err error
 
-	var data UpdateGroupResponse
-	resp := &graphql.Response{Data: &data}
+	data_ = &UpdateGroupResponse{}
+	resp_ := &graphql.Response{Data: data_}
 
-	err = client.MakeRequest(
-		ctx,
-		req,
-		resp,
+	err_ = client_.MakeRequest(
+		ctx_,
+		req_,
+		resp_,
 	)
 
-	return &data, err
+	return data_, err_
 }
 
-// The query or mutation executed by UpdatePage.
+// The mutation executed by UpdatePage.
 const UpdatePage_Operation = `
 mutation UpdatePage ($id: Int!, $content: String!, $description: String!, $editor: String!, $isPublished: Boolean!, $isPrivate: Boolean!, $locale: String!, $path: String!, $publishEndDate: Date, $publishStartDate: Date, $scriptCss: String, $scriptJs: String, $tags: [String]!, $title: String!) {
 	pages {
@@ -5514,8 +5484,8 @@ mutation UpdatePage ($id: Int!, $content: String!, $description: String!, $edito
 `
 
 func UpdatePage(
-	ctx context.Context,
-	client graphql.Client,
+	ctx_ context.Context,
+	client_ graphql.Client,
 	id int,
 	content string,
 	description string,
@@ -5530,8 +5500,8 @@ func UpdatePage(
 	scriptJs string,
 	tags []string,
 	title string,
-) (*UpdatePageResponse, error) {
-	req := &graphql.Request{
+) (data_ *UpdatePageResponse, err_ error) {
+	req_ := &graphql.Request{
 		OpName: "UpdatePage",
 		Query:  UpdatePage_Operation,
 		Variables: &__UpdatePageInput{
@@ -5551,21 +5521,20 @@ func UpdatePage(
 			Title:            title,
 		},
 	}
-	var err error
 
-	var data UpdatePageResponse
-	resp := &graphql.Response{Data: &data}
+	data_ = &UpdatePageResponse{}
+	resp_ := &graphql.Response{Data: data_}
 
-	err = client.MakeRequest(
-		ctx,
-		req,
-		resp,
+	err_ = client_.MakeRequest(
+		ctx_,
+		req_,
+		resp_,
 	)
 
-	return &data, err
+	return data_, err_
 }
 
-// The query or mutation executed by UpdateSiteConfig.
+// The mutation executed by UpdateSiteConfig.
 const UpdateSiteConfig_Operation = `
 mutation UpdateSiteConfig ($host: String, $title: String, $description: String, $robots: [String], $analyticsService: String, $analyticsId: String, $company: String, $contentLicense: String, $footerOverride: String, $logoUrl: String, $pageExtensions: String, $authAutoLogin: Boolean, $authEnforce2FA: Boolean, $authHideLocal: Boolean, $authLoginBgUrl: String, $authJwtAudience: String, $authJwtExpiration: String, $authJwtRenewablePeriod: String, $editFab: Boolean, $editMenuBar: Boolean, $editMenuBtn: Boolean, $editMenuExternalBtn: Boolean, $editMenuExternalName: String, $editMenuExternalIcon: String, $editMenuExternalUrl: String, $featurePageRatings: Boolean, $featurePageComments: Boolean, $featurePersonalWikis: Boolean, $securityOpenRedirect: Boolean, $securityIframe: Boolean, $securityReferrerPolicy: Boolean, $securityTrustProxy: Boolean, $securitySRI: Boolean, $securityHSTS: Boolean, $securityHSTSDuration: Int, $securityCSP: Boolean, $securityCSPDirectives: String, $uploadMaxFileSize: Int, $uploadMaxFiles: Int, $uploadScanSVG: Boolean, $uploadForceDownload: Boolean) {
 	site {
@@ -5582,8 +5551,8 @@ mutation UpdateSiteConfig ($host: String, $title: String, $description: String, 
 `
 
 func UpdateSiteConfig(
-	ctx context.Context,
-	client graphql.Client,
+	ctx_ context.Context,
+	client_ graphql.Client,
 	host string,
 	title string,
 	description string,
@@ -5625,8 +5594,8 @@ func UpdateSiteConfig(
 	uploadMaxFiles int,
 	uploadScanSVG bool,
 	uploadForceDownload bool,
-) (*UpdateSiteConfigResponse, error) {
-	req := &graphql.Request{
+) (data_ *UpdateSiteConfigResponse, err_ error) {
+	req_ := &graphql.Request{
 		OpName: "UpdateSiteConfig",
 		Query:  UpdateSiteConfig_Operation,
 		Variables: &__UpdateSiteConfigInput{
@@ -5673,16 +5642,15 @@ func UpdateSiteConfig(
 			UploadForceDownload:    uploadForceDownload,
 		},
 	}
-	var err error
 
-	var data UpdateSiteConfigResponse
-	resp := &graphql.Response{Data: &data}
+	data_ = &UpdateSiteConfigResponse{}
+	resp_ := &graphql.Response{Data: data_}
 
-	err = client.MakeRequest(
-		ctx,
-		req,
-		resp,
+	err_ = client_.MakeRequest(
+		ctx_,
+		req_,
+		resp_,
 	)
 
-	return &data, err
+	return data_, err_
 }

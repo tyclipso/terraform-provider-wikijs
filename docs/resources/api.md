@@ -18,5 +18,3 @@ description: |-
 ### Required
 
 - `enabled` (Boolean) Enable the Wiki.JS API
-
-

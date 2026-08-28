@@ -9,7 +9,7 @@ description: |-
   You cannot specify one renderer with its config as this will erase the complete list.
   If you are unsure about the key and config fields, you can query the API after activating it manually or with the wikijs_api resource.
   The query with the minimal information you need is as follows:
-  graphql
+  
   query{
     rendering{
       renderers{
@@ -273,5 +273,3 @@ Required:
 Optional:
 
 - `config` (Map of String) Map with config options for this specific renderer.
-
-

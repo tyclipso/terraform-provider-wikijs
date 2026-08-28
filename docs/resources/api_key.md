@@ -33,5 +33,3 @@ description: |-
 - `id` (Number) Internal Id of the API Key
 - `key` (String, Sensitive) The actual API Key. Keep it secret!
 - `key_short` (String) Suffix of the actual API Key as shown in the Web UI (Hint: Wiki.JS always adds three dots before the actual suffix. You need to remove those if you need to match an actual key)
-
-

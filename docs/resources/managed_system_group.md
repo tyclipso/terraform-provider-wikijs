@@ -43,5 +43,3 @@ Required:
 Read-Only:
 
 - `id` (String)
-
-

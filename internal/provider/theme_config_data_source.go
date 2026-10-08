@@ -79,7 +79,7 @@ func (d *themeConfigDataSource) Schema(_ context.Context, req datasource.SchemaR
 				MarkdownDescription: "HTML code to be injected just before the closing body tag.",
 			},
 		},
-		MarkdownDescription: "The `{{ .Name }}` {{ .Type }} implements the WikiJS API query `theming{config{…}}`.\n" +
+		MarkdownDescription: "The `wikijs_theme_config` Data Source implements the WikiJS API query `theming{config{…}}`.\n" +
 			"It can be used to read the current state and only change one of the required or any of the optional, without touching the required.\n" +
 			"The Schema descriptions are directly lifted from the descriptions of the input fields in WikiJS.",
 	}

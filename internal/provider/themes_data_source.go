@@ -58,7 +58,7 @@ func (d *themesDataSource) Schema(_ context.Context, req datasource.SchemaReques
 				},
 			},
 		},
-		MarkdownDescription: "The `{{ .Name }}` {{ .Type }} implements the WikiJS API query `theming{themes{…}}`.\n" +
+		MarkdownDescription: "The `wikijs_themes` Data Source implements the WikiJS API query `theming{themes{…}}`.\n" +
 			"In wikijs [v2][api-themes] this contains only the default theme.\n" +
 			"\n" +
 			"[api-themes]: https://github.com/requarks/wiki/blob/main/server/graph/resolvers/theming.js#L16-L19",

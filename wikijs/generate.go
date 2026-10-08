@@ -1,7 +1,3 @@
-//go:generate go run github.com/Khan/genqlient
+//go:generate go tool genqlient
 
 package wikijs
-
-import (
-	_ "github.com/Khan/genqlient/generate"
-)

@@ -35,5 +35,3 @@ Read-Only:
 - `name` (String) Name of the group
 - `updated_at` (String) Last update time of this group (expect RFC3399)
 - `user_count` (Number) Number of users in this group
-
-

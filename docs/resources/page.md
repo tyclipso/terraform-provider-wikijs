@@ -43,5 +43,3 @@ description: |-
 - `hash` (String) Page hash computed by wiki.js (see: https://github.com/requarks/wiki/blob/db8a09fe8c267a54fbbfabe0dc871a2108824968/server/helpers/page.js#L71)
 - `id` (Number) Internal id
 - `private_ns` (String)
-
-

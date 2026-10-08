@@ -48,5 +48,3 @@ Read-Only:
 - `logo` (String) The logo of the search engine shown in the backend.
 - `title` (String) The title of the search engine shown in the backend.
 - `website` (String) The website of the search engine.
-
-

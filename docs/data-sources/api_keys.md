@@ -31,5 +31,3 @@ Read-Only:
 - `key_short` (String) Suffix of the actual API Key as shown in the Web UI (Hint: Wiki.JS always adds three dots before the actual suffix. You need to remove those if you need to match an actual key)
 - `name` (String) Display name of the API Key (not unique)
 - `updated_at` (String) Time of last updated of the key as returned by Wiki.JS (expect RFC3339 format)
-
-

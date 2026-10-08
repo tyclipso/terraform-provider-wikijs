@@ -58,5 +58,3 @@ description: |-
 - `upload_max_file_size` (Number) The maximum size for a single file.
 - `upload_max_files` (Number) How many files can be uploaded in a single batch?
 - `upload_scan_svg` (Boolean) Should SVG uploads be scanned for vulnerabilities and stripped of any potentially unsafe content.
-
-

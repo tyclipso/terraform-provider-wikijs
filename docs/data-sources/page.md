@@ -57,5 +57,3 @@ Read-Only:
 - `tag` (String) The actual tag name. Use this string, when referencing a tag
 - `title` (String) Display name of this tag
 - `updated_at` (String) Update date of this tag (expect RFC 3399 timestamp)
-
-

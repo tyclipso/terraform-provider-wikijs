@@ -52,5 +52,3 @@ resource "wikijs_theme_config" "config" {
 - `theme` (String) Themes affect how content pages are displayed.
   Other site sections (such as the editor or admin area) are not affected.
 - `toc_position` (String) Select whether the table of contents is shown on the left, right or not at all.
-
-

@@ -95,8 +95,8 @@ func (d *searchEnginesDataSource) Schema(_ context.Context, req datasource.Schem
 				},
 			},
 		},
-		MarkdownDescription: "The `{{ .Name }}` {{ .Type }} implements the WikiJS API query `search{searchEngines{…}}`.\n" +
-			"You can use this {{ .Type }} to manipulate only certain fields with the `search_engines` resource.\n",
+		MarkdownDescription: "The `wikijs_search_engines` Data Source implements the WikiJS API query `search{searchEngines{…}}`.\n" +
+			"You can use this Data Source to manipulate only certain fields with the `search_engines` resource.\n",
 	}
 }
 
